@@ -1,0 +1,82 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "GrowBinary",
+"language": "GDScript",
+"path": "res://grow_binary.gd"
+}, {
+"base": "Node2D",
+"class": "GrowLineByLine",
+"language": "GDScript",
+"path": "res://grow_line_by_line.gd"
+}, {
+"base": "Node2D",
+"class": "GrowSmoothTransitions",
+"language": "GDScript",
+"path": "res://grow_smooth_iterations.gd"
+}, {
+"base": "Node2D",
+"class": "GrowWheat",
+"language": "GDScript",
+"path": "res://grow_wheat.gd"
+}, {
+"base": "Reference",
+"class": "LineSegment",
+"language": "GDScript",
+"path": "res://line_segment.gd"
+}, {
+"base": "Reference",
+"class": "PlantState",
+"language": "GDScript",
+"path": "res://plant_state.gd"
+} ]
+_global_script_class_icons={
+"GrowBinary": "",
+"GrowLineByLine": "",
+"GrowSmoothTransitions": "",
+"GrowWheat": "",
+"LineSegment": "",
+"PlantState": ""
+}
+
+[application]
+
+config/name="grow"
+run/main_scene="res://grow_smooth_iterations.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Grammars="*res://Grammars.gd"
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+next_step={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

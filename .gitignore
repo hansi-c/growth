@@ -1,0 +1,7 @@
+.import/*
+*.import
+.mono/
+bin/*
+git_api*
+logs/*
+models/8k_stars_milky_way.exr
