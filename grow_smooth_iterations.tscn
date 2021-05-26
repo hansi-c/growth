@@ -1,8 +1,51 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://grow_smooth_iterations.gd" type="Script" id=1]
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 resolution = vec2(1024, 600);
+
+void fragment() {
+	if(COLOR.a > 0.0) {
+		vec2 st = FRAGCOORD.xy/resolution;
+		COLOR = vec4(st.y,1.0,st.y,1.0);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/resolution = Vector2( 1024, 600 )
+
 [node name="Node2D" type="Node2D"]
+
+[node name="ColorRect_BG" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.25098, 0.219608, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 1, 1, 1, 0 )
 script = ExtResource( 1 )
-start = Vector2( 500, 580 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+start = Vector2( 400, 580 )
 branch_length = 4.0
+
+[node name="StatsLabel" type="Label" parent="ColorRect"]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 66.0
+margin_bottom = 46.0
+text = "HELLO"
+__meta__ = {
+"_edit_use_anchors_": false
+}

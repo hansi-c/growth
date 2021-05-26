@@ -1,11 +1,11 @@
-extends Node2D
+extends CanvasItem
 class_name GrowSmoothTransitions
 
 export var iterations = 6
 export var start = Vector2(500, 400)
 export var branch_length = 40.0
 var current_iteration = 0
-var current_line = -1
+var current_symbol = 0
 var word = ""
 var lines = []
 var grammar = Grammars.wheat_grammar()
@@ -13,42 +13,54 @@ var _25degrees = deg2rad(25.0)
 var start_angle = Vector2.UP.angle() + _25degrees
 var state = PlantState.new()
 
+onready var stats_label = get_node("StatsLabel")
+
 func _ready():
 	word = grammar.start
-	generate_lines()
+	update_stats_label()
+
+func _input(event):
+	if has_next_iteration():
+		if is_iteration_finished():
+			next_iteration()
+			update_stats_label()
+		elif Input.is_action_pressed("next_step") and has_next_rule():
+			next_rule()
+			update_stats_label()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept") and has_next_iteration():
-		next_iteration()
-	if Input.is_action_pressed("next_step") and has_next_line():
-		next_line()
 	update()
 
 func _draw():
-	if current_line < 0:
-		return
-#	for branch in lines:
-	for i in range(current_line):
-		var branch = lines[i]
+	for branch in lines:
 		draw_line(branch.start, branch.end, Color.green, branch.width)
-
-func has_next_line():
-	return current_line < lines.size()
-
-func next_line():
-	current_line += 1
 
 func has_next_iteration():
 	return current_iteration < iterations
 
+func is_iteration_finished():
+	return current_symbol >= word.length()
+
 func next_iteration():
-	current_line = -1
-	word = grammar.apply_rules(word)
-	generate_lines()
+	current_symbol = 0
 	current_iteration += 1
 
+func has_next_rule():
+	while current_symbol < word.length():
+		var symbol = word[current_symbol]
+		if grammar.rules.has(symbol):
+			return true
+		current_symbol += 1
+	return false
+
+func next_rule():
+	var rule = word[current_symbol]
+	word = grammar.apply_rule(word, current_symbol)
+	var production = grammar.rules[rule]
+	current_symbol += production.length()
+	generate_lines()
+
 func generate_lines():
-	print("iteration: %s" % current_iteration)
 	lines.clear()
 	state.set_position(start)
 	state.set_angle(start_angle)
@@ -80,3 +92,10 @@ func generate_branch(_start, direction, width):
 	result.end = _start + (direction * branch_length)
 	result.width = width
 	return result
+
+# FIXME this looks ugly. unfortunately tabs have no effect on normal labels.
+# have to use a rich text label or multiple labels
+func update_stats_label():
+	var text = "iteration:           %s/%s\nword length:      %s\ncurrent symbol: %s\nlines drawn:       %s" % [
+		current_iteration, iterations, word.length(), current_symbol, lines.size()]
+	stats_label.set_text(text)
