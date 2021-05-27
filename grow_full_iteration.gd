@@ -7,7 +7,7 @@ export var branch_length = 40.0
 var current_iteration = 0
 var word = ""
 #var grammar = Grammars.wheat_grammar()
-var grammar = Grammars.tomato_grammar()
+var grammar = Grammars.some_random_grammar()
 var _25degrees = deg2rad(25.0)
 var start_angle = Vector2.UP.angle()
 var line_generator: D0LineGenerator

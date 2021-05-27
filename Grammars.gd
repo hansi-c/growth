@@ -1,8 +1,8 @@
 extends Node
 
+# Deterministic, context-free grammar. Produces D0L-Systems.
 class Grammar:
-	var variables = []
-	var constants = []
+	var alphabet = []
 	var axiom
 	var rules = {}
 
@@ -31,12 +31,12 @@ class Grammar:
 # taken from https://en.wikipedia.org/wiki/L-system#Example_7:_Fractal_plant
 func wheat_grammar() -> Grammar:
 	var result = Grammar.new()
-	result.variables = ["X", # no drawing. only controls the curve
-											"F"] # draw forward
-	result.constants = ["+", # turn left 25 degrees
-											"-", # turn right 25 degrees
-											"[", # push position and angle
-											"]"] # pop position and angle
+	result.alphabet = ["X", # no drawing. only controls the curve
+										 "F", # draw forward
+										 "+", # turn left 25 degrees
+										 "-", # turn right 25 degrees
+										 "[", # push position and angle
+										 "]"] # pop position and angle
 	result.axiom = "X"
 	result.rules = {
 		"X" : "F+[[X]-X]-F[-FX]+X",
@@ -47,11 +47,11 @@ func wheat_grammar() -> Grammar:
 # taken from https://natureofcode.com/book/chapter-8-fractals/
 func ugly_tree_grammar() -> Grammar:
 	var result = Grammar.new()
-	result.variables = ["F"] # draw forward
-	result.constants = ["+", # turn left 25 degrees
-											"-", # turn right 25 degrees
-											"[", # push position and angle
-											"]"] # pop position and angle
+	result.alphabet = ["F", # draw forward
+										 "+", # turn left 25 degrees
+										 "-", # turn right 25 degrees
+										 "[", # push position and angle
+										 "]"] # pop position and angle
 	result.axiom = "F"
 	result.rules = {
 		"F" : "FF+[+F-F-F]-[-F+F+F]"
@@ -61,8 +61,7 @@ func ugly_tree_grammar() -> Grammar:
 # taken from https://en.wikipedia.org/wiki/L-system#Example_2:_Fractal_(binary)_tree
 func binary_tree_grammar() -> Grammar:
 	var result = Grammar.new()
-	result.variables = ["0", "1"]
-	result.constants = ["[", "]"]
+	result.alphabet = ["0", "1", "[", "]"]
 	result.axiom = "0"
 	result.rules = {
 		"1" : "11",
@@ -70,17 +69,49 @@ func binary_tree_grammar() -> Grammar:
 	}
 	return result
 
-func tomato_grammar() -> Grammar:
+func symmetric_grammar() -> Grammar:
 	var result = Grammar.new()
-	result.variables = ["X", # no drawing. only controls the curve
-											"F"] # draw forward
-	result.constants = ["+", # turn left 25 degrees
-											"-", # turn right 25 degrees
-											"[", # push position and angle
-											"]"] # pop position and angle
+	result.alphabet = ["X",
+										 "F",
+										 "+",
+										 "-",
+										 "[",
+										 "]"]
 	result.axiom = "X"
 	result.rules = {
-		"X" : "F[-X]+X",
-		"F" : "FF"
+		"X" : "F[-X][+X]F",
+		"F" : "XF",
 	}
 	return result
+
+func snowflake_grammar() -> Grammar:
+	var result = Grammar.new()
+	result.alphabet = ["X",
+										 "F",
+										 "+",
+										 "-",
+										 "[",
+										 "]"]
+	result.axiom = "X"
+	result.rules = {
+		"X" : "F[-X]F[+X]F",
+		"F" : "X",
+	}
+	return result
+
+func some_random_grammar() -> Grammar:
+	var result = Grammar.new()
+	result.alphabet = ["A",
+										 "B",
+										 "F",
+										 "+",
+										 "-",
+										 "[",
+										 "]"]
+	result.axiom = "ABB"
+	result.rules = {
+		"A" : "AFB",
+		"B" : "A[-B][+B]F",
+	}
+	return result
+
