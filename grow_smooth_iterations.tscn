@@ -40,6 +40,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+iterations = 12
 start = Vector2( 400, 580 )
 branch_length = 4.0
 
@@ -61,6 +62,7 @@ margin_right = -600.0
 margin_bottom = -368.0
 script = ExtResource( 3 )
 
+[connection signal="update_angle" from="ColorRect" to="ColorRect/Grid" method="_on_update_angle"]
 [connection signal="update_current_symbol" from="ColorRect" to="ColorRect/Grid" method="_on_update_current_symbol"]
 [connection signal="update_iteration" from="ColorRect" to="ColorRect/Grid" method="_on_update_iteration"]
 [connection signal="update_last_rule" from="ColorRect" to="ColorRect/Grid" method="_on_update_last_rule"]

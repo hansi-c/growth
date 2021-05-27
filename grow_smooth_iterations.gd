@@ -9,6 +9,7 @@ var current_symbol = 0
 var word = ""
 var lines = []
 var grammar = Grammars.wheat_grammar()
+#var grammar = Grammars.tomato_grammar()
 var _25degrees = deg2rad(25.0)
 var start_angle = Vector2.UP.angle() + _25degrees
 var state = PlantState.new()
@@ -16,15 +17,16 @@ var last_rule # used only for stats
 
 onready var stats_label = get_node("StatsLabel")
 
-signal update_iteration(bla)
-signal update_word_length(bla)
-signal update_current_symbol(bola)
-signal update_lines_drawn(bla)
-signal update_last_rule(bla)
+signal update_iteration(value)
+signal update_word_length(value)
+signal update_current_symbol(value)
+signal update_lines_drawn(value)
+signal update_last_rule(value)
+signal update_angle(value)
 
 func _ready():
 	word = grammar.start
-	update_stats_label()
+	update_stats()
 
 func _input(_event):
 	if has_next_iteration():
@@ -35,7 +37,6 @@ func _input(_event):
 		elif Input.is_action_just_pressed("ui_accept"):
 			while has_next_rule():
 				next_rule()
-#		update_stats_label()
 		update_stats()
 
 func _process(_delta):
@@ -104,16 +105,10 @@ func generate_branch(_start, direction, width):
 	result.width = width
 	return result
 
-# FIXME this looks ugly. unfortunately tabs have no effect on normal labels.
-# have to use a rich text label or multiple labels
-func update_stats_label():
-	var text = "iteration:           %s/%s\nword length:      %s\ncurrent symbol: %s\nlines drawn:       %s" % [
-		current_iteration, iterations, word.length(), current_symbol, lines.size()]
-	stats_label.set_text(text)
-
 func update_stats():
 	emit_signal("update_iteration", current_iteration)
 	emit_signal("update_word_length", word.length())
 	emit_signal("update_current_symbol", current_symbol)
 	emit_signal("update_lines_drawn", lines.size())
 	emit_signal("update_last_rule", last_rule)
+	emit_signal("update_angle", rad2deg(state.angle))

@@ -14,3 +14,6 @@ func _on_update_lines_drawn(value):
 
 func _on_update_last_rule(value):
 	get_node("last_rule_value").set_text(str(value))
+
+func _on_update_angle(value):
+	get_node("angle_value").set_text(str(value))

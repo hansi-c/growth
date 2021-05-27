@@ -3,9 +3,9 @@ class_name PlantState
 var positions = []
 var angles = []
 var widths = []
-var position
-var angle
-var width
+var position = Vector2.ZERO
+var angle = 0
+var width = 0
 
 func set_position(_position: Vector2):
 	position = _position

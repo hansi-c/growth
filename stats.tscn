@@ -67,3 +67,15 @@ margin_left = 101.0
 margin_top = 72.0
 margin_right = 101.0
 margin_bottom = 86.0
+
+[node name="angle_key" type="Label" parent="."]
+margin_top = 90.0
+margin_right = 97.0
+margin_bottom = 104.0
+text = "angle"
+
+[node name="angle_value" type="Label" parent="."]
+margin_left = 101.0
+margin_top = 90.0
+margin_right = 101.0
+margin_bottom = 104.0
