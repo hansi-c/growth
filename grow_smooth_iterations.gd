@@ -19,7 +19,7 @@ func _ready():
 	word = grammar.start
 	update_stats_label()
 
-func _input(event):
+func _input(_event):
 	if has_next_iteration():
 		if is_iteration_finished():
 			next_iteration()
