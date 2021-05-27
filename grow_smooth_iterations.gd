@@ -4,18 +4,15 @@ class_name GrowSmoothTransitions
 export var iterations = 6
 export var start = Vector2(500, 400)
 export var branch_length = 40.0
+var _25degrees = deg2rad(25.0)
+var start_angle = Vector2.UP.angle() + _25degrees
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
-var lines = []
 var grammar = Grammars.wheat_grammar()
 #var grammar = Grammars.tomato_grammar()
-var _25degrees = deg2rad(25.0)
-var start_angle = Vector2.UP.angle() + _25degrees
-var state = PlantState.new()
 var last_rule # used only for stats
-
-onready var stats_label = get_node("StatsLabel")
+var line_generator: D0LineGenerator
 
 signal update_iteration(value)
 signal update_word_length(value)
@@ -25,8 +22,17 @@ signal update_last_rule(value)
 signal update_angle(value)
 
 func _ready():
-	word = grammar.start
+	word = grammar.axiom
+	initialize_line_generator()
 	update_stats()
+
+func initialize_line_generator():
+	line_generator = D0LineGenerator.new()
+	line_generator.start = start
+	line_generator.start_angle = start_angle
+	line_generator.turn_degrees = _25degrees
+	line_generator.segment_length = branch_length
+	line_generator.grammar = grammar
 
 func _input(_event):
 	if has_next_iteration():
@@ -43,7 +49,7 @@ func _process(_delta):
 	update()
 
 func _draw():
-	for branch in lines:
+	for branch in line_generator.lines:
 		draw_line(branch.start, branch.end, Color.green, branch.width)
 
 func has_next_iteration():
@@ -68,47 +74,18 @@ func next_rule():
 	var rule = word[current_symbol]
 	word = grammar.apply_rule(word, current_symbol)
 	var production = grammar.rules[rule]
-	last_rule = "%s -> %s" % [rule, production]
+	last_rule = "%s -> %s" % [rule, production] # just for stats
 	current_symbol += production.length()
-	generate_lines()
-
-func generate_lines():
-	lines.clear()
-	state.set_position(start)
-	state.set_angle(start_angle)
-	state.set_width(current_iteration)
-	var degrees = _25degrees
-
-	for s in word:
-		if s == "F":
-			var direction = Vector2(cos(state.angle), sin(state.angle))
-			var branch = generate_branch(state.position, direction, state.width)
-			lines.append(branch)
-			state.position = branch.end
-		elif s == "-":
-			state.turn_clockwise(degrees)
-			state.change_width(-1.0)
-		elif s == "+":
-			state.turn_counter_clockwise(degrees)
-			state.change_width(-1.0)
-		elif s == "[":
-			state.push_state()
-		elif s == "]":
-			state.pop_state()
-		elif s != "X":
-			push_error("unknown symbol: %s" % s)
-
-func generate_branch(_start, direction, width):
-	var result = LineSegment.new()
-	result.start = _start
-	result.end = _start + (direction * branch_length)
-	result.width = width
-	return result
+	line_generator.generate_lines(word, current_iteration)
 
 func update_stats():
-	emit_signal("update_iteration", current_iteration)
+	emit_signal("update_iteration", "%s/%s" % [current_iteration, iterations])
 	emit_signal("update_word_length", word.length())
 	emit_signal("update_current_symbol", current_symbol)
-	emit_signal("update_lines_drawn", lines.size())
+	emit_signal("update_lines_drawn", line_generator.lines.size())
 	emit_signal("update_last_rule", last_rule)
-	emit_signal("update_angle", rad2deg(state.angle))
+	if line_generator.lines.size() > 0:
+		var last_branch = line_generator.lines[line_generator.lines.size()-1]
+		var direction = last_branch.start - last_branch.end
+		var angle = direction.angle()
+		emit_signal("update_angle", rad2deg(angle))

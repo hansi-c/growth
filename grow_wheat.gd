@@ -15,7 +15,7 @@ var start_angle = Vector2.UP.angle()
 var tomatoes = []
 
 func _ready():
-	word = grammar.start
+	word = grammar.axiom
 	generate_lines()
 
 func _process(_delta):

@@ -3,7 +3,7 @@ extends Node
 class Grammar:
 	var variables = []
 	var constants = []
-	var start
+	var axiom
 	var rules = {}
 
 	func apply_rules(word):
@@ -37,7 +37,7 @@ func wheat_grammar() -> Grammar:
 											"-", # turn right 25 degrees
 											"[", # push position and angle
 											"]"] # pop position and angle
-	result.start = "X"
+	result.axiom = "X"
 	result.rules = {
 		"X" : "F+[[X]-X]-F[-FX]+X",
 		"F" : "FF"
@@ -52,7 +52,7 @@ func ugly_tree_grammar() -> Grammar:
 											"-", # turn right 25 degrees
 											"[", # push position and angle
 											"]"] # pop position and angle
-	result.start = "F"
+	result.axiom = "F"
 	result.rules = {
 		"F" : "FF+[+F-F-F]-[-F+F+F]"
 	}
@@ -63,7 +63,7 @@ func binary_tree_grammar() -> Grammar:
 	var result = Grammar.new()
 	result.variables = ["0", "1"]
 	result.constants = ["[", "]"]
-	result.start = "0"
+	result.axiom = "0"
 	result.rules = {
 		"1" : "11",
 		"0" : "1[0]0"
@@ -78,7 +78,7 @@ func tomato_grammar() -> Grammar:
 											"-", # turn right 25 degrees
 											"[", # push position and angle
 											"]"] # pop position and angle
-	result.start = "X"
+	result.axiom = "X"
 	result.rules = {
 		"X" : "F[-X]+X",
 		"F" : "FF"

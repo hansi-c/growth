@@ -13,7 +13,7 @@ var start_angle = Vector2.UP.angle()
 var _45degrees = deg2rad(45.0)
 
 func _ready():
-	word = grammar.start
+	word = grammar.axiom
 	generate_lines()
 
 func _process(delta):

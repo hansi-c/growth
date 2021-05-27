@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "D0LineGenerator",
+"language": "GDScript",
+"path": "res://d0_line_generator.gd"
+}, {
 "base": "Node2D",
 "class": "GrowBinary",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://plant_state.gd"
 } ]
 _global_script_class_icons={
+"D0LineGenerator": "",
 "GrowBinary": "",
 "GrowLineByLine": "",
 "GrowSmoothTransitions": "",

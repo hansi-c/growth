@@ -14,7 +14,8 @@ void fragment() {
 		vec2 st = FRAGCOORD.xy/resolution;
 		COLOR = vec4(st.y+0.1, 1.0, st.y+0.1, 1.0);
 	}
-}"
+}
+"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -40,20 +41,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-iterations = 12
 start = Vector2( 400, 580 )
 branch_length = 4.0
-
-[node name="StatsLabel" type="Label" parent="ColorRect"]
-visible = false
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 66.0
-margin_bottom = 46.0
-text = "HELLO"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Grid" parent="ColorRect" instance=ExtResource( 2 )]
 margin_left = 24.0

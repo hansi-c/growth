@@ -1,10 +1,14 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Theme" id=1]
 
 [node name="Grid" type="GridContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -624.0
 margin_bottom = -400.0
+theme = SubResource( 1 )
+custom_constants/hseparation = 16
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -16,8 +20,8 @@ margin_bottom = 14.0
 text = "iteration"
 
 [node name="iteration_value" type="Label" parent="."]
-margin_left = 101.0
-margin_right = 101.0
+margin_left = 113.0
+margin_right = 113.0
 margin_bottom = 14.0
 
 [node name="word_length_key" type="Label" parent="."]
@@ -27,9 +31,9 @@ margin_bottom = 32.0
 text = "word length"
 
 [node name="word_length_value" type="Label" parent="."]
-margin_left = 101.0
+margin_left = 113.0
 margin_top = 18.0
-margin_right = 101.0
+margin_right = 113.0
 margin_bottom = 32.0
 
 [node name="current_symbol_key" type="Label" parent="."]
@@ -39,9 +43,9 @@ margin_bottom = 50.0
 text = "current symbol"
 
 [node name="current_symbol_value" type="Label" parent="."]
-margin_left = 101.0
+margin_left = 113.0
 margin_top = 36.0
-margin_right = 101.0
+margin_right = 113.0
 margin_bottom = 50.0
 
 [node name="lines_drawn_key" type="Label" parent="."]
@@ -51,31 +55,31 @@ margin_bottom = 68.0
 text = "lines drawn"
 
 [node name="lines_drawn_value" type="Label" parent="."]
-margin_left = 101.0
+margin_left = 113.0
 margin_top = 54.0
-margin_right = 101.0
+margin_right = 113.0
 margin_bottom = 68.0
 
-[node name="last_rule_key" type="Label" parent="."]
-margin_top = 72.0
-margin_right = 97.0
-margin_bottom = 86.0
-text = "last rule"
-
-[node name="last_rule_value" type="Label" parent="."]
-margin_left = 101.0
-margin_top = 72.0
-margin_right = 101.0
-margin_bottom = 86.0
-
 [node name="angle_key" type="Label" parent="."]
-margin_top = 90.0
+margin_top = 72.0
 margin_right = 97.0
-margin_bottom = 104.0
+margin_bottom = 86.0
 text = "angle"
 
 [node name="angle_value" type="Label" parent="."]
-margin_left = 101.0
+margin_left = 113.0
+margin_top = 72.0
+margin_right = 113.0
+margin_bottom = 86.0
+
+[node name="last_rule_key" type="Label" parent="."]
 margin_top = 90.0
-margin_right = 101.0
+margin_right = 97.0
+margin_bottom = 104.0
+text = "last production"
+
+[node name="last_rule_value" type="Label" parent="."]
+margin_left = 113.0
+margin_top = 90.0
+margin_right = 113.0
 margin_bottom = 104.0
