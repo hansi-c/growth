@@ -69,3 +69,18 @@ func binary_tree_grammar() -> Grammar:
 		"0" : "1[0]0"
 	}
 	return result
+
+func tomato_grammar() -> Grammar:
+	var result = Grammar.new()
+	result.variables = ["X", # no drawing. only controls the curve
+											"F"] # draw forward
+	result.constants = ["+", # turn left 25 degrees
+											"-", # turn right 25 degrees
+											"[", # push position and angle
+											"]"] # pop position and angle
+	result.start = "X"
+	result.rules = {
+		"X" : "F[-X]+X",
+		"F" : "FF"
+	}
+	return result

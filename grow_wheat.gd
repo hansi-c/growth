@@ -7,9 +7,11 @@ export var branch_length = 40.0
 var current_iteration = 0
 var word = ""
 var lines = []
-var grammar = Grammars.wheat_grammar()
+#var grammar = Grammars.wheat_grammar()
+var grammar = Grammars.tomato_grammar()
 var _25degrees = deg2rad(25.0)
-var start_angle = Vector2.UP.angle() + _25degrees
+#var start_angle = Vector2.UP.angle() + _25degrees
+var start_angle = Vector2.UP.angle()
 var tomatoes = []
 
 func _ready():
