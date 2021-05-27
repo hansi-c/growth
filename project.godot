@@ -15,9 +15,9 @@ _global_script_classes=[ {
 "path": "res://d0_line_generator.gd"
 }, {
 "base": "Node2D",
-"class": "GrowBinary",
+"class": "GrowFullIteration",
 "language": "GDScript",
-"path": "res://grow_binary.gd"
+"path": "res://grow_full_iteration.gd"
 }, {
 "base": "Node2D",
 "class": "GrowLineByLine",
@@ -28,11 +28,6 @@ _global_script_classes=[ {
 "class": "GrowSmoothTransitions",
 "language": "GDScript",
 "path": "res://grow_smooth_iterations.gd"
-}, {
-"base": "Node2D",
-"class": "GrowWheat",
-"language": "GDScript",
-"path": "res://grow_wheat.gd"
 }, {
 "base": "Reference",
 "class": "LineSegment",
@@ -46,10 +41,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "D0LineGenerator": "",
-"GrowBinary": "",
+"GrowFullIteration": "",
 "GrowLineByLine": "",
 "GrowSmoothTransitions": "",
-"GrowWheat": "",
 "LineSegment": "",
 "PlantState": ""
 }
