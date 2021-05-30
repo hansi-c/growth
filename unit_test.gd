@@ -2,6 +2,7 @@ extends Node
 
 func _ready():
 	test_apply_rule()
+	test_match_left_context()
 
 func test_apply_rule():
 	var grammar = Grammars.Grammar.new()
@@ -32,3 +33,61 @@ func test_apply_rule():
 	result = grammar.apply_rule(word, 0)
 	print(result)
 	assert(result == "")
+
+
+
+func test_match_left_context():
+	var production = Grammars.Production.new("", "ABC", "")
+	var word = "ABC[DE][FG[HI[JK]L]MNO]P"
+	var index = 8 # F
+	var matches = production.matches_left_context(word, index)
+	assert(matches == true)
+
+	index = 4 # D
+	matches = production.matches_left_context(word, index)
+	assert(matches == true)
+
+	index = 11 # H
+	matches = production.matches_left_context(word, index)
+	assert(matches == false)
+
+	index = 23 # P
+	matches = production.matches_left_context(word, index)
+	assert(matches == true)
+
+	index = 21 # O
+	matches = production.matches_left_context(word, index)
+	assert(matches == false)
+
+	var p2 = Grammars.Production.new("", "D", "")
+	index = 5 # E
+	matches = p2.matches_left_context(word, index)
+	assert(matches == true)
+
+	var p3 = Grammars.Production.new("", "C", "")
+	index = 8 # F
+	matches = p3.matches_left_context(word, index)
+	assert(matches == true)
+
+	index = 0 # A
+	matches = p3.matches_left_context(word, index)
+	assert(matches == false)
+
+	var p4 = Grammars.Production.new("", "", "")
+	index = 0
+	matches = p4.matches_left_context(word, index)
+	assert(matches == true)
+
+	index = 1
+	matches = p4.matches_left_context(word, index)
+	assert(matches == true)
+
+	var p5 = Grammars.Production.new("", "MN", "")
+	index = 21 # O
+	matches = p5.matches_left_context(word, index)
+	assert(matches == true)
+
+	var p6 = Grammars.Production.new("", "FG", "")
+	index = 19 # M
+	matches = p6.matches_left_context(word, index)
+	assert(matches == true)

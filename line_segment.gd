@@ -1,5 +1,5 @@
 class_name LineSegment
 
-var start
-var end
-var width
+var start: Vector2
+var end: Vector2
+var width: float
