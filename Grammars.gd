@@ -132,7 +132,7 @@ func wheat_1l() -> ILGrammar:
 										 "]"] # pop position and angle
 	result.axiom = "X"
 	result.productions = {
-		"X" : [Production.new("F+[[AX]-X]-F[-FX]+X", "", "")],
+		"X" : [Production.new("F+[[AX]-X]-F[-FBX]+X", "", "")],
 		"F" : [Production.new("FF", "", "")]
 	}
 	return result

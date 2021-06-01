@@ -6,11 +6,13 @@ var turn_degrees: float
 var segment_length: float
 var lines = []
 var circles = []
+var fruits = []
 var state = PlantState.new()
 
 func generate_lines(word, current_iteration: int):
 	lines.clear()
 	circles.clear()
+	fruits.clear()
 	state.set_position(start)
 	state.set_angle(start_angle)
 	state.set_width(current_iteration * 0.66)
@@ -32,8 +34,12 @@ func generate_lines(word, current_iteration: int):
 			state.pop_state()
 		elif s == "A":
 			# FIXME this belongs into the grammar of course. So we need a non-deterministic grammar
-			if randf() > 0.9:
-				circles.append(state.position + Vector2(0,2.0))
+#			if randf() > 0.9:
+			circles.append(state.position + Vector2(0,2.0))
+		elif s == "B":
+			# FIXME this belongs into the grammar of course. So we need a non-deterministic grammar
+			if randf() < 0.1:
+				fruits.append(state.position + Vector2(0,2.0))
 
 func generate_branch(_start, direction, width):
 	var result = LineSegment.new()

@@ -36,9 +36,11 @@ func _process(_delta):
 
 func _draw():
 	for branch in line_generator.lines:
-		draw_line(branch.start, branch.end, Color.green, branch.width)
+		draw_line(branch.start, branch.end, Color.brown, branch.width)
 	for circle in line_generator.circles:
-		draw_circle(circle, 3.0, Color.yellow)
+		draw_circle(circle, 3.0, Color.green)
+	for fruit in line_generator.fruits:
+		draw_circle(fruit, 5.0, Color.yellow)
 
 func has_next_iteration():
 	return current_iteration < iterations
