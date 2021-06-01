@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasItem
 class_name GrowContextFull
 
 export var iterations = 6

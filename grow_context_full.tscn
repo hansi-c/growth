@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://grow_context_full.gd" type="Script" id=1]
+[ext_resource path="res://assets/level_mockup_v2.png" type="Texture" id=2]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 1, 1, 1, 0 )
 script = ExtResource( 1 )
-start = Vector2( 400, 580 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+start = Vector2( 320, 600 )
 branch_length = 4.0

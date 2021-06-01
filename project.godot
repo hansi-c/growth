@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://d0_line_generator.gd"
 }, {
-"base": "Node2D",
+"base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
 "path": "res://grow_context_full.gd"
@@ -63,6 +63,11 @@ config/icon="res://icon.png"
 [autoload]
 
 Grammars="*res://Grammars.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [input]
 
