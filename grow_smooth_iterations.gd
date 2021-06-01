@@ -33,16 +33,16 @@ func initialize_line_generator():
 	line_generator.turn_degrees = _25degrees
 	line_generator.segment_length = branch_length
 
-func _input(_event):
-	if has_next_iteration():
-		if is_iteration_finished():
-			next_iteration()
-		elif Input.is_action_pressed("next_step") and has_next_rule():
-			next_rule()
-		elif Input.is_action_just_pressed("ui_accept"):
-			while has_next_rule():
-				next_rule()
-		update_stats()
+#func _input(_event):
+#	if has_next_iteration():
+#		if is_iteration_finished():
+#			next_iteration()
+#		elif Input.is_action_pressed("next_step") and has_next_rule():
+#			next_rule()
+#		elif Input.is_action_just_pressed("ui_accept"):
+#			while has_next_rule():
+#				next_rule()
+#		update_stats()
 
 func _process(_delta):
 	update()
@@ -88,3 +88,11 @@ func update_stats():
 		var direction = last_branch.start - last_branch.end
 		var angle = direction.angle()
 		emit_signal("update_angle", rad2deg(angle))
+
+
+func _on_Timer_timeout():
+	if has_next_iteration():
+		if is_iteration_finished():
+			next_iteration()
+		if has_next_rule():
+			next_rule()

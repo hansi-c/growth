@@ -9,15 +9,18 @@ var circles = []
 var fruits = []
 var state = PlantState.new()
 
+var last_length = 0
+
 func generate_lines(word, current_iteration: int):
 	lines.clear()
 	circles.clear()
-	fruits.clear()
+#	fruits.clear()
 	state.set_position(start)
 	state.set_angle(start_angle)
 	state.set_width(current_iteration * 0.66)
 
-	for s in word:
+	for i in range(word.length()):
+		var s = word[i]
 		if s == "F":
 			var direction = Vector2(cos(state.angle), sin(state.angle))
 			var branch = generate_branch(state.position, direction, state.width)
@@ -33,13 +36,15 @@ func generate_lines(word, current_iteration: int):
 		elif s == "]":
 			state.pop_state()
 		elif s == "A":
-			# FIXME this belongs into the grammar of course. So we need a non-deterministic grammar
-#			if randf() > 0.9:
 			circles.append(state.position + Vector2(0,2.0))
 		elif s == "B":
+			if i >= last_length:
+
 			# FIXME this belongs into the grammar of course. So we need a non-deterministic grammar
-			if randf() < 0.1:
-				fruits.append(state.position + Vector2(0,2.0))
+				if randf() < 0.1:
+					fruits.append(state.position + Vector2(0,2.0))
+
+	last_length = word.length()
 
 func generate_branch(_start, direction, width):
 	var result = LineSegment.new()
@@ -47,3 +52,7 @@ func generate_branch(_start, direction, width):
 	result.end = _start + (direction * segment_length)
 	result.width = width
 	return result
+
+func on_next_iteration():
+	last_length = 0
+	fruits.clear()

@@ -112,15 +112,44 @@ class ILGrammar:
 	func apply_productions(word):
 		var result = ""
 		for i in range(word.length()):
-			var s = word[i]
-			if productions.has(s):
-				var successors = productions[s]
-				for p in successors:
-					if p.matches_context(word, i):
-						result += p.successor
+			var p = applicable_production(word, i)
+			if p != null:
+				result += p.successor
 			else:
-				result += s
+				result += word[i]
+#			var s = word[i]
+#			if productions.has(s):
+#				var successors = productions[s]
+#				for p in successors:
+#					if p.matches_context(word, i):
+#						result += p.successor
+#			else:
+#				result += s
 		return result
+
+	func apply_production(word, index):
+		var result = ""
+		var symbol = word[index]
+		if productions.has(symbol):
+			var possible = productions[symbol]
+			for p in possible:
+				if p.matches_context(word, index):
+					result = word.substr(0, index) + p.successor
+					break
+			if word.length() > index:
+				result += word.substr(index+1)
+		else:
+			push_error("unknown rule at index %s in word '%s'" % [index, word])
+		return result
+
+	func applicable_production(word, index):
+		var s = word[index]
+		if productions.has(s):
+			var successors = productions[s]
+			for p in successors:
+				if p.matches_context(word, index):
+					return p
+		return null
 
 func wheat_1l() -> ILGrammar:
 	var result = ILGrammar.new()

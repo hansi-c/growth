@@ -51,9 +51,14 @@ margin_right = -600.0
 margin_bottom = -368.0
 script = ExtResource( 3 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="update_angle" from="ColorRect" to="ColorRect/Grid" method="_on_update_angle"]
 [connection signal="update_current_symbol" from="ColorRect" to="ColorRect/Grid" method="_on_update_current_symbol"]
 [connection signal="update_iteration" from="ColorRect" to="ColorRect/Grid" method="_on_update_iteration"]
 [connection signal="update_last_rule" from="ColorRect" to="ColorRect/Grid" method="_on_update_last_rule"]
 [connection signal="update_lines_drawn" from="ColorRect" to="ColorRect/Grid" method="_on_update_lines_drawn"]
 [connection signal="update_word_length" from="ColorRect" to="ColorRect/Grid" method="_on_update_word_length"]
+[connection signal="timeout" from="Timer" to="ColorRect" method="_on_Timer_timeout"]

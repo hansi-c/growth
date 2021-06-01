@@ -25,19 +25,8 @@ color = Color( 0.160784, 0.584314, 0.92549, 1 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-start = Vector2( 320, 600 )
-branch_length = 4.0
-
 [node name="Pot" type="Sprite" parent="."]
-position = Vector2( 650, 630 )
+position = Vector2( 478.235, 625.011 )
 texture = ExtResource( 5 )
 
 [node name="WaterParticles2D" type="Particles2D" parent="Pot"]
@@ -61,66 +50,117 @@ autoplay = true
 stream = ExtResource( 3 )
 autoplay = true
 
-[node name="FruitColorPickerButton" type="ColorPickerButton" parent="."]
-margin_left = 168.868
-margin_top = 180.0
-margin_right = 218.868
-margin_bottom = 220.0
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 1, 1, 1, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+start = Vector2( 480, 580 )
+branch_length = 4.0
+
+[node name="VBoxContainer" type="GridContainer" parent="."]
+margin_left = 134.131
+margin_top = 260.168
+margin_right = 254.131
+margin_bottom = 420.168
+custom_constants/vseparation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FruitColorPickerButton" type="ColorPickerButton" parent="VBoxContainer"]
+visible = false
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
 icon = ExtResource( 6 )
 color = Color( 0.854902, 0.180392, 0.180392, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LeavesColorPickerButton" type="ColorPickerButton" parent="."]
-margin_left = 168.868
-margin_top = 268.754
-margin_right = 218.868
-margin_bottom = 308.754
+[node name="LeavesColorPickerButton" type="ColorPickerButton" parent="VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
 icon = ExtResource( 6 )
 color = Color( 0.113725, 0.654902, 0.364706, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StemColorPickerButton" type="ColorPickerButton" parent="."]
-margin_left = 168.868
-margin_top = 360.0
-margin_right = 218.868
-margin_bottom = 400.0
+[node name="StemColorPickerButton" type="ColorPickerButton" parent="VBoxContainer"]
+margin_top = 60.0
+margin_right = 120.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 40 )
 icon = ExtResource( 6 )
 color = Color( 0.411765, 0.34902, 0.105882, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FruitSizeSlider" type="HSlider" parent="."]
-margin_left = 1020.34
-margin_top = 193.678
-margin_right = 1180.34
-margin_bottom = 209.678
+[node name="VBoxContainer2" type="GridContainer" parent="."]
+margin_left = 1024.24
+margin_top = 282.898
+margin_right = 1184.24
+margin_bottom = 432.898
+custom_constants/vseparation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GrowAngleSlider" type="HSlider" parent="."]
-margin_left = 1021.53
-margin_top = 292.382
-margin_right = 1181.53
-margin_bottom = 308.382
+[node name="LeafRadiusSlider" type="HSlider" parent="VBoxContainer2"]
+margin_right = 160.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 160, 0 )
+max_value = 4.0
+step = 0.5
+value = 3.0
+tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StemThicknessSlider" type="HSlider" parent="."]
-margin_left = 1021.53
-margin_top = 399.411
-margin_right = 1181.53
-margin_bottom = 415.411
+[node name="GrowAngleSlider" type="HSlider" parent="VBoxContainer2"]
+visible = false
+margin_top = 56.0
+margin_right = 160.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 160, 0 )
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="color_changed" from="FruitColorPickerButton" to="ColorRect" method="_on_FruitColorPickerButton_color_changed"]
-[connection signal="color_changed" from="LeavesColorPickerButton" to="ColorRect" method="_on_LeavesColorPickerButton_color_changed"]
-[connection signal="color_changed" from="StemColorPickerButton" to="ColorRect" method="_on_StemColorPickerButton_color_changed"]
+[node name="StemThicknessSlider" type="HSlider" parent="VBoxContainer2"]
+margin_top = 56.0
+margin_right = 160.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 160, 0 )
+min_value = 0.5
+max_value = 10.0
+step = 0.5
+value = 1.0
+tick_count = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="color_changed" from="VBoxContainer/FruitColorPickerButton" to="ColorRect" method="_on_FruitColorPickerButton_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/LeavesColorPickerButton" to="ColorRect" method="_on_LeavesColorPickerButton_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/StemColorPickerButton" to="ColorRect" method="_on_StemColorPickerButton_color_changed"]
+[connection signal="value_changed" from="VBoxContainer2/LeafRadiusSlider" to="ColorRect" method="_on_LeafRadiusSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/StemThicknessSlider" to="ColorRect" method="_on_StemThicknessSlider_value_changed"]
+[connection signal="timeout" from="Timer" to="ColorRect" method="_on_Timer_timeout"]
