@@ -32,7 +32,6 @@ func initialize_line_generator():
 	line_generator.start_angle = start_angle
 	line_generator.turn_degrees = _25degrees
 	line_generator.segment_length = branch_length
-	line_generator.grammar = grammar
 
 func _input(_event):
 	if has_next_iteration():

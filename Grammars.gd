@@ -32,6 +32,7 @@ class Production:
 	var successor: String
 	var left_context: String
 	var right_context: String
+	var relevant_symbols: Dictionary
 
 	func _init(_successor, _left_context, _right_context):
 		successor = _successor
@@ -100,12 +101,41 @@ class ILGrammar:
 	var alphabet = []
 	var axiom
 	var productions = {}
+	var context_symbols = {}
 
 	func add_production(symbol, successor, left_context=null, right_context=null):
 		if not productions.has(symbol):
 			productions[symbol] = []
 		var successors = productions[symbol]
 		successors.append(Production.new(successor, left_context, right_context))
+
+	func apply_productions(word):
+		var result = ""
+		for i in range(word.length()):
+			var s = word[i]
+			if productions.has(s):
+				var successors = productions[s]
+				for p in successors:
+					if p.matches_context(word, i):
+						result += p.successor
+			else:
+				result += s
+		return result
+
+func wheat_1l() -> ILGrammar:
+	var result = ILGrammar.new()
+	result.alphabet = ["X", # no drawing. only controls the curve
+										 "F", # draw forward
+										 "+", # turn left 25 degrees
+										 "-", # turn right 25 degrees
+										 "[", # push position and angle
+										 "]"] # pop position and angle
+	result.axiom = "X"
+	result.productions = {
+		"X" : [Production.new("F+[[AX]-X]-F[-FX]+X", "", "")],
+		"F" : [Production.new("FF", "", "")]
+	}
+	return result
 
 # Alternative implementation using a PoolStringArray instead of String.
 # I tried benchmarking this vs the String version to find out if we can reach

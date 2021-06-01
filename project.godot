@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://d0_line_generator.gd"
 }, {
 "base": "Node2D",
+"class": "GrowContextFull",
+"language": "GDScript",
+"path": "res://grow_context_full.gd"
+}, {
+"base": "Node2D",
 "class": "GrowFullIteration",
 "language": "GDScript",
 "path": "res://grow_full_iteration.gd"
@@ -41,6 +46,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "D0LineGenerator": "",
+"GrowContextFull": "",
 "GrowFullIteration": "",
 "GrowLineByLine": "",
 "GrowSmoothTransitions": "",

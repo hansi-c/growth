@@ -5,11 +5,12 @@ var start_angle: float
 var turn_degrees: float
 var segment_length: float
 var lines = []
+var circles = []
 var state = PlantState.new()
-var grammar: Grammars.Grammar
 
 func generate_lines(word, current_iteration: int):
 	lines.clear()
+	circles.clear()
 	state.set_position(start)
 	state.set_angle(start_angle)
 	state.set_width(current_iteration * 0.66)
@@ -26,12 +27,13 @@ func generate_lines(word, current_iteration: int):
 			state.turn_counter_clockwise(turn_degrees)
 		elif s == "[":
 			state.push_state()
-#			state.change_width(-state.width*0.33)
 			state.width *= 0.66
 		elif s == "]":
 			state.pop_state()
-		elif s != "X": # FIXME replace with a check against grammar's alphabet
-			push_error("unknown symbol: %s" % s)
+		elif s == "A":
+			# FIXME this belongs into the grammar of course. So we need a non-deterministic grammar
+			if randf() > 0.9:
+				circles.append(state.position + Vector2(0,2.0))
 
 func generate_branch(_start, direction, width):
 	var result = LineSegment.new()

@@ -21,7 +21,7 @@ signal update_word_length(value)
 signal update_lines_drawn(value)
 
 func _ready():
-	word.append(grammar.axiom)
+	word = grammar.axiom
 	initialize_line_generator()
 	line_generator.generate_lines(word, current_iteration)
 
@@ -31,7 +31,6 @@ func initialize_line_generator():
 	line_generator.start_angle = start_angle
 	line_generator.turn_degrees = _25degrees
 	line_generator.segment_length = branch_length
-	line_generator.grammar = grammar
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and has_next_iteration():
