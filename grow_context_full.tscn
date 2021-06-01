@@ -1,11 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://grow_context_full.gd" type="Script" id=1]
-[ext_resource path="res://assets/level_mockup_v2.png" type="Texture" id=2]
+[ext_resource path="res://assets/level_single_pot.png" type="Texture" id=2]
+[ext_resource path="res://assets/sound/vogelzwitschern.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/growth1_noperc.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/pot.png" type="Texture" id=5]
+[ext_resource path="res://assets/tomate.png" type="Texture" id=6]
+[ext_resource path="res://assets/sound/shower.ogg" type="AudioStream" id=7]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 41.61
+flag_disable_z = true
+gravity = Vector3( 0, 200, 0 )
+initial_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+color = Color( 0.160784, 0.584314, 0.92549, 1 )
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
 
@@ -19,3 +35,92 @@ __meta__ = {
 }
 start = Vector2( 320, 600 )
 branch_length = 4.0
+
+[node name="Pot" type="Sprite" parent="."]
+position = Vector2( 650, 630 )
+texture = ExtResource( 5 )
+
+[node name="WaterParticles2D" type="Particles2D" parent="Pot"]
+position = Vector2( -6.1803, -623.7 )
+emitting = false
+amount = 512
+lifetime = 2.5
+one_shot = true
+explosiveness = 0.11
+randomness = 0.62
+process_material = SubResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pot/WaterParticles2D"]
+stream = ExtResource( 7 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
+[node name="FruitColorPickerButton" type="ColorPickerButton" parent="."]
+margin_left = 168.868
+margin_top = 180.0
+margin_right = 218.868
+margin_bottom = 220.0
+icon = ExtResource( 6 )
+color = Color( 0.854902, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeavesColorPickerButton" type="ColorPickerButton" parent="."]
+margin_left = 168.868
+margin_top = 268.754
+margin_right = 218.868
+margin_bottom = 308.754
+icon = ExtResource( 6 )
+color = Color( 0.113725, 0.654902, 0.364706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StemColorPickerButton" type="ColorPickerButton" parent="."]
+margin_left = 168.868
+margin_top = 360.0
+margin_right = 218.868
+margin_bottom = 400.0
+icon = ExtResource( 6 )
+color = Color( 0.411765, 0.34902, 0.105882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FruitSizeSlider" type="HSlider" parent="."]
+margin_left = 1020.34
+margin_top = 193.678
+margin_right = 1180.34
+margin_bottom = 209.678
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GrowAngleSlider" type="HSlider" parent="."]
+margin_left = 1021.53
+margin_top = 292.382
+margin_right = 1181.53
+margin_bottom = 308.382
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StemThicknessSlider" type="HSlider" parent="."]
+margin_left = 1021.53
+margin_top = 399.411
+margin_right = 1181.53
+margin_bottom = 415.411
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="color_changed" from="FruitColorPickerButton" to="ColorRect" method="_on_FruitColorPickerButton_color_changed"]
+[connection signal="color_changed" from="LeavesColorPickerButton" to="ColorRect" method="_on_LeavesColorPickerButton_color_changed"]
+[connection signal="color_changed" from="StemColorPickerButton" to="ColorRect" method="_on_StemColorPickerButton_color_changed"]

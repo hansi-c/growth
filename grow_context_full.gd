@@ -10,7 +10,9 @@ var grammar = Grammars.wheat_1l()
 var _25degrees = deg2rad(25.0)
 var start_angle = Vector2.UP.angle() + _25degrees
 var line_generator: D0LineGenerator
-
+var color_fruit = Color.red
+var color_leaves = Color.green
+var color_stem = Color.brown
 
 signal update_iteration(value)
 signal update_word_length(value)
@@ -36,11 +38,11 @@ func _process(_delta):
 
 func _draw():
 	for branch in line_generator.lines:
-		draw_line(branch.start, branch.end, Color.brown, branch.width)
+		draw_line(branch.start, branch.end, color_stem, branch.width)
 	for circle in line_generator.circles:
-		draw_circle(circle, 3.0, Color.green)
+		draw_circle(circle, 3.0, color_leaves)
 	for fruit in line_generator.fruits:
-		draw_circle(fruit, 5.0, Color.yellow)
+		draw_circle(fruit, 5.0, color_fruit)
 
 func has_next_iteration():
 	return current_iteration < iterations
@@ -54,3 +56,15 @@ func update_stats():
 	emit_signal("update_iteration", "%s/%s" % [current_iteration, iterations])
 	emit_signal("update_word_length", word.length())
 	emit_signal("update_lines_drawn", line_generator.lines.size())
+
+
+func _on_FruitColorPickerButton_color_changed(color):
+	color_fruit = color
+
+
+func _on_LeavesColorPickerButton_color_changed(color):
+	color_leaves = color
+
+
+func _on_StemColorPickerButton_color_changed(color):
+	color_stem = color
