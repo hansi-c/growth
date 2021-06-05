@@ -15,16 +15,12 @@ var color_fruit = Color.red
 var color_leaves = Color.green
 var color_stem = Color.brown
 var leaves_radius = 3.0
+var fruit_radius = 5.0
 var stem_thickness = 1.0
-
-#signal update_iteration(value)
-#signal update_word_length(value)
-#signal update_lines_drawn(value)
 
 func _ready():
 	word = grammar.axiom
 	initialize_line_generator()
-#	line_generator.generate_lines(word, current_iteration)
 
 func initialize_line_generator():
 	line_generator = D0LineGenerator.new()
@@ -34,26 +30,15 @@ func initialize_line_generator():
 	line_generator.segment_length = branch_length
 
 func _process(_delta):
-#	if Input.is_action_just_pressed("ui_accept") and has_next_iteration():
-#		next_iteration()
-#		update_stats()
 	update()
 
 func _draw():
 	for branch in line_generator.lines:
 		draw_line(branch.start, branch.end, color_stem, branch.width * stem_thickness)
-	for circle in line_generator.circles:
+	for circle in line_generator.leaves:
 		draw_circle(circle, leaves_radius, color_leaves)
-#	for fruit in line_generator.fruits:
-#		draw_circle(fruit, 5.0, color_fruit)
-
-#func has_next_iteration():
-#	return current_iteration < iterations
-#
-#func next_iteration():
-#	word = grammar.apply_productions(word)
-#	line_generator.generate_lines(word, current_iteration)
-#	current_iteration += 1
+	for fruit in line_generator.fruits:
+		draw_circle(fruit, fruit_radius, color_fruit)
 
 func _on_Timer_timeout():
 	if has_next_iteration():
@@ -71,7 +56,7 @@ func is_iteration_finished():
 func next_iteration():
 	current_symbol = 0
 	current_iteration += 1
-	line_generator.on_next_iteration()
+#	line_generator.on_next_iteration()
 
 func has_next_rule():
 	while current_symbol < word.length():
@@ -82,10 +67,8 @@ func has_next_rule():
 	return false
 
 func next_rule():
-	var rule = word[current_symbol]
-	var production = grammar.applicable_production(word, current_symbol)
 	word = grammar.apply_production(word, current_symbol)
-	current_symbol += production.successor.length()
+	current_symbol += grammar.last_applied_production.successor.length()
 	line_generator.generate_lines(word, current_iteration)
 
 func _on_FruitColorPickerButton_color_changed(color):

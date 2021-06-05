@@ -48,7 +48,6 @@ autoplay = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1280.0

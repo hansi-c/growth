@@ -6,7 +6,7 @@ export var start = Vector2(500, 400)
 export var branch_length = 40.0
 var current_iteration = 0
 var word = ""
-var grammar = Grammars.wheat_grammar()
+var grammar = Grammars.wheat_1l()
 var _25degrees = deg2rad(25.0)
 var start_angle = Vector2.UP.angle()
 var line_generator: D0LineGenerator
@@ -47,7 +47,7 @@ func has_next_iteration():
 
 func next_iteration():
 	time_rules_start = OS.get_ticks_msec()
-	word = grammar.apply_rules(word)
+	word = grammar.apply_productions(word)
 	time_rules_end = OS.get_ticks_msec()
 	line_generator.generate_lines(word, current_iteration)
 	time_lines_end = OS.get_ticks_msec()

@@ -9,7 +9,7 @@ var start_angle = Vector2.UP.angle() + _25degrees
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
-var grammar = Grammars.wheat_grammar()
+var grammar = Grammars.wheat_1l()
 #var grammar = Grammars.tomato_grammar()
 var last_rule # used only for stats
 var line_generator: D0LineGenerator
@@ -64,17 +64,17 @@ func next_iteration():
 func has_next_rule():
 	while current_symbol < word.length():
 		var symbol = word[current_symbol]
-		if grammar.rules.has(symbol):
+		if grammar.productions.has(symbol):
 			return true
 		current_symbol += 1
 	return false
 
 func next_rule():
-	var rule = word[current_symbol]
-	word = grammar.apply_rule(word, current_symbol)
-	var production = grammar.rules[rule]
-	last_rule = "%s -> %s" % [rule, production] # just for stats
-	current_symbol += production.length()
+	var predecessor = word[current_symbol]
+	word = grammar.apply_production(word, current_symbol)
+	var production = grammar.last_applied_production
+	last_rule = "%s -> %s" % [predecessor, production.successor] # just for stats
+	current_symbol += production.successor.length()
 	line_generator.generate_lines(word, current_iteration)
 
 func update_stats():
