@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://grow_smooth_iterations.gd"
 }, {
 "base": "Reference",
+"class": "ILGrammar",
+"language": "GDScript",
+"path": "res://ILGrammar.gd"
+}, {
+"base": "Reference",
 "class": "LineSegment",
 "language": "GDScript",
 "path": "res://line_segment.gd"
@@ -43,6 +48,11 @@ _global_script_classes=[ {
 "class": "PlantState",
 "language": "GDScript",
 "path": "res://plant_state.gd"
+}, {
+"base": "Reference",
+"class": "Production",
+"language": "GDScript",
+"path": "res://Production.gd"
 } ]
 _global_script_class_icons={
 "D0LineGenerator": "",
@@ -50,8 +60,10 @@ _global_script_class_icons={
 "GrowFullIteration": "",
 "GrowLineByLine": "",
 "GrowSmoothTransitions": "",
+"ILGrammar": "",
 "LineSegment": "",
-"PlantState": ""
+"PlantState": "",
+"Production": ""
 }
 
 [application]

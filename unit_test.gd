@@ -5,39 +5,37 @@ func _ready():
 	test_match_left_context()
 
 func test_apply_rule():
-	var grammar = Grammars.Grammar.new()
-	grammar.rules = {
-		"0" : "Zero",
-		"1" : "One",
-		"2" : "Two"
+	var grammar = ILGrammar.new()
+	grammar.productions = {
+		"0" : [Production.new("Zero")],
+		"1" : [Production.new("One")],
+		"2" : [Production.new("Two")]
 	}
 
 	var word = "0"
-	var result = grammar.apply_rule(word, 0)
+	var result = grammar.apply_production(word, 0)
 	print(result)
 	assert(result == "Zero")
 
 	word = "012"
-	result = grammar.apply_rule(word, 0)
+	result = grammar.apply_production(word, 0)
 	print(result)
 	assert(result == "Zero12")
-	result = grammar.apply_rule(word, 1)
+	result = grammar.apply_production(word, 1)
 	print(result)
 	assert(result == "0One2")
-	result = grammar.apply_rule(word, 2)
+	result = grammar.apply_production(word, 2)
 	print(result)
 	assert(result == "01Two")
 
 	# expect an error to be thrown here
 	word = "+"
-	result = grammar.apply_rule(word, 0)
+	result = grammar.apply_production(word, 0)
 	print(result)
 	assert(result == "")
 
-
-
 func test_match_left_context():
-	var production = Grammars.Production.new("", "ABC", "")
+	var production = Production.new("", "ABC", "")
 	var word = "ABC[DE][FG[HI[JK]L]MNO]P"
 	var index = 8 # F
 	var matches = production.matches_left_context(word, index)
@@ -59,12 +57,12 @@ func test_match_left_context():
 	matches = production.matches_left_context(word, index)
 	assert(matches == false)
 
-	var p2 = Grammars.Production.new("", "D", "")
+	var p2 = Production.new("", "D", "")
 	index = 5 # E
 	matches = p2.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p3 = Grammars.Production.new("", "C", "")
+	var p3 = Production.new("", "C", "")
 	index = 8 # F
 	matches = p3.matches_left_context(word, index)
 	assert(matches == true)
@@ -73,7 +71,7 @@ func test_match_left_context():
 	matches = p3.matches_left_context(word, index)
 	assert(matches == false)
 
-	var p4 = Grammars.Production.new("", "", "")
+	var p4 = Production.new("", "", "")
 	index = 0
 	matches = p4.matches_left_context(word, index)
 	assert(matches == true)
@@ -82,12 +80,12 @@ func test_match_left_context():
 	matches = p4.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p5 = Grammars.Production.new("", "MN", "")
+	var p5 = Production.new("", "MN", "")
 	index = 21 # O
 	matches = p5.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p6 = Grammars.Production.new("", "FG", "")
+	var p6 = Production.new("", "FG", "")
 	index = 19 # M
 	matches = p6.matches_left_context(word, index)
 	assert(matches == true)

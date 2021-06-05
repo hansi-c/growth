@@ -56,7 +56,6 @@ func is_iteration_finished():
 func next_iteration():
 	current_symbol = 0
 	current_iteration += 1
-#	line_generator.on_next_iteration()
 
 func has_next_rule():
 	while current_symbol < word.length():

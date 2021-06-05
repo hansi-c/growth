@@ -10,7 +10,6 @@ var current_iteration = 0
 var current_symbol = 0
 var word = ""
 var grammar = Grammars.wheat_1l()
-#var grammar = Grammars.tomato_grammar()
 var last_rule # used only for stats
 var line_generator: D0LineGenerator
 
