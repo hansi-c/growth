@@ -88,7 +88,6 @@ func update_stats():
 		var angle = direction.angle()
 		emit_signal("update_angle", rad2deg(angle))
 
-
 func _on_Timer_timeout():
 	if has_next_iteration():
 		if is_iteration_finished():

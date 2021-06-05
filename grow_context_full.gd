@@ -82,5 +82,8 @@ func _on_StemColorPickerButton_color_changed(color):
 func _on_LeafRadiusSlider_value_changed(value):
 	leaves_radius = value
 
+func _on_FruitRadiusSlider_value_changed(value):
+	fruit_radius = value
+
 func _on_StemThicknessSlider_value_changed(value):
 	stem_thickness = value
