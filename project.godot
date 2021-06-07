@@ -12,47 +12,47 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "D0LineGenerator",
 "language": "GDScript",
-"path": "res://d0_line_generator.gd"
+"path": "res://source/render/d0_line_generator.gd"
 }, {
 "base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
-"path": "res://grow_context_full.gd"
+"path": "res://source/grow_context_full.gd"
 }, {
 "base": "Node2D",
 "class": "GrowFullIteration",
 "language": "GDScript",
-"path": "res://grow_full_iteration.gd"
+"path": "res://source/grow_full_iteration.gd"
 }, {
 "base": "Node2D",
 "class": "GrowLineByLine",
 "language": "GDScript",
-"path": "res://grow_line_by_line.gd"
+"path": "res://source/grow_line_by_line.gd"
 }, {
 "base": "CanvasItem",
 "class": "GrowSmoothTransitions",
 "language": "GDScript",
-"path": "res://grow_smooth_iterations.gd"
+"path": "res://source/grow_smooth_iterations.gd"
 }, {
 "base": "Reference",
 "class": "ILGrammar",
 "language": "GDScript",
-"path": "res://ILGrammar.gd"
+"path": "res://source/grammar/ILGrammar.gd"
 }, {
 "base": "Reference",
 "class": "LineSegment",
 "language": "GDScript",
-"path": "res://line_segment.gd"
+"path": "res://source/render/line_segment.gd"
 }, {
 "base": "Reference",
 "class": "PlantState",
 "language": "GDScript",
-"path": "res://plant_state.gd"
+"path": "res://source/render/plant_state.gd"
 }, {
 "base": "Reference",
 "class": "Production",
 "language": "GDScript",
-"path": "res://Production.gd"
+"path": "res://source/grammar/Production.gd"
 } ]
 _global_script_class_icons={
 "D0LineGenerator": "",
@@ -69,12 +69,12 @@ _global_script_class_icons={
 [application]
 
 config/name="grow"
-run/main_scene="res://grow_zoomable.tscn"
+run/main_scene="res://source/grow_zoomable.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Grammars="*res://Grammars.gd"
+Grammars="*res://source/grammar/Grammars.gd"
 
 [display]
 
