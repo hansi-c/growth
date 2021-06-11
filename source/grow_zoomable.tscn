@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/grow_context_full.gd" type="Script" id=3]
 [ext_resource path="res://source/gui/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://source/gui/CameraPanning.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -84,15 +84,6 @@ autostart = true
 position = Vector2( 640, 360 )
 current = true
 script = ExtResource( 4 )
-
-[node name="Control" type="Control" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
-mouse_filter = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="."]
 margin_left = 1215.32
@@ -205,10 +196,9 @@ __meta__ = {
 }
 
 [node name="CameraPan" type="Node2D" parent="."]
-visible = false
+script = ExtResource( 1 )
 
 [connection signal="timeout" from="ViewportContainer/Viewport/PlantRect/Timer" to="ViewportContainer/Viewport/PlantRect" method="_on_Timer_timeout"]
-[connection signal="camera_panning" from="Control" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
 [connection signal="value_changed" from="ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]
 [connection signal="color_changed" from="CosmeticsContainer/FruitColorPickerButton" to="ViewportContainer/Viewport/PlantRect" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="CosmeticsContainer/FruitRadiusSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_FruitRadiusSlider_value_changed"]
@@ -216,3 +206,4 @@ visible = false
 [connection signal="value_changed" from="CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="CosmeticsContainer/StemColorPickerButton" to="ViewportContainer/Viewport/PlantRect" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_StemThicknessSlider_value_changed"]
+[connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
