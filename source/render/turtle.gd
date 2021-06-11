@@ -1,4 +1,4 @@
-class_name D0LineGenerator
+class_name Turtle
 
 var start: Vector2
 var start_angle: float
@@ -7,7 +7,7 @@ var segment_length: float
 var lines = []
 var leaves = []
 var fruits = []
-var state = PlantState.new()
+var state = TurtleState.new()
 
 func generate_lines(word, current_iteration: int):
 	lines.clear()
@@ -21,9 +21,9 @@ func generate_lines(word, current_iteration: int):
 		var s = word[i]
 		if s == "F":
 			var direction = Vector2(cos(state.angle), sin(state.angle))
-			var branch = generate_branch(state.position, direction, state.width)
-			lines.append(branch)
-			state.position = branch.end
+			var line_segment = line_segment(state.position, direction, state.width)
+			lines.append(line_segment)
+			state.position = line_segment.end
 		elif s == "-":
 			state.turn_clockwise(turn_degrees)
 		elif s == "+":
@@ -38,7 +38,7 @@ func generate_lines(word, current_iteration: int):
 		elif s == "B":
 			fruits.append(state.position + Vector2(0,2.0))
 
-func generate_branch(_start, direction, width):
+func line_segment(_start, direction, width):
 	var result = LineSegment.new()
 	result.start = _start
 	result.end = _start + (direction * segment_length)

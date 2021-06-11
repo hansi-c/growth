@@ -1,4 +1,4 @@
-class_name PlantState
+class_name TurtleState
 
 var positions = []
 var angles = []

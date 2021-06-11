@@ -76,14 +76,14 @@ __meta__ = {
 start = Vector2( 480, 580 )
 branch_length = 4.0
 
-[node name="Timer" type="Timer" parent="ViewportContainer/Viewport/PlantRect"]
-wait_time = 0.1
-autostart = true
-
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 640, 360 )
 current = true
 script = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="ViewportContainer/Viewport"]
+wait_time = 0.1
+autostart = true
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="."]
 margin_left = 1215.32
@@ -198,7 +198,7 @@ __meta__ = {
 [node name="CameraPan" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
-[connection signal="timeout" from="ViewportContainer/Viewport/PlantRect/Timer" to="ViewportContainer/Viewport/PlantRect" method="_on_Timer_timeout"]
+[connection signal="timeout" from="ViewportContainer/Viewport/Timer" to="ViewportContainer/Viewport/PlantRect" method="_on_Timer_timeout"]
 [connection signal="value_changed" from="ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]
 [connection signal="color_changed" from="CosmeticsContainer/FruitColorPickerButton" to="ViewportContainer/Viewport/PlantRect" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="CosmeticsContainer/FruitRadiusSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_FruitRadiusSlider_value_changed"]

@@ -11,7 +11,7 @@ var current_symbol = 0
 var word = ""
 var grammar = Grammars.wheat_1l()
 var last_rule # used only for stats
-var line_generator: D0LineGenerator
+var turtle: Turtle
 
 signal update_iteration(value)
 signal update_word_length(value)
@@ -22,15 +22,15 @@ signal update_angle(value)
 
 func _ready():
 	word = grammar.axiom
-	initialize_line_generator()
+	initialize_turtle()
 	update_stats()
 
-func initialize_line_generator():
-	line_generator = D0LineGenerator.new()
-	line_generator.start = start
-	line_generator.start_angle = start_angle
-	line_generator.turn_degrees = _25degrees
-	line_generator.segment_length = branch_length
+func initialize_turtle():
+	turtle = Turtle.new()
+	turtle.start = start
+	turtle.start_angle = start_angle
+	turtle.turn_degrees = _25degrees
+	turtle.segment_length = branch_length
 
 #func _input(_event):
 #	if has_next_iteration():
@@ -43,11 +43,8 @@ func initialize_line_generator():
 #				next_rule()
 #		update_stats()
 
-func _process(_delta):
-	update()
-
 func _draw():
-	for branch in line_generator.lines:
+	for branch in turtle.lines:
 		draw_line(branch.start, branch.end, Color.green, branch.width)
 
 func has_next_iteration():
@@ -74,19 +71,21 @@ func next_rule():
 	var production = grammar.last_applied_production
 	last_rule = "%s -> %s" % [predecessor, production.successor] # just for stats
 	current_symbol += production.successor.length()
-	line_generator.generate_lines(word, current_iteration)
+	turtle.generate_lines(word, current_iteration)
+	update()
 
 func update_stats():
 	emit_signal("update_iteration", "%s/%s" % [current_iteration, iterations])
 	emit_signal("update_word_length", word.length())
 	emit_signal("update_current_symbol", current_symbol)
-	emit_signal("update_lines_drawn", line_generator.lines.size())
+	emit_signal("update_lines_drawn", turtle.lines.size())
 	emit_signal("update_last_rule", last_rule)
-	if line_generator.lines.size() > 0:
-		var last_branch = line_generator.lines[line_generator.lines.size()-1]
+	if turtle.lines.size() > 0:
+		var last_branch = turtle.lines[turtle.lines.size()-1]
 		var direction = last_branch.start - last_branch.end
 		var angle = direction.angle()
 		emit_signal("update_angle", rad2deg(angle))
+	update()
 
 func _on_Timer_timeout():
 	if has_next_iteration():

@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "D0LineGenerator",
-"language": "GDScript",
-"path": "res://source/render/d0_line_generator.gd"
-}, {
 "base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
@@ -45,25 +40,30 @@ _global_script_classes=[ {
 "path": "res://source/render/line_segment.gd"
 }, {
 "base": "Reference",
-"class": "PlantState",
-"language": "GDScript",
-"path": "res://source/render/plant_state.gd"
-}, {
-"base": "Reference",
 "class": "Production",
 "language": "GDScript",
 "path": "res://source/grammar/Production.gd"
+}, {
+"base": "Reference",
+"class": "Turtle",
+"language": "GDScript",
+"path": "res://source/render/turtle.gd"
+}, {
+"base": "Reference",
+"class": "TurtleState",
+"language": "GDScript",
+"path": "res://source/render/turtle_state.gd"
 } ]
 _global_script_class_icons={
-"D0LineGenerator": "",
 "GrowContextFull": "",
 "GrowFullIteration": "",
 "GrowLineByLine": "",
 "GrowSmoothTransitions": "",
 "ILGrammar": "",
 "LineSegment": "",
-"PlantState": "",
-"Production": ""
+"Production": "",
+"Turtle": "",
+"TurtleState": ""
 }
 
 [application]
