@@ -18,9 +18,13 @@ var leaves_radius = 3.0
 var fruit_radius = 5.0
 var stem_thickness = 1.0
 
+signal max_iteration_reached()
+signal update_current_iteration(text)
+
 func _ready():
 	word = grammar.axiom
 	initialize_turtle()
+	emit_iteration_update()
 
 func initialize_turtle():
 	turtle = Turtle.new()
@@ -28,6 +32,9 @@ func initialize_turtle():
 	turtle.start_angle = start_angle
 	turtle.turn_degrees = _25degrees
 	turtle.segment_length = branch_length
+
+func emit_iteration_update():
+	emit_signal("update_current_iteration", "%s/%s" % [current_iteration, iterations])
 
 func _draw():
 	for line in turtle.lines:
@@ -53,6 +60,7 @@ func _on_Timer_timeout():
 			next_iteration()
 		if has_next_rule():
 			next_rule()
+			generate_geometry()
 
 func has_next_iteration():
 	return current_iteration < iterations
@@ -63,6 +71,9 @@ func is_iteration_finished():
 func next_iteration():
 	current_symbol = 0
 	current_iteration += 1
+	emit_iteration_update()
+	if not has_next_iteration():
+		emit_signal("max_iteration_reached")
 
 func has_next_rule():
 	while current_symbol < word.length():
@@ -75,8 +86,18 @@ func has_next_rule():
 func next_rule():
 	word = grammar.apply_production(word, current_symbol)
 	current_symbol += grammar.last_applied_production.successor.length()
+
+func generate_geometry():
 	turtle.generate_lines(word, current_iteration)
 	update()
+
+func _on_FinishIteration():
+	if has_next_iteration():
+		while not is_iteration_finished() and has_next_rule():
+			next_rule()
+		generate_geometry()
+		if has_next_iteration():
+			next_iteration()
 
 func _on_FruitColorPickerButton_color_changed(color):
 	color_fruit = color
