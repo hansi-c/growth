@@ -30,12 +30,22 @@ func initialize_turtle():
 	turtle.segment_length = branch_length
 
 func _draw():
-	for branch in turtle.lines:
-		draw_line(branch.start, branch.end, color_stem, branch.width * stem_thickness)
-	for circle in turtle.leaves:
-		draw_circle(circle, leaves_radius, color_leaves)
-	for fruit in turtle.fruits:
-		draw_circle(fruit, fruit_radius, color_fruit)
+	for line in turtle.lines:
+		_draw_stem(line)
+	for position in turtle.leaves:
+		_draw_leave(position)
+	for position in turtle.fruits:
+		_draw_fruit(position)
+		
+func _draw_stem(line_segment):
+	draw_line(line_segment.start, line_segment.end, color_stem,
+		line_segment.width * stem_thickness)
+
+func _draw_leave(position):
+	draw_circle(position, leaves_radius, color_leaves)
+
+func _draw_fruit(position):
+	draw_circle(position, fruit_radius, color_fruit)
 
 func _on_Timer_timeout():
 	if has_next_iteration():

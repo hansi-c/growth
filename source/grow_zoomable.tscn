@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
+[ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
 [ext_resource path="res://source/grow_context_full.gd" type="Script" id=3]
 [ext_resource path="res://source/gui/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://source/gui/PauseButton.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -48,8 +50,7 @@ __meta__ = {
 }
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_left = 1.13147
-margin_right = 1281.13
+margin_right = 1280.0
 margin_bottom = 720.0
 mouse_filter = 2
 __meta__ = {
@@ -84,6 +85,7 @@ script = ExtResource( 4 )
 [node name="Timer" type="Timer" parent="ViewportContainer/Viewport"]
 wait_time = 0.1
 autostart = true
+script = ExtResource( 2 )
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="."]
 margin_left = 1215.32
@@ -195,6 +197,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SpeedContainer" type="GridContainer" parent="."]
+margin_left = 1000.0
+margin_top = 640.0
+margin_right = 1124.0
+margin_bottom = 700.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="SpeedContainer"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+toggle_mode = true
+pressed = true
+text = "Playing"
+script = ExtResource( 5 )
+
+[node name="FinishIterationButton" type="Button" parent="SpeedContainer"]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+text = "Next"
+
 [node name="CameraPan" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
@@ -206,4 +234,6 @@ script = ExtResource( 1 )
 [connection signal="value_changed" from="CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="CosmeticsContainer/StemColorPickerButton" to="ViewportContainer/Viewport/PlantRect" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantRect" method="_on_StemThicknessSlider_value_changed"]
+[connection signal="toggled" from="SpeedContainer/PlayButton" to="ViewportContainer/Viewport/Timer" method="_on_PlayButton_toggled"]
+[connection signal="toggled" from="SpeedContainer/PlayButton" to="SpeedContainer/PlayButton" method="_on_PlayButton_toggled"]
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
