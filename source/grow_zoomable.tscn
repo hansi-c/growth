@@ -11,7 +11,7 @@
 [ext_resource path="res://source/gui/FruitsValue.gd" type="Script" id=9]
 [ext_resource path="res://source/gui/StemValue.gd" type="Script" id=10]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 render_mode unshaded;
@@ -21,8 +21,8 @@ render_mode unshaded;
 //}
 "
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -55,28 +55,26 @@ render_target_update_mode = 3
 gui_disable_input = true
 
 [node name="PlantCanvas" type="Node2D" parent="ViewportContainer/Viewport"]
-material = SubResource( 4 )
+material = SubResource( 2 )
 script = ExtResource( 3 )
 branch_length = 4.0
+
+[node name="Timer" type="Timer" parent="ViewportContainer/Viewport/PlantCanvas"]
+wait_time = 0.1
+autostart = true
+script = ExtResource( 2 )
+
+[node name="GrowthStartPosition" type="Position2D" parent="ViewportContainer/Viewport/PlantCanvas"]
+position = Vector2( 320, 300 )
+__meta__ = {
+"_gizmo_extents_": 105.9
+}
 
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport"]
 show_behind_parent = true
 position = Vector2( 320, 180 )
 current = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
 script = ExtResource( 4 )
-
-[node name="Timer" type="Timer" parent="ViewportContainer/Viewport"]
-wait_time = 0.1
-autostart = true
-script = ExtResource( 2 )
-
-[node name="GrowthStartPosition" type="Position2D" parent="ViewportContainer"]
-position = Vector2( 320, 300 )
-__meta__ = {
-"_gizmo_extents_": 1000.0
-}
 
 [node name="GUI" type="Control" parent="."]
 margin_right = 640.0
@@ -294,20 +292,20 @@ __meta__ = {
 }
 
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
-[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/SpeedContainer/FinishIterationButton" method="_on_max_iteration_reached"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/SpeedContainer/PlayButton" method="_on_max_iteration_reached"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/SpeedContainer/FinishIterationButton" method="_on_max_iteration_reached"]
 [connection signal="update_current_iteration" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentIterationValue" method="_on_update_current_iteration"]
 [connection signal="update_fruits" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/FruitsValue" method="_on_update_fruits"]
 [connection signal="update_leaves" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/LeavesValue" method="_on_update_leaves"]
 [connection signal="update_line_segments" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/StemValue" method="_on_update_line_segments"]
-[connection signal="timeout" from="ViewportContainer/Viewport/Timer" to="ViewportContainer/Viewport/PlantCanvas" method="_on_Timer_timeout"]
+[connection signal="timeout" from="ViewportContainer/Viewport/PlantCanvas/Timer" to="ViewportContainer/Viewport/PlantCanvas" method="_on_Timer_timeout"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/FruitColorPickerButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/FruitRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/LeavesColorPickerButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeavesColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/StemColorPickerButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
-[connection signal="toggled" from="GUI/Indented/SpeedContainer/PlayButton" to="ViewportContainer/Viewport/Timer" method="_on_PlayButton_toggled"]
+[connection signal="toggled" from="GUI/Indented/SpeedContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="toggled" from="GUI/Indented/SpeedContainer/PlayButton" to="GUI/Indented/SpeedContainer/PlayButton" method="_on_PlayButton_toggled"]
 [connection signal="button_up" from="GUI/Indented/SpeedContainer/FinishIterationButton" to="GUI/Indented/SpeedContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
 [connection signal="button_up" from="GUI/Indented/SpeedContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]

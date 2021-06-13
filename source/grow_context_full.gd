@@ -32,7 +32,7 @@ func _ready():
 	_emit_iteration_update()
 
 func _get_starting_position():
-	var start_pos = get_node_or_null("../../GrowthStartPosition")
+	var start_pos = get_node_or_null("GrowthStartPosition")
 	print(start_pos)
 	if start_pos:
 		start = start_pos.position
