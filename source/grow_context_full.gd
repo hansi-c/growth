@@ -25,11 +25,11 @@ signal update_fruits(amount)
 signal update_line_segments(amount)
 
 func _ready():
-	_get_starting_position()
 	word = grammar.axiom
-	initialize_turtle()
-	update_stats()
-	emit_iteration_update()
+	_get_starting_position()
+	_initialize_turtle()
+	_update_stats()
+	_emit_iteration_update()
 
 func _get_starting_position():
 	var start_pos = get_node_or_null("../../GrowthStartPosition")
@@ -37,17 +37,17 @@ func _get_starting_position():
 	if start_pos:
 		start = start_pos.position
 
-func initialize_turtle():
+func _initialize_turtle():
 	turtle = Turtle.new()
 	turtle.start = start
 	turtle.start_angle = start_angle
 	turtle.turn_degrees = _25degrees
 	turtle.segment_length = branch_length
 
-func emit_iteration_update():
+func _emit_iteration_update():
 	emit_signal("update_current_iteration", "%s/%s" % [current_iteration, iterations])
 
-func update_stats():
+func _update_stats():
 	emit_signal("update_fruits", turtle.fruits.size())
 	emit_signal("update_leaves", turtle.leaves.size())
 	emit_signal("update_line_segments", turtle.lines.size())
@@ -87,7 +87,7 @@ func is_iteration_finished():
 func next_iteration():
 	current_symbol = 0
 	current_iteration += 1
-	emit_iteration_update()
+	_emit_iteration_update()
 	if not has_next_iteration():
 		emit_signal("max_iteration_reached")
 
