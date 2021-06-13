@@ -25,10 +25,17 @@ signal update_fruits(amount)
 signal update_line_segments(amount)
 
 func _ready():
+	_get_starting_position()
 	word = grammar.axiom
 	initialize_turtle()
 	update_stats()
 	emit_iteration_update()
+
+func _get_starting_position():
+	var start_pos = get_node_or_null("../../GrowthStartPosition")
+	print(start_pos)
+	if start_pos:
+		start = start_pos.position
 
 func initialize_turtle():
 	turtle = Turtle.new()
