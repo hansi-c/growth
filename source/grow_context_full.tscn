@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/grow_context_full.gd" type="Script" id=1]
 [ext_resource path="res://assets/level_single_pot.png" type="Texture" id=2]
 [ext_resource path="res://assets/sound/vogelzwitschern.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sound/growth1_noperc.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/pot.png" type="Texture" id=5]
+[ext_resource path="res://source/WateringCan.gd" type="Script" id=6]
 [ext_resource path="res://assets/sound/shower.ogg" type="AudioStream" id=7]
 
 [sub_resource type="ParticlesMaterial" id=1]
@@ -27,6 +28,9 @@ code = "shader_type canvas_item;
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 36.8571, 33.6955 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -161,6 +165,22 @@ __meta__ = {
 wait_time = 0.1
 autostart = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 640, 360 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="WateringCan" type="Node2D" parent="."]
+position = Vector2( 1152.34, 637.415 )
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="WateringCan"]
+
+[node name="Area2D" type="Area2D" parent="WateringCan"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WateringCan/Area2D"]
+shape = SubResource( 4 )
+
 [connection signal="color_changed" from="ColorContainer/FruitColorPickerButton" to="PlantRect" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="ColorContainer/FruitRadiusSlider" to="PlantRect" method="_on_FruitRadiusSlider_value_changed"]
 [connection signal="color_changed" from="ColorContainer/LeavesColorPickerButton" to="PlantRect" method="_on_LeavesColorPickerButton_color_changed"]
@@ -168,3 +188,4 @@ autostart = true
 [connection signal="color_changed" from="ColorContainer/StemColorPickerButton" to="PlantRect" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="ColorContainer/StemThicknessSlider" to="PlantRect" method="_on_StemThicknessSlider_value_changed"]
 [connection signal="timeout" from="Timer" to="PlantRect" method="_on_Timer_timeout"]
+[connection signal="mouse_entered" from="WateringCan/Area2D" to="WateringCan" method="_on_Area2D_mouse_entered"]

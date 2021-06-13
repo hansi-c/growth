@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
-[ext_resource path="res://source/grow_context_full.gd" type="Script" id=3]
+[ext_resource path="res://source/grow_shapes.gd" type="Script" id=3]
 [ext_resource path="res://source/gui/Camera2D.gd" type="Script" id=4]
 [ext_resource path="res://source/gui/PauseButton.gd" type="Script" id=5]
 [ext_resource path="res://source/gui/CurrentIterationLabel.gd" type="Script" id=6]
@@ -10,6 +10,10 @@
 [ext_resource path="res://source/gui/LeavesValue.gd" type="Script" id=8]
 [ext_resource path="res://source/gui/FruitsValue.gd" type="Script" id=9]
 [ext_resource path="res://source/gui/StemValue.gd" type="Script" id=10]
+[ext_resource path="res://source/WateringCan.gd" type="Script" id=11]
+[ext_resource path="res://assets/level_single_pot.png" type="Texture" id=12]
+[ext_resource path="res://assets/wateringcan.png" type="Texture" id=13]
+[ext_resource path="res://assets/pot.png" type="Texture" id=14]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -24,16 +28,38 @@ render_mode unshaded;
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 60, 35 )
 
-[node name="BackgroundRect" type="ColorRect" parent="."]
-margin_right = 640.0
-margin_bottom = 360.0
-mouse_filter = 2
-color = Color( 0.329412, 0.666667, 0.780392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
+[sub_resource type="Animation" id=4]
+resource_name = "watering"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -33.0 ]
 }
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 7.0
+flag_disable_z = true
+direction = Vector3( -2, -1, 0 )
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color = Color( 0.411765, 0.623529, 0.917647, 1 )
+
+[node name="Node2D" type="Node2D"]
 
 [node name="CameraPan" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -56,16 +82,16 @@ gui_disable_input = true
 
 [node name="PlantCanvas" type="Node2D" parent="ViewportContainer/Viewport"]
 material = SubResource( 2 )
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 3 )
-branch_length = 4.0
 
 [node name="Timer" type="Timer" parent="ViewportContainer/Viewport/PlantCanvas"]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 script = ExtResource( 2 )
 
 [node name="GrowthStartPosition" type="Position2D" parent="ViewportContainer/Viewport/PlantCanvas"]
-position = Vector2( 320, 300 )
+position = Vector2( 630, 600 )
 __meta__ = {
 "_gizmo_extents_": 35.3
 }
@@ -74,7 +100,21 @@ __meta__ = {
 show_behind_parent = true
 position = Vector2( 320, 180 )
 current = true
+limit_top = 0
+limit_bottom = 360
 script = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="ViewportContainer/Viewport"]
+position = Vector2( 320, 180 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -2
+texture = ExtResource( 12 )
+
+[node name="Pot" type="Sprite" parent="ViewportContainer/Viewport"]
+position = Vector2( 318.76, 316.24 )
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+texture = ExtResource( 14 )
 
 [node name="GUI" type="Control" parent="."]
 margin_right = 640.0
@@ -183,7 +223,7 @@ margin_right = 230.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 160, 0 )
 size_flags_vertical = 4
-max_value = 8.0
+max_value = 12.0
 step = 0.5
 tick_count = 10
 __meta__ = {
@@ -210,7 +250,7 @@ margin_bottom = 78.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
 size_flags_vertical = 4
-max_value = 4.0
+max_value = 10.0
 step = 0.5
 tick_count = 10
 __meta__ = {
@@ -291,14 +331,44 @@ margin_bottom = 360.0
 rect_min_size = Vector2( 40, 360 )
 mouse_filter = 1
 size_flags_horizontal = 1
-min_value = 0.1
-max_value = 10.0
-value = 1.0
+min_value = 0.01
+max_value = 0.5
+value = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WateringCan" type="Node2D" parent="."]
+position = Vector2( 520, 280 )
+z_index = 1
+script = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="WateringCan"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WateringCan/Area2D"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="WateringCan"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WateringCan"]
+anims/watering = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="WateringCan"]
+position = Vector2( -63, -20.624 )
+emitting = false
+amount = 300
+local_coords = false
+process_material = SubResource( 5 )
+
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_max_iteration_reached"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_max_iteration_reached"]
+[connection signal="update_current_iteration" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentIterationValue" method="_on_update_current_iteration"]
+[connection signal="update_fruits" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/FruitsValue" method="_on_update_fruits"]
+[connection signal="update_leaves" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/LeavesValue" method="_on_update_leaves"]
+[connection signal="update_line_segments" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/StemValue" method="_on_update_line_segments"]
 [connection signal="timeout" from="ViewportContainer/Viewport/PlantCanvas/Timer" to="ViewportContainer/Viewport/PlantCanvas" method="_on_Timer_timeout"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/FruitColorPickerButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/FruitRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitRadiusSlider_value_changed"]
@@ -308,7 +378,9 @@ __meta__ = {
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_PlayButton_toggled"]
-[connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
+[connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
-[connection signal="value_changed" from="GUI/ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]
+[connection signal="value_changed" from="GUI/ZoomVScrollBar" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_ZoomVScrollBar_value_changed"]
+[connection signal="mouse_entered" from="WateringCan/Area2D" to="WateringCan" method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="WateringCan/Area2D" to="WateringCan" method="_on_Area2D_mouse_exited"]
