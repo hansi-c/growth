@@ -44,3 +44,9 @@ func _line_segment(_start, direction, width):
 	result.end = _start + (direction * segment_length)
 	result.width = width
 	return result
+
+func reset():
+	state.reset()
+	lines.clear()
+	leaves.clear()
+	fruits.clear()

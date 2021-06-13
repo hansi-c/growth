@@ -34,3 +34,11 @@ func pop_state():
 	position = positions.pop_back()
 	angle = angles.pop_back()
 	width = widths.pop_back()
+
+func reset():
+	positions.clear()
+	angles.clear()
+	widths.clear()
+	position = Vector2.ZERO
+	angle = 0
+	width = 0

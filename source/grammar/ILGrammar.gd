@@ -7,7 +7,6 @@ var axiom
 var productions = {}
 var context_symbols = {}
 var production_picker = StochasticProductionPicker.new()
-var last_applied_production
 
 func add_production(symbol, successor, left_context=null, right_context=null):
 	if not productions.has(symbol):
@@ -26,7 +25,7 @@ func apply_productions(word):
 			result += word[i]
 	return result
 
-func apply_production(word, index):
+func apply_production(word, index, last_production=[]):
 	var result = ""
 	var ps = applicable_productions(word, index)
 	if ps.empty():
@@ -34,7 +33,8 @@ func apply_production(word, index):
 	else:
 		var random_index = production_picker.pick_random_weighted(ps)
 		var p = ps[random_index]
-		last_applied_production = p
+		if last_production.size() > 0:
+			last_production[0] = p
 		result = word.substr(0, index) + p.successor
 		if word.length() > index:
 			result += word.substr(index+1)

@@ -25,15 +25,21 @@ signal update_fruits(amount)
 signal update_line_segments(amount)
 
 func _ready():
+	reset()
+
+func reset():
+	current_iteration = 0
+	current_symbol = 0
 	word = grammar.axiom
 	_get_starting_position()
 	_initialize_turtle()
 	_update_stats()
 	_emit_iteration_update()
+	turtle.reset()
+	generate_geometry()
 
 func _get_starting_position():
 	var start_pos = get_node_or_null("GrowthStartPosition")
-	print(start_pos)
 	if start_pos:
 		start = start_pos.position
 
@@ -100,8 +106,9 @@ func has_next_rule():
 	return false
 
 func next_rule():
-	word = grammar.apply_production(word, current_symbol)
-	current_symbol += grammar.last_applied_production.successor.length()
+	var last_production = [null]
+	word = grammar.apply_production(word, current_symbol, last_production)
+	current_symbol += last_production[0].successor.length()
 
 func generate_geometry():
 	var num_lines = turtle.lines.size()
@@ -151,3 +158,7 @@ func _on_FruitRadiusSlider_value_changed(value):
 func _on_StemThicknessSlider_value_changed(value):
 	stem_thickness = value
 	update()
+
+func _on_ResetButton_button_up():
+	reset()
+
