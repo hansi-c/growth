@@ -20,10 +20,14 @@ var stem_thickness = 1.0
 
 signal max_iteration_reached()
 signal update_current_iteration(text)
+signal update_leaves(amount)
+signal update_fruits(amount)
+signal update_line_segments(amount)
 
 func _ready():
 	word = grammar.axiom
 	initialize_turtle()
+	update_stats()
 	emit_iteration_update()
 
 func initialize_turtle():
@@ -35,6 +39,11 @@ func initialize_turtle():
 
 func emit_iteration_update():
 	emit_signal("update_current_iteration", "%s/%s" % [current_iteration, iterations])
+
+func update_stats():
+	emit_signal("update_fruits", turtle.fruits.size())
+	emit_signal("update_leaves", turtle.leaves.size())
+	emit_signal("update_line_segments", turtle.lines.size())
 
 func _draw():
 	for line in turtle.lines:
@@ -88,7 +97,20 @@ func next_rule():
 	current_symbol += grammar.last_applied_production.successor.length()
 
 func generate_geometry():
-	turtle.generate_lines(word, current_iteration)
+	var num_lines = turtle.lines.size()
+	var num_leaves = turtle.leaves.size()
+	var num_fruits = turtle.fruits.size()
+	
+	var initial_width = (current_iteration+1) * 0.66
+	turtle.generate_lines(word, initial_width)
+	
+	if turtle.lines.size() != num_lines:
+		emit_signal("update_line_segments", turtle.lines.size())
+	if turtle.leaves.size() != num_leaves:
+		emit_signal("update_leaves", turtle.leaves.size())
+	if turtle.fruits.size() != num_fruits:
+		emit_signal("update_fruits", turtle.fruits.size())
+	
 	update()
 
 func _on_FinishIteration():
