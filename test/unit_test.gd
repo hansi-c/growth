@@ -3,14 +3,13 @@ extends Node
 func _ready():
 	test_apply_rule()
 	test_match_left_context()
+	test_apply_next_production()
 
 func test_apply_rule():
 	var grammar = ILGrammar.new()
-	grammar.productions = {
-		"0" : [Production.new("Zero")],
-		"1" : [Production.new("One")],
-		"2" : [Production.new("Two")]
-	}
+	grammar.add_production(Production.new("0", "Zero"))
+	grammar.add_production(Production.new("1", "One"))
+	grammar.add_production(Production.new("2", "Two"))
 
 	var word = "0"
 	var result = grammar.apply_production(word, 0)
@@ -35,7 +34,7 @@ func test_apply_rule():
 	assert(result == "")
 
 func test_match_left_context():
-	var production = Production.new("", "ABC", "")
+	var production = Production.new("","", "ABC", "")
 	var word = "ABC[DE][FG[HI[JK]L]MNO]P"
 	var index = 8 # F
 	var matches = production.matches_left_context(word, index)
@@ -57,12 +56,12 @@ func test_match_left_context():
 	matches = production.matches_left_context(word, index)
 	assert(matches == false)
 
-	var p2 = Production.new("", "D", "")
+	var p2 = Production.new("","", "D", "")
 	index = 5 # E
 	matches = p2.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p3 = Production.new("", "C", "")
+	var p3 = Production.new("","", "C", "")
 	index = 8 # F
 	matches = p3.matches_left_context(word, index)
 	assert(matches == true)
@@ -71,7 +70,7 @@ func test_match_left_context():
 	matches = p3.matches_left_context(word, index)
 	assert(matches == false)
 
-	var p4 = Production.new("", "", "")
+	var p4 = Production.new("","", "", "")
 	index = 0
 	matches = p4.matches_left_context(word, index)
 	assert(matches == true)
@@ -80,12 +79,29 @@ func test_match_left_context():
 	matches = p4.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p5 = Production.new("", "MN", "")
+	var p5 = Production.new("","", "MN", "")
 	index = 21 # O
 	matches = p5.matches_left_context(word, index)
 	assert(matches == true)
 
-	var p6 = Production.new("", "FG", "")
+	var p6 = Production.new("","", "FG", "")
 	index = 19 # M
 	matches = p6.matches_left_context(word, index)
 	assert(matches == true)
+
+func test_apply_next_production():
+	var grammar = ILGrammar.new()
+	grammar.add_production(Production.new("A", "ABC"))
+	var word = "A"
+	var result = ILGrammar.AppliedProduction.new()
+	
+	var applied = grammar.apply_next_production(word, 0, result)
+	assert(applied == true)
+	assert(result.word == "ABC")
+	assert(result.next_index == 3)
+	
+	applied = grammar.apply_next_production(word, 1, result)
+	assert(applied == false)
+
+	applied = grammar.apply_next_production(word, 3, result)
+	assert(applied == false)

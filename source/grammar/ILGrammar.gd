@@ -8,11 +8,18 @@ var productions = {}
 var context_symbols = {}
 var production_picker = StochasticProductionPicker.new()
 
-func add_production(symbol, successor, left_context=null, right_context=null):
+#func add_production2(symbol, successor, left_context="", right_context=""):
+#	if not productions.has(symbol):
+#		productions[symbol] = []
+#	var successors = productions[symbol]
+#	successors.append(Production.new(symbol, successor, left_context, right_context))
+
+func add_production(p: Production):
+	var symbol = p.predecessor
 	if not productions.has(symbol):
 		productions[symbol] = []
 	var successors = productions[symbol]
-	successors.append(Production.new(successor, left_context, right_context))
+	successors.append(p)
 
 func apply_productions(word):
 	var result = ""
@@ -25,7 +32,19 @@ func apply_productions(word):
 			result += word[i]
 	return result
 
-func apply_production(word, index, last_production=[]):
+# Returns the index of the next predecessor of a production,
+# starting at offset.
+# Returns -1 if no production is found until the end of the word.
+func find_next_rule(word, offset) -> int:
+	var i = offset
+	while i < word.length():
+		var symbol = word[i]
+		if productions.has(symbol):
+			return i
+		i += 1
+	return -1
+
+func apply_production(word, index, applied_production=[]) -> String:
 	var result = ""
 	var ps = applicable_productions(word, index)
 	if ps.empty():
@@ -33,8 +52,8 @@ func apply_production(word, index, last_production=[]):
 	else:
 		var random_index = production_picker.pick_random_weighted(ps)
 		var p = ps[random_index]
-		if last_production.size() > 0:
-			last_production[0] = p
+		if applied_production.size() > 0:
+			applied_production[0] = p
 		result = word.substr(0, index) + p.successor
 		if word.length() > index:
 			result += word.substr(index+1)
@@ -49,6 +68,28 @@ func applicable_productions(word, index):
 			if p.matches_context(word, index):
 				result.append(p)
 	return result
+
+class AppliedProduction:
+	var word: String
+	var next_index: int
+	var production: Production
+
+func apply_next_production(word:String, index:int,
+		applied_production:AppliedProduction) -> bool:
+	for i in range(index, word.length()):
+		var symbol = word[i]
+		if productions.has(symbol):
+			var ps = applicable_productions(word, i)
+			if not ps.empty():
+				var random_index = production_picker.pick_random_weighted(ps)
+				var p = ps[random_index]
+				applied_production.production = p
+				applied_production.word = word.substr(0, index) + p.successor
+				if word.length() > index:
+					applied_production.word += word.substr(index+1)
+				applied_production.next_index = i + p.successor.length()
+				return true
+	return false
 
 class StochasticProductionPicker:
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()

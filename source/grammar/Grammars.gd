@@ -9,11 +9,9 @@ func wheat_1l() -> ILGrammar:
 										 "[", # push position and angle
 										 "]"] # pop position and angle
 	result.axiom = "X"
-	result.productions = {
-		"X" : [Production.new("F+[[AX]-X]-F[-FX]+XB", "", "", 1.0),
-					 Production.new("F+[[AX]-X]-F[-FX]+X", "", "", 10.0)],
-		"F" : [Production.new("FF", "", "")]
-	}
+	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+XB", "", "", 1.0))
+	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+X", "", "", 10.0))
+	result.add_production(Production.new("F", "FF", "", "", 10.0))
 	return result
 
 # taken from https://en.wikipedia.org/wiki/L-system#Example_7:_Fractal_plant
@@ -26,10 +24,9 @@ func wheat_grammar() -> ILGrammar:
 										 "[", # push position and angle
 										 "]"] # pop position and angle
 	result.axiom = "X"
-	result.productions = {
-		"X" : [Production.new("F+[[X]-X]-F[-FX]+X")],
-		"F" : [Production.new("FF")]
-	}
+	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+XB"))
+	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+X"))
+	result.add_production(Production.new("F", "FF"))
 	return result
 
 # taken from https://natureofcode.com/book/chapter-8-fractals/
@@ -41,9 +38,7 @@ func ugly_tree_grammar() -> ILGrammar:
 										 "[", # push position and angle
 										 "]"] # pop position and angle
 	result.axiom = "F"
-	result.productions = {
-		"F" : [Production.new("FF+[+F-F-F]-[-F+F+F]")]
-	}
+	result.add_production(Production.new("F", "FF+[+F-F-F]-[-F+F+F]"))
 	return result
 
 # taken from https://en.wikipedia.org/wiki/L-system#Example_2:_Fractal_(binary)_tree
@@ -51,10 +46,8 @@ func binary_tree_grammar() -> ILGrammar:
 	var result = ILGrammar.new()
 	result.alphabet = ["0", "1", "[", "]"]
 	result.axiom = "0"
-	result.productions = {
-		"1" : [Production.new("11")],
-		"0" : [Production.new("1[0]0")]
-	}
+	result.add_production(Production.new("1", "11"))
+	result.add_production(Production.new("0", "1[0]0"))
 	return result
 
 func symmetric_grammar() -> ILGrammar:
@@ -66,10 +59,8 @@ func symmetric_grammar() -> ILGrammar:
 										 "[",
 										 "]"]
 	result.axiom = "X"
-	result.productions = {
-		"X" : [Production.new("F[-X][+X]F")],
-		"F" : [Production.new("XF")],
-	}
+	result.add_production(Production.new("X", "F[-X][+X]F"))
+	result.add_production(Production.new("F", "XF"))
 	return result
 
 func snowflake_grammar() -> ILGrammar:
@@ -81,10 +72,8 @@ func snowflake_grammar() -> ILGrammar:
 										 "[",
 										 "]"]
 	result.axiom = "X"
-	result.productions = {
-		"X" : [Production.new("F[-X]F[+X]F")],
-		"F" : [Production.new("X")],
-	}
+	result.add_production(Production.new("X", "F[-X]F[+X]F"))
+	result.add_production(Production.new("F", "X"))
 	return result
 
 func some_random_grammar() -> ILGrammar:
@@ -97,8 +86,21 @@ func some_random_grammar() -> ILGrammar:
 										 "[",
 										 "]"]
 	result.axiom = "ABB"
-	result.rules = {
-		"A" : [Production.new("AFB")],
-		"B" : [Production.new("A[-B][+B]F")],
-	}
+	result.add_production(Production.new("A", "AFB"))
+	result.add_production(Production.new("B", "A[-B][+B]F"))
+	return result
+
+
+#rules  : (F → F−G+F+G−F), (G → GG)
+func sierpinski_triangle() -> ILGrammar:
+	var result = ILGrammar.new()
+	result.alphabet = ["G",
+										 "F",
+										 "+",
+										 "-",
+										 "[",
+										 "]"]
+	result.axiom = "X-G-G"
+	result.add_production(Production.new("X", "FX-G-FX-G+FX"))
+	result.add_production(Production.new("G", "GFGF"))
 	return result

@@ -1,12 +1,14 @@
 class_name Production
 
+var predecessor: String
 var successor: String
 var left_context: String
 var right_context: String
 #	var relevant_symbols: Dictionary # this can be used to determine a context ignoring special symbols like '+' and so on
 var probability_factor: float = 0.0
 
-func _init(_successor, _left_context="", _right_context="", _probability=0.0):
+func _init(_predecessor, _successor, _left_context="", _right_context="", _probability=0.0):
+	predecessor = _predecessor
 	successor = _successor
 	left_context = _left_context
 	right_context = _right_context

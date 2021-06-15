@@ -4,12 +4,14 @@ class_name GrowContextFull
 export var iterations = 6
 export var start = Vector2(500, 400)
 export var branch_length = 40.0
+var _25degrees = deg2rad(25.0)
+export var turn_angle = deg2rad(25.0)
+export var start_angle = -1.0 #Vector2.UP.angle() + _25degrees
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
 var grammar = Grammars.wheat_1l()
-var _25degrees = deg2rad(25.0)
-var start_angle = Vector2.UP.angle() + _25degrees
+#var grammar = Grammars.sierpinski_triangle()
 var turtle: Turtle
 var color_fruit = Color.red
 var color_leaves = Color.green
@@ -47,7 +49,7 @@ func _initialize_turtle():
 	turtle = Turtle.new()
 	turtle.start = start
 	turtle.start_angle = start_angle
-	turtle.turn_degrees = _25degrees
+	turtle.turn_degrees = turn_angle
 	turtle.segment_length = branch_length
 
 func _emit_iteration_update():
@@ -83,6 +85,19 @@ func _on_Timer_timeout():
 		if has_next_rule():
 			next_rule()
 			generate_geometry()
+
+func _on_FinishIteration():
+	if has_next_iteration():
+		while not is_iteration_finished() and has_next_rule():
+			next_rule()
+#		var applied_production = ILGrammar.AppliedProduction.new()
+#		while not is_iteration_finished() and grammar.apply_next_production(
+#				word, current_symbol, applied_production):
+#			word = applied_production.word
+#			current_symbol = applied_production.next_index
+		generate_geometry()
+		if has_next_iteration():
+			next_iteration()
 
 func has_next_iteration():
 	return current_iteration < iterations
@@ -126,14 +141,6 @@ func generate_geometry():
 		emit_signal("update_fruits", turtle.fruits.size())
 	
 	update()
-
-func _on_FinishIteration():
-	if has_next_iteration():
-		while not is_iteration_finished() and has_next_rule():
-			next_rule()
-		generate_geometry()
-		if has_next_iteration():
-			next_iteration()
 
 func _on_FruitColorPickerButton_color_changed(color):
 	color_fruit = color
