@@ -14,3 +14,7 @@ func _on_FinishIterationButton_button_up():
 func _on_max_iteration_reached():
 #	set_pressed(false)
 	set_disabled(true)
+
+
+func _on_iterations_reset():
+	set_disabled(false)

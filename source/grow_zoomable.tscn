@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
 [ext_resource path="res://source/grow_context_full.gd" type="Script" id=3]
 [ext_resource path="res://source/gui/Camera2D.gd" type="Script" id=4]
 [ext_resource path="res://source/gui/PauseButton.gd" type="Script" id=5]
-[ext_resource path="res://source/gui/CurrentIterationLabel.gd" type="Script" id=6]
+[ext_resource path="res://source/gui/CurrentIterationValue.gd" type="Script" id=6]
 [ext_resource path="res://source/gui/FinishIterationButton.gd" type="Script" id=7]
 [ext_resource path="res://source/gui/LeavesValue.gd" type="Script" id=8]
 [ext_resource path="res://source/gui/FruitsValue.gd" type="Script" id=9]
 [ext_resource path="res://source/gui/StemValue.gd" type="Script" id=10]
+[ext_resource path="res://source/gui/CurrentSymbolValue.gd" type="Script" id=11]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -114,43 +115,56 @@ margin_right = 113.0
 margin_bottom = 14.0
 script = ExtResource( 6 )
 
-[node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
+[node name="CurrentSymbolLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 18.0
 margin_right = 109.0
 margin_bottom = 32.0
+text = "Current symbol:"
+
+[node name="CurrentSymbolValue" type="Label" parent="GUI/Indented/StatsContainer"]
+margin_left = 113.0
+margin_top = 18.0
+margin_right = 113.0
+margin_bottom = 32.0
+script = ExtResource( 11 )
+
+[node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
+margin_top = 36.0
+margin_right = 109.0
+margin_bottom = 50.0
 text = "Fruits:"
 
 [node name="FruitsValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 113.0
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 113.0
-margin_bottom = 32.0
+margin_bottom = 50.0
 script = ExtResource( 9 )
 
 [node name="LeavesLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 36.0
+margin_top = 54.0
 margin_right = 109.0
-margin_bottom = 50.0
+margin_bottom = 68.0
 text = "Leaves:"
 
 [node name="LeavesValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 113.0
-margin_top = 36.0
+margin_top = 54.0
 margin_right = 113.0
-margin_bottom = 50.0
+margin_bottom = 68.0
 script = ExtResource( 8 )
 
 [node name="StemLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 54.0
+margin_top = 72.0
 margin_right = 109.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 text = "Line segments:"
 
 [node name="StemValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 113.0
-margin_top = 54.0
+margin_top = 72.0
 margin_right = 113.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 script = ExtResource( 10 )
 
 [node name="CosmeticsContainer" type="GridContainer" parent="GUI/Indented"]
@@ -299,9 +313,12 @@ __meta__ = {
 }
 
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
+[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_iterations_reset"]
+[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_iterations_reset"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_max_iteration_reached"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_max_iteration_reached"]
 [connection signal="update_current_iteration" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentIterationValue" method="_on_update_current_iteration"]
+[connection signal="update_current_symbol" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentSymbolValue" method="_on_update_current_symbol"]
 [connection signal="update_fruits" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/FruitsValue" method="_on_update_fruits"]
 [connection signal="update_leaves" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/LeavesValue" method="_on_update_leaves"]
 [connection signal="update_line_segments" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/StemValue" method="_on_update_line_segments"]
@@ -312,8 +329,8 @@ __meta__ = {
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/StemColorPickerButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
-[connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_PlayButton_toggled"]
+[connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]

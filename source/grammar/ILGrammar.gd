@@ -6,13 +6,10 @@ var alphabet = []
 var axiom
 var productions = {}
 var context_symbols = {}
-var production_picker = StochasticProductionPicker.new()
+var production_picker: ProductionPicker = ProductionPicker.new()
 
-#func add_production2(symbol, successor, left_context="", right_context=""):
-#	if not productions.has(symbol):
-#		productions[symbol] = []
-#	var successors = productions[symbol]
-#	successors.append(Production.new(symbol, successor, left_context, right_context))
+func set_production_picker(_production_picker:ProductionPicker):
+	production_picker = _production_picker
 
 func add_production(p: Production):
 	var symbol = p.predecessor
@@ -26,7 +23,7 @@ func apply_productions(word):
 	for i in range(word.length()):
 		var ps = applicable_productions(word, i)
 		if not ps.empty():
-			var random_index = production_picker.pick_random_weighted(ps)
+			var random_index = production_picker.pick(ps)
 			result += ps[random_index].successor
 		else:
 			result += word[i]
@@ -34,15 +31,15 @@ func apply_productions(word):
 
 # Returns the index of the next predecessor of a production,
 # starting at offset.
-# Returns -1 if no production is found until the end of the word.
+# Returns an index > word.length() if no production is found until the end of the word.
 func find_next_rule(word, offset) -> int:
 	var i = offset
 	while i < word.length():
 		var symbol = word[i]
 		if productions.has(symbol):
-			return i
+			break
 		i += 1
-	return -1
+	return i
 
 func apply_production(word, index, applied_production=[]) -> String:
 	var result = ""
@@ -50,7 +47,7 @@ func apply_production(word, index, applied_production=[]) -> String:
 	if ps.empty():
 		push_error("unknown rule at index %s in word '%s'" % [index, word])
 	else:
-		var random_index = production_picker.pick_random_weighted(ps)
+		var random_index = production_picker.pick(ps)
 		var p = ps[random_index]
 		if applied_production.size() > 0:
 			applied_production[0] = p
@@ -81,7 +78,7 @@ func apply_next_production(word:String, index:int,
 		if productions.has(symbol):
 			var ps = applicable_productions(word, i)
 			if not ps.empty():
-				var random_index = production_picker.pick_random_weighted(ps)
+				var random_index = production_picker.pick(ps)
 				var p = ps[random_index]
 				applied_production.production = p
 				applied_production.word = word.substr(0, index) + p.successor
@@ -90,44 +87,4 @@ func apply_next_production(word:String, index:int,
 				applied_production.next_index = i + p.successor.length()
 				return true
 	return false
-
-class StochasticProductionPicker:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
-	# Returns an index into the array. The probability for each index is based
-	# on the probability factor of the element.
-	func pick_random_weighted(applicable_productions: Array) -> int:
-		if applicable_productions.size() == 1:
-			return 0
-		var sum = sum(applicable_productions)
-		if sum == 0.0:
-			return 0
-		var probabilities = weighted(applicable_productions, sum)
-		probabilities.sort_custom(self, "sort_ascending")
-		return get_random_weighted_index(probabilities)
-
-	static func sum(applicable_productions: Array) -> float:
-		var sum = 0.0
-		for p in applicable_productions:
-			sum += p.probability_factor
-		return sum
-
-	static func sort_ascending(a, b) -> bool:
-		return a[1] <= b[1]
-
-	static func weighted(applicable_productions, sum):
-		var probabilities = []
-		for i in range(applicable_productions.size()):
-			var factor = applicable_productions[i].probability_factor
-			if factor >= 0.0:
-				probabilities.append([i, factor/sum])
-		return probabilities
-
-	func get_random_weighted_index(probabilities):
-		var accumulated_probability = 0.0
-		var random = rng.randf()
-		for p in probabilities:
-			accumulated_probability += p[1]
-			if random <= accumulated_probability:
-				return p[0]
-		return 0
+	
