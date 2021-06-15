@@ -12,6 +12,7 @@ var current_iteration = 0
 var current_symbol = 0
 var word = ""
 var grammar = Grammars.wheat_1l()
+#var grammar = Grammars.sierpinski_triangle()
 var turtle: Turtle
 var rng_state: RngState
 var color_fruit = Color.red
@@ -55,11 +56,13 @@ func _get_starting_position():
 		start = start_pos.position
 
 func _initialize_turtle():
-	turtle = Turtle.new()
-	turtle.start = start
-	turtle.start_angle = start_angle
-	turtle.turn_degrees = turn_angle
-	turtle.segment_length = branch_length
+	var config = TurtleConfig.new()
+	config.start_angle = start_angle
+	config.start_pos = start
+	config.turn_angle = turn_angle
+	config.line_length = branch_length
+	config.width_falloff = 0.66
+	turtle = Turtle.new(config)
 
 func _initialize_rng_state():
 	rng_state = RngState.new()
@@ -116,6 +119,7 @@ func _on_FinishIteration():
 #			current_symbol = applied_production.next_index
 		if has_next_iteration():
 			next_iteration()
+#	print(word)
 
 func has_next_iteration():
 	return current_iteration < iterations

@@ -2,7 +2,7 @@
 # left or right context, 2L has both.
 class_name ILGrammar
 
-var alphabet = []
+#var alphabet = []
 var axiom
 var productions = {}
 var context_symbols = {}

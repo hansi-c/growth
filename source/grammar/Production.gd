@@ -64,7 +64,7 @@ func skip_matching_left_bracket(word, i) -> int:
 			count += 1
 	return i
 
-func matches_right_context(word, index) -> bool:
+func matches_right_context(_word, _index) -> bool:
 	if right_context == null or right_context.empty():
 		return true
 	return false
