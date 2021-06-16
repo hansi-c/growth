@@ -99,6 +99,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Grammars="*res://source/grammar/Grammars.gd"
+Turtles="*res://source/render/Turtles.gd"
 
 [display]
 

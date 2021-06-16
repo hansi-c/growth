@@ -58,7 +58,6 @@ gui_disable_input = true
 [node name="PlantCanvas" type="Node2D" parent="ViewportContainer/Viewport"]
 material = SubResource( 2 )
 script = ExtResource( 3 )
-branch_length = 4.0
 
 [node name="Timer" type="Timer" parent="ViewportContainer/Viewport/PlantCanvas"]
 wait_time = 0.1

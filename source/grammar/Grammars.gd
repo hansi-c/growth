@@ -91,16 +91,16 @@ func some_random_grammar() -> ILGrammar:
 	return result
 
 
-#rules  : (F → F−G+F+G−F), (G → GG)
-func sierpinski_triangle() -> ILGrammar:
+func sierpinski_120() -> ILGrammar:
 	var result = ILGrammar.new()
-#	result.alphabet = ["G",
-#										 "F",
-#										 "+",
-#										 "-",
-#										 "[",
-#										 "]"]
-	result.axiom = "F−G−G"
-	result.add_production(Production.new("F", "F−G+F+G−F"))
+	result.axiom = "F-G-G"
+	result.add_production(Production.new("F", "F-G+F+G-F"))
 	result.add_production(Production.new("G", "GG"))
+	return result
+
+func sierpinski_60() -> ILGrammar:
+	var result = ILGrammar.new()
+	result.axiom = "F"
+	result.add_production(Production.new("F", "G-F-G"))
+	result.add_production(Production.new("G", "F+G+F"))
 	return result

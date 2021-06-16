@@ -3,18 +3,17 @@ class_name GrowContextFull
 
 export var iterations = 6
 export var start = Vector2(500, 400)
-export var branch_length = 40.0
-var _25degrees = deg2rad(25.0)
-export var turn_angle = deg2rad(25.0)
-export var start_angle = -1.0 #Vector2.UP.angle() + _25degrees
 export var random_seed = 1
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
-var grammar = Grammars.wheat_1l()
-#var grammar = Grammars.sierpinski_triangle()
+#var grammar = Grammars.wheat_1l()
+#var turtle_config = Turtles.wheat()
+var grammar = Grammars.sierpinski_120()
+var turtle_config = Turtles.sierpinski_120()
 var turtle: Turtle
 var rng_state: RngState
+# cosmetics
 var color_fruit = Color.red
 var color_leaves = Color.green
 var color_stem = Color.brown
@@ -56,13 +55,8 @@ func _get_starting_position():
 		start = start_pos.position
 
 func _initialize_turtle():
-	var config = TurtleConfig.new()
-	config.start_angle = start_angle
-	config.start_pos = start
-	config.turn_angle = turn_angle
-	config.line_length = branch_length
-	config.width_falloff = 0.66
-	turtle = Turtle.new(config)
+	turtle_config.start_pos = start
+	turtle = Turtle.new(turtle_config)
 
 func _initialize_rng_state():
 	rng_state = RngState.new()
@@ -149,7 +143,7 @@ func generate_geometry():
 	var num_leaves = turtle.leaves.size()
 	var num_fruits = turtle.fruits.size()
 	
-	var initial_width = (current_iteration+1) * 0.66
+	var initial_width = (current_iteration+1)# * 0.66
 	turtle.generate_lines(word, initial_width)
 	
 	if turtle.lines.size() != num_lines:
