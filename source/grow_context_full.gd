@@ -8,12 +8,10 @@ export var dynamic_line_width = true
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
-#var grammar = Grammars.wheat_1l()
-#var turtle_config = Turtles.wheat()
-var grammar = Grammars.sierpinski_120()
-var turtle_config = Turtles.sierpinski_120()
-var turtle: Turtle
+var grammar: ILGrammar
+var turtle: Turtle = Turtle.new()
 var rng_state: RngState
+var production_picker: ProductionPicker
 # cosmetics
 var color_fruit = Color.red
 var color_leaves = Color.green
@@ -38,7 +36,7 @@ func _ready():
 	_initialize_rng_state()
 	_initialize_production_picker()
 	_initialize_cosmetics()
-	reset()
+#	reset()
 
 func _initialize_cosmetics():
 	var cosmeticContainer = "../../../GUI/Indented/CosmeticsContainer/"
@@ -74,13 +72,12 @@ func reset():
 	emit_signal("iterations_reset")
 
 func _get_starting_position():
-	var start_pos = get_node_or_null("GrowthStartPosition")
-	if start_pos:
-		start = start_pos.position
+	var start_pos_node = get_node_or_null("GrowthStartPosition")
+	if start_pos_node:
+		start = start_pos_node.position
 
 func _initialize_turtle():
-	turtle_config.start_pos = start
-	turtle = Turtle.new(turtle_config)
+	turtle.start_position = start
 
 func _initialize_rng_state():
 	rng_state = RngState.new()
@@ -88,7 +85,7 @@ func _initialize_rng_state():
 	rng_state.initialize(random_seed)
 
 func _initialize_production_picker():
-	grammar.production_picker = StochasticProductionPicker.new(rng_state.rng)
+	production_picker = StochasticProductionPicker.new(rng_state.rng)
 
 func _emit_iteration_update():
 	emit_signal("update_current_iteration", current_iteration, iterations)
@@ -208,4 +205,11 @@ func _on_StemThicknessSlider_value_changed(value):
 	update()
 
 func _on_ResetButton_button_up():
+	reset()
+
+func _on_preset_selected(preset):
+	print("preset selected")
+	grammar = preset.grammar
+	grammar.production_picker = production_picker
+	turtle.config = preset.config
 	reset()

@@ -1,0 +1,35 @@
+extends OptionButton
+
+var presets = []
+
+signal preset_selected(preset)
+
+func _ready():
+	add_presets()
+	emit_signal("preset_selected", presets[0])
+
+func add_presets():
+	var wheat = Preset.new()
+	wheat.grammar = Grammars.wheat_1l()
+	wheat.config = Turtles.wheat()
+	
+	var sierpinski_60 = Preset.new()
+	sierpinski_60.grammar = Grammars.sierpinski_60()
+	sierpinski_60.config = Turtles.sierpinski_60()
+	
+	var sierpinski_120 = Preset.new()
+	sierpinski_120.grammar = Grammars.sierpinski_120()
+	sierpinski_120.config = Turtles.sierpinski_120()
+
+	append_preset("Wheat", wheat)
+	append_preset("Sierpinski 60", sierpinski_60)
+	append_preset("Sierpinski 120", sierpinski_120)
+
+func append_preset(name: String, preset: Preset):
+	var index = presets.size()
+	presets.append(preset)
+	add_item(name, index)
+
+
+func _on_item_selected(index):
+	emit_signal("preset_selected", presets[index])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://source/gui/FruitsValue.gd" type="Script" id=9]
 [ext_resource path="res://source/gui/StemValue.gd" type="Script" id=10]
 [ext_resource path="res://source/gui/CurrentSymbolValue.gd" type="Script" id=11]
+[ext_resource path="res://source/gui/PresetsButton.gd" type="Script" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -97,7 +98,7 @@ __meta__ = {
 
 [node name="StatsContainer" type="GridContainer" parent="GUI/Indented"]
 margin_right = 113.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 mouse_filter = 2
 columns = 2
 __meta__ = {
@@ -185,7 +186,7 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 60, 40 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.929412, 0.901961, 0.266667, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -199,6 +200,7 @@ rect_min_size = Vector2( 160, 0 )
 size_flags_vertical = 4
 max_value = 8.0
 step = 0.5
+value = 4.0
 tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -211,7 +213,7 @@ margin_bottom = 90.0
 rect_min_size = Vector2( 60, 40 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.121569, 0.482353, 0.109804, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,8 +226,9 @@ margin_bottom = 78.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
 size_flags_vertical = 4
-max_value = 4.0
+max_value = 8.0
 step = 0.5
+value = 3.0
 tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -238,7 +241,7 @@ margin_bottom = 140.0
 rect_min_size = Vector2( 0, 40 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.427451, 0.329412, 0.164706, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -265,7 +268,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 400.0
 margin_top = -30.0
-margin_right = 524.0
+margin_right = 588.0
 grow_vertical = 0
 mouse_filter = 2
 columns = 3
@@ -296,6 +299,16 @@ margin_right = 188.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 text = "Reset"
+
+[node name="PresetsButton" type="OptionButton" parent="GUI/Indented"]
+margin_left = 440.0
+margin_right = 528.0
+margin_bottom = 20.0
+text = "L-System"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="GUI"]
 anchor_left = 1.0
@@ -334,4 +347,6 @@ __meta__ = {
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
+[connection signal="item_selected" from="GUI/Indented/PresetsButton" to="GUI/Indented/PresetsButton" method="_on_item_selected"]
+[connection signal="preset_selected" from="GUI/Indented/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
 [connection signal="value_changed" from="GUI/ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]

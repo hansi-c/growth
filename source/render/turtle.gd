@@ -6,9 +6,9 @@ var fruits = []
 var state = TurtleState.new()
 var abilities = {}
 var config: TurtleConfig
+var start_position: Vector2
 
-func _init(_config: TurtleConfig):
-	config = _config
+func _init():
 	add_ability("F", "draw_line")
 	add_ability("G", "draw_line")
 	add_ability("-", "turn_cw")
@@ -23,7 +23,7 @@ func generate_lines(word, initial_width: float):
 	leaves.clear()
 	fruits.clear()
 	state.set_width(initial_width)
-	state.set_position(config.start_pos)
+	state.set_position(start_position)
 	state.set_angle(config.start_angle)
 
 	for i in range(word.length()):
