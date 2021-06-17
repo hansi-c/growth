@@ -4,6 +4,7 @@ class_name GrowContextFull
 export var iterations = 6
 export var start = Vector2(500, 400)
 export var random_seed = 1
+export var dynamic_line_width = true
 var current_iteration = 0
 var current_symbol = 0
 var word = ""
@@ -36,7 +37,30 @@ func _ready():
 	_initialize_turtle()
 	_initialize_rng_state()
 	_initialize_production_picker()
+	_initialize_cosmetics()
 	reset()
+
+func _initialize_cosmetics():
+	var cosmeticContainer = "../../../GUI/Indented/CosmeticsContainer/"
+	var color_fruit_node = get_node_or_null(cosmeticContainer+"FruitColorPicker")
+	var color_leaf_node = get_node_or_null(cosmeticContainer+"LeavesColorPicker")
+	var color_stem_node = get_node_or_null(cosmeticContainer+"StemColorPicker")
+	var size_fruit_node = get_node_or_null(cosmeticContainer+"FruitRadiusSlider")
+	var size_leaf_node = get_node_or_null(cosmeticContainer+"LeafRadiusSlider")
+	var size_stem_node = get_node_or_null(cosmeticContainer+"StemThicknessSlider")
+
+	if color_fruit_node:
+		color_fruit = color_fruit_node.color
+	if color_leaf_node:
+		color_leaves = color_leaf_node.color
+	if color_stem_node:
+		color_stem = color_stem_node.color
+	if size_fruit_node:
+		fruit_radius = size_fruit_node.value
+	if size_leaf_node:
+		leaves_radius = size_leaf_node.value
+	if size_stem_node:
+		stem_thickness = size_stem_node.value
 
 func reset():
 	current_iteration = 0
@@ -143,7 +167,11 @@ func generate_geometry():
 	var num_leaves = turtle.leaves.size()
 	var num_fruits = turtle.fruits.size()
 	
-	var initial_width = (current_iteration+1)# * 0.66
+	var initial_width
+	if dynamic_line_width:
+		initial_width = (current_iteration+1)# * 0.66
+	else:
+		initial_width = 1.0
 	turtle.generate_lines(word, initial_width)
 	
 	if turtle.lines.size() != num_lines:
