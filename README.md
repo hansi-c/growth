@@ -16,7 +16,7 @@ We kept extending the gamejam submission. The code is heavily based on this pape
 
 You can try out the current version here: https://yongu.itch.io/l-systems?secret=TTrvfLagm8k8kMKYoiKrySGLo
 
-Since we don't have an automatic deployment process (yet), the playable version might be behind a few commits.
+Since we don't have an automated deployment process (yet), the playable version might be behind a few commits.
 
 ### Existing features
 
