@@ -300,15 +300,32 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 text = "Reset"
 
-[node name="PresetsButton" type="OptionButton" parent="GUI/Indented"]
-margin_left = 440.0
-margin_right = 528.0
+[node name="PresetsContainer" type="GridContainer" parent="GUI/Indented"]
+margin_left = 450.0
+margin_right = 578.0
 margin_bottom = 20.0
+grow_horizontal = 0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PresetsButton" type="OptionButton" parent="GUI/Indented/PresetsContainer"]
+margin_right = 88.0
+margin_bottom = 20.0
+grow_horizontal = 0
+size_flags_horizontal = 10
 text = "L-System"
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EditButton" type="Button" parent="GUI/Indented/PresetsContainer"]
+margin_left = 92.0
+margin_right = 128.0
+margin_bottom = 20.0
+text = "Edit"
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="GUI"]
 anchor_left = 1.0
@@ -344,9 +361,10 @@ __meta__ = {
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_PlayButton_toggled"]
-[connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
+[connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
-[connection signal="item_selected" from="GUI/Indented/PresetsButton" to="GUI/Indented/PresetsButton" method="_on_item_selected"]
-[connection signal="preset_selected" from="GUI/Indented/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
+[connection signal="item_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="GUI/Indented/PresetsContainer/PresetsButton" method="_on_item_selected"]
+[connection signal="preset_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
+[connection signal="button_up" from="GUI/Indented/PresetsContainer/EditButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_EditButton_button_up"]
 [connection signal="value_changed" from="GUI/ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]

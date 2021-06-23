@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/editor/gui/grammar_container.gd" type="Script" id=1]
+[ext_resource path="res://grammar_editor_label_style.tres" type="StyleBox" id=2]
+
+[node name="GrammarEditor" type="Node2D"]
+
+[node name="GUI" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indented" type="Control" parent="GUI"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 630.0
+margin_bottom = 350.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GrammarContainer" type="GridContainer" parent="GUI/Indented"]
+margin_right = 368.0
+margin_bottom = 22.0
+columns = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_context_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+margin_right = 85.0
+margin_bottom = 22.0
+custom_styles/normal = ExtResource( 2 )
+text = "left context"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="predecessor_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+margin_left = 89.0
+margin_right = 180.0
+margin_bottom = 22.0
+custom_styles/normal = ExtResource( 2 )
+text = "predecessor"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="successor_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+margin_left = 184.0
+margin_right = 260.0
+margin_bottom = 22.0
+custom_styles/normal = ExtResource( 2 )
+text = "successor"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="probability_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+margin_left = 264.0
+margin_right = 344.0
+margin_bottom = 22.0
+custom_styles/normal = ExtResource( 2 )
+text = "probability"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_production_button" type="Button" parent="GUI/Indented/GrammarContainer"]
+margin_left = 348.0
+margin_right = 368.0
+margin_bottom = 22.0
+text = "+"
+
+[connection signal="button_up" from="GUI/Indented/GrammarContainer/add_production_button" to="GUI/Indented/GrammarContainer" method="_on_add_production_button_button_up"]

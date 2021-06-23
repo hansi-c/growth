@@ -6,7 +6,7 @@ func wheat_1l() -> ILGrammar:
 	result.axiom = "X"
 	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+XB", "", "", 1.0))
 	result.add_production(Production.new("X", "F+[[AX]-X]-F[-FX]+X", "", "", 10.0))
-	result.add_production(Production.new("F", "FF", "", "", 10.0))
+	result.add_production(Production.new("F", "FF", "", ""))
 	return result
 
 # taken from https://natureofcode.com/book/chapter-8-fractals/
@@ -57,4 +57,12 @@ func sierpinski_60() -> ILGrammar:
 	result.axiom = "F"
 	result.add_production(Production.new("F", "G-F-G"))
 	result.add_production(Production.new("G", "F+G+F"))
+	return result
+
+# returns a grammar with only the identity production.
+func identity_grammar(symbol="F") -> ILGrammar:
+	var result = ILGrammar.new()
+	var identity = Production.new(symbol, symbol)
+	result.add_production(identity)
+	result.axiom = symbol
 	return result

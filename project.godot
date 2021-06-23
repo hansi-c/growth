@@ -106,6 +106,7 @@ config/icon="res://icon.png"
 
 Grammars="*res://source/grammar/Grammars.gd"
 Turtles="*res://source/render/Turtles.gd"
+Globals="*res://source/global/Globals.gd"
 
 [display]
 

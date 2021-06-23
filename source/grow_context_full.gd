@@ -10,7 +10,6 @@ var current_symbol = 0
 var word = ""
 var grammar: ILGrammar
 var turtle: Turtle = Turtle.new()
-var rng_state: RngState
 var production_picker: ProductionPicker
 # cosmetics
 var color_fruit = Color.red
@@ -36,7 +35,6 @@ func _ready():
 	_initialize_rng_state()
 	_initialize_production_picker()
 	_initialize_cosmetics()
-#	reset()
 
 func _initialize_cosmetics():
 	var cosmeticContainer = "../../../GUI/Indented/CosmeticsContainer/"
@@ -64,7 +62,7 @@ func reset():
 	current_iteration = 0
 	current_symbol = 0
 	word = grammar.axiom
-	rng_state.reset()
+	Globals.rng_state.reset()
 	turtle.reset()
 	generate_geometry()
 	_update_stats()
@@ -80,12 +78,11 @@ func _initialize_turtle():
 	turtle.start_position = start
 
 func _initialize_rng_state():
-	rng_state = RngState.new()
-	rng_state.rng = RandomNumberGenerator.new()
-	rng_state.initialize(random_seed)
+	Globals.rng_state.rng = RandomNumberGenerator.new()
+	Globals.rng_state.initialize(random_seed)
 
 func _initialize_production_picker():
-	production_picker = StochasticProductionPicker.new(rng_state.rng)
+	production_picker = StochasticProductionPicker.new(Globals.rng_state.rng)
 
 func _emit_iteration_update():
 	emit_signal("update_current_iteration", current_iteration, iterations)
@@ -127,11 +124,6 @@ func _on_FinishIteration():
 		while not is_iteration_finished() and has_next_rule():
 			next_rule()
 		generate_geometry()
-#		var applied_production = ILGrammar.AppliedProduction.new()
-#		while not is_iteration_finished() and grammar.apply_next_production(
-#				word, current_symbol, applied_production):
-#			word = applied_production.word
-#			current_symbol = applied_production.next_index
 		if has_next_iteration():
 			next_iteration()
 #	print(word)
@@ -213,3 +205,7 @@ func _on_preset_selected(preset):
 	grammar.production_picker = production_picker
 	turtle.config = preset.config
 	reset()
+
+func _on_EditButton_button_up():
+	Globals.grammar = grammar
+	get_tree().change_scene("res://source/editor/grammar_editor.tscn")

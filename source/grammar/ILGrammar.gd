@@ -2,10 +2,9 @@
 # left or right context, 2L has both.
 class_name ILGrammar
 
-#var alphabet = []
 var axiom
 var productions = {}
-var context_symbols = {}
+#var context_symbols = {}
 var production_picker: ProductionPicker = ProductionPicker.new()
 
 func set_production_picker(_production_picker:ProductionPicker):
@@ -66,25 +65,30 @@ func applicable_productions(word, index):
 				result.append(p)
 	return result
 
-class AppliedProduction:
-	var word: String
-	var next_index: int
-	var production: Production
+# w : ABC
+# p1 : A < B -> A  : 1
+# p2 : B > C -> BB : 2
+func _to_string() -> String:
+	var result = ""
+	result += "alphabet: %s" % str(alphabet())
+	result += "\naxiom: " + axiom
+	for s in productions:
+		for p in productions[s]:
+			result += "\n" + p._to_string()
+	return result
 
-func apply_next_production(word:String, index:int,
-		applied_production:AppliedProduction) -> bool:
-	for i in range(index, word.length()):
-		var symbol = word[i]
-		if productions.has(symbol):
-			var ps = applicable_productions(word, i)
-			if not ps.empty():
-				var random_index = production_picker.pick(ps)
-				var p = ps[random_index]
-				applied_production.production = p
-				applied_production.word = word.substr(0, index) + p.successor
-				if word.length() > index:
-					applied_production.word += word.substr(index+1)
-				applied_production.next_index = i + p.successor.length()
-				return true
-	return false
+func production_count():
+	var count = 0
+	for s in productions:
+		for p in productions[s]:
+			count += 1
+	return count
 	
+func alphabet() -> Array:
+	var result = {}
+	for s in productions:
+		result[s] = true
+		for p in productions[s]:
+			for c in p.successor:
+				result[c] = true
+	return result.keys()

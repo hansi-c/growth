@@ -5,9 +5,9 @@ var successor: String
 var left_context: String
 var right_context: String
 #	var relevant_symbols: Dictionary # this can be used to determine a context ignoring special symbols like '+' and so on
-var probability_factor: float = 0.0
+var probability_factor: float = 1.0
 
-func _init(_predecessor, _successor, _left_context="", _right_context="", _probability=0.0):
+func _init(_predecessor, _successor, _left_context="", _right_context="", _probability=1.0):
 	predecessor = _predecessor
 	successor = _successor
 	left_context = _left_context
@@ -68,3 +68,19 @@ func matches_right_context(_word, _index) -> bool:
 	if right_context == null or right_context.empty():
 		return true
 	return false
+
+# w : ABC
+# p1 : A < B -> A  : 1
+# p2 : B > C -> BB : 2
+func _to_string() -> String:
+	var result = ""
+	if left_context and not left_context.empty():
+		result += left_context + " < "
+	result += predecessor
+	if right_context and not right_context.empty():
+		result += " > " + right_context
+	result += " -> " + successor
+	if probability_factor > 0.0:
+		result += " : " + str(probability_factor)
+	return result
+	
