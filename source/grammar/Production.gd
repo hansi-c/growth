@@ -65,9 +65,10 @@ func skip_matching_left_bracket(word, i) -> int:
 	return i
 
 func matches_right_context(_word, _index) -> bool:
-	if right_context == null or right_context.empty():
-		return true
-	return false
+#	if right_context == null or right_context.empty():
+#		return true
+#	return false
+	return true
 
 # w : ABC
 # p1 : A < B -> A  : 1
