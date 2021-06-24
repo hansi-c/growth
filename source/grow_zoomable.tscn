@@ -32,7 +32,7 @@ shader = SubResource( 1 )
 margin_right = 640.0
 margin_bottom = 360.0
 mouse_filter = 2
-color = Color( 0.329412, 0.666667, 0.780392, 1 )
+color = Color( 0.392157, 0.678431, 0.772549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,18 +108,21 @@ __meta__ = {
 [node name="CurrentIterationLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_right = 109.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Current iteration:"
 
 [node name="CurrentIterationValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 113.0
 margin_right = 113.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 6 )
 
 [node name="CurrentSymbolLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 18.0
 margin_right = 109.0
 margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Current symbol:"
 
 [node name="CurrentSymbolValue" type="Label" parent="GUI/Indented/StatsContainer"]
@@ -127,12 +130,14 @@ margin_left = 113.0
 margin_top = 18.0
 margin_right = 113.0
 margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 11 )
 
 [node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 36.0
 margin_right = 109.0
 margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Fruits:"
 
 [node name="FruitsValue" type="Label" parent="GUI/Indented/StatsContainer"]
@@ -140,12 +145,14 @@ margin_left = 113.0
 margin_top = 36.0
 margin_right = 113.0
 margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 9 )
 
 [node name="LeavesLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 54.0
 margin_right = 109.0
 margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Leaves:"
 
 [node name="LeavesValue" type="Label" parent="GUI/Indented/StatsContainer"]
@@ -153,12 +160,14 @@ margin_left = 113.0
 margin_top = 54.0
 margin_right = 113.0
 margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 8 )
 
 [node name="StemLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 72.0
 margin_right = 109.0
 margin_bottom = 86.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Line segments:"
 
 [node name="StemValue" type="Label" parent="GUI/Indented/StatsContainer"]
@@ -166,11 +175,13 @@ margin_left = 113.0
 margin_top = 72.0
 margin_right = 113.0
 margin_bottom = 86.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 10 )
 
 [node name="CosmeticsContainer" type="GridContainer" parent="GUI/Indented"]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_right = 210.0
 grow_vertical = 0
 mouse_filter = 2
 custom_constants/vseparation = 10
@@ -181,21 +192,21 @@ __meta__ = {
 }
 
 [node name="FruitColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
-margin_right = 60.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 60, 40 )
+margin_right = 40.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 0.929412, 0.901961, 0.266667, 1 )
+color = Color( 0.972549, 0.956863, 0.52549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FruitRadiusSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 70.0
-margin_top = 12.0
-margin_right = 230.0
-margin_bottom = 28.0
+margin_left = 50.0
+margin_top = 7.0
+margin_right = 210.0
+margin_bottom = 23.0
 rect_min_size = Vector2( 160, 0 )
 size_flags_vertical = 4
 max_value = 8.0
@@ -207,22 +218,22 @@ __meta__ = {
 }
 
 [node name="LeavesColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
-margin_top = 50.0
-margin_right = 60.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 60, 40 )
+margin_top = 40.0
+margin_right = 40.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 0.121569, 0.482353, 0.109804, 1 )
+color = Color( 0.686275, 0.478431, 0.682353, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LeafRadiusSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 70.0
-margin_top = 62.0
-margin_right = 230.0
-margin_bottom = 78.0
+margin_left = 50.0
+margin_top = 47.0
+margin_right = 210.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
 size_flags_vertical = 4
@@ -235,22 +246,22 @@ __meta__ = {
 }
 
 [node name="StemColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
-margin_top = 100.0
-margin_right = 60.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 0, 40 )
+margin_top = 80.0
+margin_right = 40.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
-color = Color( 0.427451, 0.329412, 0.164706, 1 )
+color = Color( 0.933333, 0.803922, 0.596078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StemThicknessSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 70.0
-margin_top = 112.0
-margin_right = 230.0
-margin_bottom = 128.0
+margin_left = 50.0
+margin_top = 87.0
+margin_right = 210.0
+margin_bottom = 103.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
 size_flags_vertical = 4
@@ -343,10 +354,10 @@ __meta__ = {
 }
 
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
-[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_iterations_reset"]
 [connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_iterations_reset"]
-[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_max_iteration_reached"]
+[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_iterations_reset"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_max_iteration_reached"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_max_iteration_reached"]
 [connection signal="update_current_iteration" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentIterationValue" method="_on_update_current_iteration"]
 [connection signal="update_current_symbol" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentSymbolValue" method="_on_update_current_symbol"]
 [connection signal="update_fruits" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/FruitsValue" method="_on_update_fruits"]
