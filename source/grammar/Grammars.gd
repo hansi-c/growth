@@ -1,5 +1,19 @@
 extends Node
 
+# returns a deep clone of the grammar's productions.
+# the production picker is shared
+func duplicate_grammar(grammar: ILGrammar):
+	var result = ILGrammar.new()
+	result.axiom = grammar.axiom
+	result.production_picker = grammar.production_picker
+	for s in grammar.productions:
+		for p in grammar.productions[s]:
+			result.add_production(duplicate_production(p))
+	return result
+
+func duplicate_production(production: Production):
+	return Production.new(production.predecessor, production.successor, production.left_context, production.right_context, production.probability_factor)
+
 # taken from https://en.wikipedia.org/wiki/L-system#Example_7:_Fractal_plant
 func wheat_1l() -> ILGrammar:
 	var result = ILGrammar.new()

@@ -1,7 +1,6 @@
 extends GridContainer
 
-onready var grammar: ILGrammar = Globals.grammar
-onready var alphabet_textbox = get_node("/root/GrammarEditor/GUI/Indented/AlphabetTextBox")
+onready var grammar: ILGrammar
 var _row_index: int
 var _row_group_prefix = "_row"
 var rows = {}
@@ -9,13 +8,14 @@ var rows = {}
 signal grammar_modified(grammar)
 
 func _ready():
-	if grammar == null:
+	if Globals.grammar == null:
 		grammar = Grammars.identity_grammar()
 		var production_picker = StochasticProductionPicker.new(Globals.rng_state.rng)
 		grammar.set_production_picker(production_picker)
+	else:
+		grammar = Grammars.duplicate_grammar(Globals.grammar)
 	_setup_grammar_table()
 	print(grammar)
-	connect("grammar_modified", alphabet_textbox, "_on_grammar_modified")
 	emit_signal("grammar_modified", grammar)
 
 func _setup_grammar_table():

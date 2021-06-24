@@ -89,4 +89,5 @@ margin_right = 371.0
 margin_bottom = 22.0
 text = "+"
 
+[connection signal="grammar_modified" from="GUI/Indented/GrammarContainer" to="GUI/Indented/AlphabetTextBox" method="_on_grammar_modified"]
 [connection signal="button_up" from="GUI/Indented/GrammarContainer/add_production_button" to="GUI/Indented/GrammarContainer" method="_on_add_production_button_button_up"]
