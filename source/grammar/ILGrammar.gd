@@ -65,6 +65,12 @@ func applicable_productions(word, index):
 				result.append(p)
 	return result
 
+func delete_production(production: Production):
+	for s in productions:
+		productions[s].erase(production)
+		if productions[s].empty():
+			productions.erase(s)
+	
 # w : ABC
 # p1 : A < B -> A  : 1
 # p2 : B > C -> BB : 2
@@ -87,8 +93,13 @@ func production_count():
 func alphabet() -> Array:
 	var result = {}
 	for s in productions:
-		result[s] = true
 		for p in productions[s]:
-			for c in p.successor:
-				result[c] = true
+			_add_unique_chars(result, p.left_context)
+			_add_unique_chars(result, p.predecessor)
+			_add_unique_chars(result, p.successor)
 	return result.keys()
+
+func _add_unique_chars(target: Dictionary, source: String):
+	if not source.empty():
+		for c in source:
+			target[c] = true
