@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "LineSegment",
 "language": "GDScript",
-"path": "res://source/render/line_segment.gd"
+"path": "res://source/render/LineSegment.gd"
 }, {
 "base": "Reference",
 "class": "Preset",
@@ -67,17 +67,17 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Turtle",
 "language": "GDScript",
-"path": "res://source/render/turtle.gd"
+"path": "res://source/render/Turtle.gd"
 }, {
 "base": "Reference",
 "class": "TurtleConfig",
 "language": "GDScript",
-"path": "res://source/render/turtle_config.gd"
+"path": "res://source/render/TurtleConfig.gd"
 }, {
 "base": "Reference",
 "class": "TurtleState",
 "language": "GDScript",
-"path": "res://source/render/turtle_state.gd"
+"path": "res://source/render/TurtleState.gd"
 } ]
 _global_script_class_icons={
 "GrowContextFull": "",
