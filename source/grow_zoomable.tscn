@@ -106,74 +106,74 @@ __meta__ = {
 }
 
 [node name="CurrentIterationLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_right = 109.0
+margin_right = 98.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Current iteration:"
+text = "Iteration:"
 
 [node name="CurrentIterationValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 113.0
-margin_right = 113.0
+margin_left = 102.0
+margin_right = 102.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 6 )
 
 [node name="CurrentSymbolLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 18.0
-margin_right = 109.0
+margin_right = 98.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Current symbol:"
+text = "Symbol:"
 
 [node name="CurrentSymbolValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 113.0
+margin_left = 102.0
 margin_top = 18.0
-margin_right = 113.0
+margin_right = 102.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 11 )
 
 [node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 36.0
-margin_right = 109.0
+margin_right = 98.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Fruits:"
 
 [node name="FruitsValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 113.0
+margin_left = 102.0
 margin_top = 36.0
-margin_right = 113.0
+margin_right = 102.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 9 )
 
 [node name="LeavesLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 54.0
-margin_right = 109.0
+margin_right = 98.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Leaves:"
 
 [node name="LeavesValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 113.0
+margin_left = 102.0
 margin_top = 54.0
-margin_right = 113.0
+margin_right = 102.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 8 )
 
 [node name="StemLabel" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_top = 72.0
-margin_right = 109.0
+margin_right = 98.0
 margin_bottom = 86.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Line segments:"
 
 [node name="StemValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 113.0
+margin_left = 102.0
 margin_top = 72.0
-margin_right = 113.0
+margin_right = 102.0
 margin_bottom = 86.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 10 )
@@ -211,7 +211,7 @@ rect_min_size = Vector2( 160, 0 )
 size_flags_vertical = 4
 max_value = 8.0
 step = 0.5
-value = 4.0
+value = 3.0
 tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -239,7 +239,7 @@ mouse_filter = 1
 size_flags_vertical = 4
 max_value = 8.0
 step = 0.5
-value = 3.0
+value = 2.0
 tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -268,7 +268,7 @@ size_flags_vertical = 4
 min_value = 0.1
 max_value = 10.0
 step = 0.1
-value = 0.1
+value = 2.9
 tick_count = 10
 __meta__ = {
 "_edit_use_anchors_": false

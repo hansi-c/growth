@@ -1,5 +1,6 @@
 extends OptionButton
 
+onready var global_grammar = Globals.grammar
 var presets = []
 
 signal preset_selected(preset)
@@ -9,6 +10,12 @@ func _ready():
 	emit_signal("preset_selected", presets[0])
 
 func add_presets():
+	if global_grammar:
+		var preset = Preset.new()
+		preset.grammar = global_grammar
+		preset.config = Turtles.wheat()
+		add_preset("Custom", preset)
+	
 	var wheat = Preset.new()
 	wheat.grammar = Grammars.wheat_1l()
 	wheat.config = Turtles.wheat()

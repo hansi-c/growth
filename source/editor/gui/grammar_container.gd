@@ -121,7 +121,8 @@ func _on_Axiom_text_changed(new_text):
 	emit_signal("grammar_modified", grammar)
 
 func _on_SaveButton_button_up():
-	pass # Replace with function body.
+	Globals.grammar = grammar
+	get_tree().change_scene("res://source/grow_zoomable.tscn")
 
 func _on_CancelButton_button_up():
 	get_tree().change_scene("res://source/grow_zoomable.tscn")
