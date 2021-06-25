@@ -92,6 +92,8 @@ func production_count():
 	
 func alphabet() -> Array:
 	var result = {}
+	if axiom and not axiom.empty():
+		_add_unique_chars(result, axiom)
 	for s in productions:
 		for p in productions[s]:
 			_add_unique_chars(result, p.left_context)
@@ -100,6 +102,6 @@ func alphabet() -> Array:
 	return result.keys()
 
 func _add_unique_chars(target: Dictionary, source: String):
-	if not source.empty():
+	if source and not source.empty():
 		for c in source:
 			target[c] = true

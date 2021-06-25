@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/editor/gui/grammar_container.gd" type="Script" id=1]
 [ext_resource path="res://source/editor/gui/grammar_editor_label_style.tres" type="StyleBox" id=2]
 [ext_resource path="res://source/editor/gui/AlphabetTextBox.gd" type="Script" id=3]
+[ext_resource path="res://source/editor/gui/AxiomLineEdit.gd" type="Script" id=4]
 
 [node name="GrammarEditor" type="Node2D"]
 
@@ -20,31 +21,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AlphabetTextBox" type="TextEdit" parent="GUI/Indented"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 505.859
-margin_top = -207.708
-margin_right = 605.859
-margin_bottom = -107.708
-rect_min_size = Vector2( 100, 100 )
-readonly = true
-wrap_enabled = true
-script = ExtResource( 3 )
+[node name="GridContainer" type="GridContainer" parent="GUI/Indented"]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GrammarContainer" type="GridContainer" parent="GUI/Indented"]
-margin_right = 368.0
-margin_bottom = 22.0
+[node name="GridContainer" type="GridContainer" parent="GUI/Indented/GridContainer"]
+margin_right = 371.0
+margin_bottom = 52.0
+columns = 2
+
+[node name="AlphabetLabel" type="Label" parent="GUI/Indented/GridContainer/GridContainer"]
+margin_top = 1.0
+margin_right = 73.0
+margin_bottom = 23.0
+custom_styles/normal = ExtResource( 2 )
+text = "Alphabet:"
+
+[node name="AlphabetTextBox" type="LineEdit" parent="GUI/Indented/GridContainer/GridContainer"]
+margin_left = 77.0
+margin_right = 371.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 22 )
+size_flags_horizontal = 3
+custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+editable = false
+expand_to_text_length = true
+script = ExtResource( 3 )
+
+[node name="AxiomLabel" type="Label" parent="GUI/Indented/GridContainer/GridContainer"]
+margin_top = 29.0
+margin_right = 73.0
+margin_bottom = 51.0
+custom_styles/normal = ExtResource( 2 )
+text = "Axiom:"
+
+[node name="AxiomLineEdit" type="LineEdit" parent="GUI/Indented/GridContainer/GridContainer"]
+margin_left = 77.0
+margin_top = 28.0
+margin_right = 371.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 100, 22 )
+size_flags_horizontal = 3
+expand_to_text_length = true
+script = ExtResource( 4 )
+
+[node name="GrammarContainer" type="GridContainer" parent="GUI/Indented/GridContainer"]
+margin_top = 56.0
+margin_right = 371.0
+margin_bottom = 78.0
 columns = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="left_context_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+[node name="left_context_label" type="Label" parent="GUI/Indented/GridContainer/GrammarContainer"]
 margin_right = 88.0
 margin_bottom = 22.0
 custom_styles/normal = ExtResource( 2 )
@@ -53,7 +87,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="predecessor_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+[node name="predecessor_label" type="Label" parent="GUI/Indented/GridContainer/GrammarContainer"]
 margin_left = 92.0
 margin_right = 183.0
 margin_bottom = 22.0
@@ -63,7 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="successor_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+[node name="successor_label" type="Label" parent="GUI/Indented/GridContainer/GrammarContainer"]
 margin_left = 187.0
 margin_right = 263.0
 margin_bottom = 22.0
@@ -73,7 +107,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="probability_label" type="Label" parent="GUI/Indented/GrammarContainer"]
+[node name="probability_label" type="Label" parent="GUI/Indented/GridContainer/GrammarContainer"]
 margin_left = 267.0
 margin_right = 347.0
 margin_bottom = 22.0
@@ -83,11 +117,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_production_button" type="Button" parent="GUI/Indented/GrammarContainer"]
+[node name="add_production_button" type="Button" parent="GUI/Indented/GridContainer/GrammarContainer"]
 margin_left = 351.0
 margin_right = 371.0
 margin_bottom = 22.0
 text = "+"
 
-[connection signal="grammar_modified" from="GUI/Indented/GrammarContainer" to="GUI/Indented/AlphabetTextBox" method="_on_grammar_modified"]
-[connection signal="button_up" from="GUI/Indented/GrammarContainer/add_production_button" to="GUI/Indented/GrammarContainer" method="_on_add_production_button_button_up"]
+[connection signal="text_changed" from="GUI/Indented/GridContainer/GridContainer/AxiomLineEdit" to="GUI/Indented/GridContainer/GrammarContainer" method="_on_Axiom_text_changed"]
+[connection signal="axiom_initialized" from="GUI/Indented/GridContainer/GrammarContainer" to="GUI/Indented/GridContainer/GridContainer/AxiomLineEdit" method="_on_GrammarContainer_axiom_initialized"]
+[connection signal="grammar_modified" from="GUI/Indented/GridContainer/GrammarContainer" to="GUI/Indented/GridContainer/GridContainer/AlphabetTextBox" method="_on_grammar_modified"]
+[connection signal="button_up" from="GUI/Indented/GridContainer/GrammarContainer/add_production_button" to="GUI/Indented/GridContainer/GrammarContainer" method="_on_add_production_button_button_up"]

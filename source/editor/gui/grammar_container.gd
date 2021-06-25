@@ -6,6 +6,7 @@ var _row_group_prefix = "_row"
 var rows = {}
 
 signal grammar_modified(grammar)
+signal axiom_initialized(axiom)
 
 func _ready():
 	if Globals.grammar == null:
@@ -16,6 +17,7 @@ func _ready():
 		grammar = Grammars.duplicate_grammar(Globals.grammar)
 	_setup_grammar_table()
 	print(grammar)
+	emit_signal("axiom_initialized", grammar.axiom)
 	emit_signal("grammar_modified", grammar)
 
 func _setup_grammar_table():
@@ -78,15 +80,15 @@ func _create_delete_button(row_group: String):
 	delete_button.connect("button_up", self, "_on_delete_row", [row_group], CONNECT_ONESHOT)
 	return delete_button
 
+func _add_cell(node: Node, row_group: String):
+	add_child(node)
+	node.add_to_group(row_group)
+
 func _on_add_production_button_button_up():
 	var production = Production.new("", "")
 	grammar.add_production(production)
 	add_row(production)
 	emit_signal("grammar_modified", grammar)
-
-func _add_cell(node: Node, row_group: String):
-	add_child(node)
-	node.add_to_group(row_group)
 
 func _on_delete_row(row_group: String):
 	grammar.delete_production(rows[row_group])
@@ -112,4 +114,8 @@ func _on_successor_changed(text: String, row_group: String):
 func _on_probability_changed(value: float, row_group: String):
 	var production = rows[row_group]
 	production.probability_factor = value
+	emit_signal("grammar_modified", grammar)
+
+func _on_Axiom_text_changed(new_text):
+	grammar.axiom = new_text
 	emit_signal("grammar_modified", grammar)

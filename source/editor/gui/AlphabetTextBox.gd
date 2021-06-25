@@ -1,4 +1,4 @@
-extends TextEdit
+extends LineEdit
 
 func _on_grammar_modified(grammar: ILGrammar):
 	var alphabet = grammar.alphabet()
