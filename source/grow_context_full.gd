@@ -200,7 +200,7 @@ func _on_ResetButton_button_up():
 	reset()
 
 func _on_preset_selected(preset):
-	print("preset selected")
+#	print("preset selected")
 	grammar = preset.grammar
 	grammar.production_picker = production_picker
 	turtle.set_config(preset.config)
@@ -208,4 +208,6 @@ func _on_preset_selected(preset):
 
 func _on_EditButton_button_up():
 	Globals.grammar = grammar
-	get_tree().change_scene("res://source/editor/grammar_editor.tscn")
+	var error = get_tree().change_scene("res://source/editor/grammar_editor.tscn")
+	if error:
+		print("could not change scene: %s" % error)

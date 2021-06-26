@@ -1,4 +1,4 @@
 extends LineEdit
 
-func _on_GrammarContainer_axiom_initialized(axiom):
+func _on_axiom_changed(axiom):
 	set_text(axiom)

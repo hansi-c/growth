@@ -1,8 +1,8 @@
 extends LineEdit
 
-func _on_grammar_modified(grammar: ILGrammar):
+func _on_alphabet_changed(grammar: ILGrammar):
 	var alphabet = grammar.alphabet()
-	print("%s (%s)" % [alphabet, alphabet.size()])
+#	print("%s (%s)" % [alphabet, alphabet.size()])
 	set_text(_alphabet_to_string(alphabet))
 
 func _alphabet_to_string(alphabet: Array):
