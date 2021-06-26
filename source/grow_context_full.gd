@@ -208,6 +208,7 @@ func _on_preset_selected(preset):
 
 func _on_EditButton_button_up():
 	Globals.grammar = grammar
+	Globals.turtle_config = turtle.get_config()
 	var error = get_tree().change_scene("res://source/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)

@@ -12,7 +12,9 @@ func set_config(config: TurtleConfig):
 	_config = config
 	for key in _config.abilities:
 		add_ability(key, _config.abilities[key])
-	
+
+func get_config() -> TurtleConfig:
+	return _config
 
 #func _init(_config: TurtleConfig):
 #	add_ability("F", "draw_line")

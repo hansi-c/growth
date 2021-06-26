@@ -41,10 +41,6 @@ func sierpinski_60():
 
 func default_config():
 	var config = TurtleConfig.new()
-	config.start_angle = Vector2.UP.angle() + deg2rad(25.0)
-	config.turn_angle = deg2rad(25.0)
-	config.line_length = 4.0
-	config.width_falloff = 0.66
 	config.abilities["F"] = "draw_line"
 	config.abilities["-"] = "turn_cw"
 	config.abilities["+"] = "turn_ccw"
