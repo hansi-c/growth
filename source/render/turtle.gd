@@ -5,18 +5,24 @@ var leaves = []
 var fruits = []
 var state = TurtleState.new()
 var abilities = {}
-var config: TurtleConfig
+var _config: TurtleConfig
 var start_position: Vector2
 
-func _init():
-	add_ability("F", "draw_line")
-	add_ability("G", "draw_line")
-	add_ability("-", "turn_cw")
-	add_ability("+", "turn_ccw")
-	add_ability("[", "open_branch")
-	add_ability("]", "close_branch")
-	add_ability("A", "shape_1")
-	add_ability("B", "shape_2")
+func set_config(config: TurtleConfig):
+	_config = config
+	for key in _config.abilities:
+		add_ability(key, _config.abilities[key])
+	
+
+#func _init(_config: TurtleConfig):
+#	add_ability("F", "draw_line")
+#	add_ability("G", "draw_line")
+#	add_ability("-", "turn_cw")
+#	add_ability("+", "turn_ccw")
+#	add_ability("[", "open_branch")
+#	add_ability("]", "close_branch")
+#	add_ability("A", "shape_1")
+#	add_ability("B", "shape_2")
 
 func generate_lines(word, initial_width: float):
 	lines.clear()
@@ -24,7 +30,7 @@ func generate_lines(word, initial_width: float):
 	fruits.clear()
 	state.set_width(initial_width)
 	state.set_position(start_position)
-	state.set_angle(config.start_angle)
+	state.set_angle(_config.start_angle)
 
 	for i in range(word.length()):
 		var s = word[i]
@@ -47,19 +53,19 @@ func draw_line():
 func _line_segment(_start, direction, width):
 	var result = LineSegment.new()
 	result.start = _start
-	result.end = _start + (direction * config.line_length)
+	result.end = _start + (direction * _config.line_length)
 	result.width = width
 	return result
 	
 func turn_ccw():
-	state.turn_counter_clockwise(config.turn_angle)
+	state.turn_counter_clockwise(_config.turn_angle)
 
 func turn_cw():
-	state.turn_clockwise(config.turn_angle)
+	state.turn_clockwise(_config.turn_angle)
 
 func open_branch():
 	state.push_state()
-	state.width *= config.width_falloff
+	state.width *= _config.width_falloff
 
 func close_branch():
 	state.pop_state()

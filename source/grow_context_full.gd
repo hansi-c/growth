@@ -203,7 +203,7 @@ func _on_preset_selected(preset):
 	print("preset selected")
 	grammar = preset.grammar
 	grammar.production_picker = production_picker
-	turtle.config = preset.config
+	turtle.set_config(preset.config)
 	reset()
 
 func _on_EditButton_button_up():
