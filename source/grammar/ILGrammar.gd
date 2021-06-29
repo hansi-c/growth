@@ -70,7 +70,13 @@ func delete_production(production: Production):
 		productions[s].erase(production)
 		if productions[s].empty():
 			productions.erase(s)
-	
+
+# this needs to be called because the production's predecessor is used
+# as a key into the productions dictionary
+func update_predecessor(production: Production):
+	delete_production(production)
+	add_production(production)
+
 # w : ABC
 # p1 : A < B -> A  : 1
 # p2 : B > C -> BB : 2
