@@ -1,5 +1,6 @@
-# Can be a deterministic 0L, 1L or 2L grammar. 0L has no context, 1L has either
-# left or right context, 2L has both.
+# Can be a 0L, 1L or 2L grammar. 0L has no context, 1L has either
+# left or right context, 2L has both. The grammar will be deterministic
+# or non-deterministic according to its production picker.
 class_name ILGrammar
 
 var axiom
@@ -17,6 +18,18 @@ func add_production(p: Production):
 	var successors = productions[symbol]
 	successors.append(p)
 
+func delete_production(production: Production):
+	for s in productions:
+		productions[s].erase(production)
+		if productions[s].empty():
+			productions.erase(s)
+
+# this needs to be called because the production's predecessor is used
+# as a key into the productions dictionary
+func update_predecessor(production: Production):
+	delete_production(production)
+	add_production(production)
+	
 func apply_productions(word):
 	var result = ""
 	for i in range(word.length()):
@@ -64,18 +77,6 @@ func applicable_productions(word, index):
 			if p.matches_context(word, index):
 				result.append(p)
 	return result
-
-func delete_production(production: Production):
-	for s in productions:
-		productions[s].erase(production)
-		if productions[s].empty():
-			productions.erase(s)
-
-# this needs to be called because the production's predecessor is used
-# as a key into the productions dictionary
-func update_predecessor(production: Production):
-	delete_production(production)
-	add_production(production)
 
 # w : ABC
 # p1 : A < B -> A  : 1
