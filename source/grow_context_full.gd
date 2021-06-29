@@ -161,7 +161,7 @@ func generate_geometry():
 		initial_width = (current_iteration+1)# * 0.66
 	else:
 		initial_width = 1.0
-	turtle.generate_lines(word, initial_width)
+	turtle.generate_geometry(word, initial_width)
 	
 	if turtle.lines.size() != num_lines:
 		emit_signal("update_line_segments", turtle.lines.size())

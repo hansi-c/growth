@@ -16,17 +16,7 @@ func set_config(config: TurtleConfig):
 func get_config() -> TurtleConfig:
 	return _config
 
-#func _init(_config: TurtleConfig):
-#	add_ability("F", "draw_line")
-#	add_ability("G", "draw_line")
-#	add_ability("-", "turn_cw")
-#	add_ability("+", "turn_ccw")
-#	add_ability("[", "open_branch")
-#	add_ability("]", "close_branch")
-#	add_ability("A", "shape_1")
-#	add_ability("B", "shape_2")
-
-func generate_lines(word, initial_width: float):
+func generate_geometry(word, initial_width: float):
 	lines.clear()
 	leaves.clear()
 	fruits.clear()
