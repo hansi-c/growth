@@ -1,16 +1,28 @@
 extends HBoxContainer
 
-#onready var abilties_container = get_node("/root/Turtles/AbiltiesContainer")
-
-signal add_ability_symbol(symbol)
+signal add_ability(symbol)
 
 func _on_alphabet_changed(grammar: ILGrammar):
-	var children_to_delete = get_children()
 	var alphabet = grammar.alphabet()
+	delete_symbol_buttons(alphabet)
+	add_symbol_buttons(alphabet)
+
+func delete_symbol_buttons(alphabet: Array):
+	for child in get_children():
+		if child is Button:
+			var symbol = child.get_text()
+			if not alphabet.has(symbol):
+				child.queue_free() 
+
+func add_symbol_buttons(alphabet: Array):
 	for symbol in alphabet:
-		add_symbol_button(symbol)
-	for child in children_to_delete:
-		child.queue_free()
+		var has_button = false
+		for child in get_children():
+			if child is Button and child.get_text() == symbol:
+				has_button = true
+				break
+		if not has_button:
+			add_symbol_button(symbol)
 
 func add_symbol_button(symbol: String):
 	var button = Button.new()
@@ -21,4 +33,9 @@ func add_symbol_button(symbol: String):
 func _on_symbol_button_up(button: Button):
 	button.set_disabled(true)
 	var symbol = button.get_text()
-	emit_signal("add_ability_symbol", symbol)
+	emit_signal("add_ability", symbol)
+
+func _on_ability_removed(symbol):
+	for child in get_children():
+		if child is Button and child.get_text() == symbol:
+			child.set_disabled(false)
