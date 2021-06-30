@@ -23,7 +23,6 @@ __meta__ = {
 }
 
 [node name="Grammar" type="GridContainer" parent="GUI/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -172,6 +171,7 @@ __meta__ = {
 }
 
 [node name="Turtle" type="GridContainer" parent="GUI/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -202,8 +202,9 @@ columns = 2
 script = ExtResource( 6 )
 
 [connection signal="text_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_Axiom_text_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_add_production_button_button_up"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_RevertButton_button_up"]

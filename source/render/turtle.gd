@@ -4,6 +4,7 @@ var lines = []
 var leaves = []
 var fruits = []
 var state = TurtleState.new()
+# maps from grammar symbol (a String) to Funcref
 var abilities = {}
 var _config: TurtleConfig
 var start_position: Vector2

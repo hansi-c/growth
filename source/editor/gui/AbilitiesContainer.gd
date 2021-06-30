@@ -1,6 +1,6 @@
 extends GridContainer
 
-var _ability_group_prefix = "_ability_"
+const _ability_group_prefix = "_ability_"
 
 signal ability_removed(symbol)
 
@@ -43,3 +43,12 @@ func _extract_ability_from_group(ability_group: String) -> String:
 	else:
 		push_error("invalid ability group: %s" % ability_group)
 		return ""
+
+func _on_alphabet_changed(grammar: ILGrammar):
+	var alphabet = grammar.alphabet()
+	for child in get_children():
+		if child is Button:
+			var symbol = child.get_text()
+			if not alphabet.has(symbol):
+				var ability_group = _concat_ability_group(symbol)
+				_remove_ability(ability_group)
