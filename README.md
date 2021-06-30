@@ -14,7 +14,7 @@ The original submission can be seen here: https://yongu.itch.io/twigs (runs in b
 
 We kept extending the gamejam submission. The code is heavily based on this paper: http://algorithmicbotany.org/papers/hanan.dis1992.pdf
 
-You can try out the latest version here: https://yongu.itch.io/l-systems?secret=TTrvfLagm8k8kMKYoiKrySGLo
+You can try out the latest version here: https://yongu.itch.io/l-systems?secret=TTrvfLagm8k8kMKYoiKrySGLo (Runs in web and also on mobile but only on Firefox, not Chrome. On my Android phone at least. Did not test any other browsers or systems.)
 
 ### Existing features
 
