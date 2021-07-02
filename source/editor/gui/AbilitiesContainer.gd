@@ -1,6 +1,8 @@
 extends GridContainer
 
 const _ability_group_prefix = "_ability_"
+onready var turtle_abilities = Globals.turtle_abilities
+onready var turtle_settings = Globals.turtle_settings
 
 signal ability_removed(symbol)
 
@@ -52,3 +54,7 @@ func _on_alphabet_changed(grammar: ILGrammar):
 			if not alphabet.has(symbol):
 				var ability_group = _concat_ability_group(symbol)
 				_remove_ability(ability_group)
+
+func _on_BackButton_button_up():
+	Globals.turtle_abilities = turtle_abilities
+	Globals.turtle_settings = turtle_settings

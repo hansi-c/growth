@@ -1,7 +1,7 @@
 extends OptionButton
 
-onready var global_grammar = Globals.grammar
-onready var global_turtle_config = Globals.turtle_config
+#onready var global_grammar = Globals.grammar
+#onready var global_turtle_config = Globals.turtle_config
 var presets = []
 
 signal preset_selected(preset)
@@ -11,26 +11,34 @@ func _ready():
 	emit_signal("preset_selected", presets[0])
 
 func add_presets():
-	if global_grammar:
+	if Globals.grammar:
 		var preset = Preset.new()
-		preset.grammar = global_grammar
-		if global_turtle_config:
-			preset.config = global_turtle_config
+		preset.grammar = Globals.grammar
+		if Globals.turtle_settings:
+			preset.turtle_settings = Globals.turtle_settings
 		else:
-			preset.config = Turtles.default_config()
+			preset.turtle_settings = TurtleSettings.new()
+		if Globals.turtle_abilities:
+			preset.turtle_abilities = Globals.turtle_abilities
+		else:
+			preset.turtle_abilities = Turtles.default_abilities()
 		add_preset("Custom", preset)
 	
 	var wheat = Preset.new()
 	wheat.grammar = Grammars.wheat_1l()
-	wheat.config = Turtles.wheat()
+#	wheat.config = Turtles.wheat()
+	wheat.turtle_settings = Turtles.wheat_settings()
+	wheat.turtle_abilities = Turtles.wheat_abilities()
 
 	var sierpinski_60 = Preset.new()
 	sierpinski_60.grammar = Grammars.sierpinski_60()
-	sierpinski_60.config = Turtles.sierpinski_60()
+	sierpinski_60.turtle_settings = Turtles.sierpinski_60_settings()
+	sierpinski_60.turtle_abilities = Turtles.sierpinski_abilities()
 
 	var sierpinski_120 = Preset.new()
 	sierpinski_120.grammar = Grammars.sierpinski_120()
-	sierpinski_120.config = Turtles.sierpinski_120()
+	sierpinski_120.turtle_settings = Turtles.sierpinski_120_settings()
+	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities()
 
 	add_preset("Wheat", wheat)
 	add_preset("Sierpinski 60", sierpinski_60)

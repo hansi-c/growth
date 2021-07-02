@@ -139,37 +139,6 @@ margin_right = 371.0
 margin_bottom = 22.0
 text = "+"
 
-[node name="ButtonsContainer" type="GridContainer" parent="GUI/TabContainer/Grammar"]
-margin_left = 504.0
-margin_right = 613.0
-margin_bottom = 300.0
-custom_constants/hseparation = 10
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RevertButton" type="Button" parent="GUI/TabContainer/Grammar/ButtonsContainer"]
-margin_right = 53.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-text = "Revert"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackButton" type="Button" parent="GUI/TabContainer/Grammar/ButtonsContainer"]
-margin_left = 63.0
-margin_right = 109.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-text = "Done"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Turtle" type="GridContainer" parent="GUI/TabContainer"]
 visible = false
 anchor_right = 1.0
@@ -201,13 +170,46 @@ margin_bottom = 18.0
 columns = 2
 script = ExtResource( 6 )
 
+[node name="ButtonsContainer" type="GridContainer" parent="GUI"]
+margin_left = 508.0
+margin_top = 32.0
+margin_right = 617.0
+margin_bottom = 332.0
+custom_constants/hseparation = 10
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RevertButton" type="Button" parent="GUI/ButtonsContainer"]
+margin_right = 53.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+text = "Revert"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="GUI/ButtonsContainer"]
+margin_left = 63.0
+margin_right = 109.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+text = "Done"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="text_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_Axiom_text_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_add_production_button_button_up"]
-[connection signal="button_up" from="GUI/TabContainer/Grammar/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_RevertButton_button_up"]
-[connection signal="button_up" from="GUI/TabContainer/Grammar/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
+[connection signal="button_up" from="GUI/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_RevertButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_BackButton_button_up"]
