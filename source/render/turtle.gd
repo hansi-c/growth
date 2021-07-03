@@ -3,48 +3,10 @@ class_name Turtle
 var lines = []
 var leaves = []
 var fruits = []
-var state = TurtleState.new()
+var _state = TurtleState.new()
 # maps from grammar symbol (a String) to Funcref
 var _abilities = {}
 var _settings = TurtleSettings.new()
-#var _config: TurtleConfig
-#var start_position: Vector2
-
-#func set_config(config: TurtleConfig):
-#	_config = config
-#	for key in _config.abilities:
-#		add_ability(key, _config.abilities[key])
-
-#func get_config() -> TurtleConfig:
-#	return _config
-
-func generate_geometry(word: String, initial_width=1.0):
-	lines.clear()
-	leaves.clear()
-	fruits.clear()
-	state.reset()
-	state.set_width(initial_width)
-	state.set_position(_settings.start_position)
-	state.set_angle(_settings.start_angle)
-#	print(_abilities)
-	for i in range(word.length()):
-		var s = word[i]
-		if _abilities.has(s):
-			var ability = _abilities[s]
-			ability.call_func()
-#func generate_geometry(word: String, start_position: Vector2, initial_width: float):
-#	lines.clear()
-#	leaves.clear()
-#	fruits.clear()
-#	state.set_width(initial_width)
-#	state.set_position(start_position)
-#	state.set_angle(_config.start_angle)
-#
-#	for i in range(word.length()):
-#		var s = word[i]
-#		if abilities.has(s):
-#			var ability = abilities[s]
-#			ability.call_func()
 
 func set_settings(settings: TurtleSettings):
 	_settings = settings
@@ -68,11 +30,28 @@ func add_ability(symbol: String, ability: String):
 	call.set_function(ability)
 	_abilities[symbol] = call
 
+func generate_geometry(word: String, initial_line_width=1.0):
+	reset()
+	_initialize_state(initial_line_width)
+	_process_word(word)
+
+func _initialize_state(initial_line_width):
+	_state.set_width(initial_line_width)
+	_state.set_position(_settings.start_position)
+	_state.set_angle(_settings.start_angle)
+
+func _process_word(word: String):
+	for i in range(word.length()):
+		var s = word[i]
+		if _abilities.has(s):
+			var ability = _abilities[s]
+			ability.call_func()
+
 func draw_line():
-	var direction = Vector2(cos(state.angle), sin(state.angle))
-	var line_segment = _line_segment(state.position, direction, state.width)
+	var direction = Vector2(cos(_state.angle), sin(_state.angle))
+	var line_segment = _line_segment(_state.position, direction, _state.width)
 	lines.append(line_segment)
-	state.position = line_segment.end
+	_state.position = line_segment.end
 	
 func _line_segment(_start, direction, width):
 	var result = LineSegment.new()
@@ -82,26 +61,26 @@ func _line_segment(_start, direction, width):
 	return result
 	
 func turn_ccw():
-	state.turn_counter_clockwise(_settings.turn_angle)
+	_state.turn_counter_clockwise(_settings.turn_angle)
 
 func turn_cw():
-	state.turn_clockwise(_settings.turn_angle)
+	_state.turn_clockwise(_settings.turn_angle)
 
 func open_branch():
-	state.push_state()
-	state.width *= _settings.width_falloff
+	_state.push_state()
+	_state.width *= _settings.width_falloff
 
 func close_branch():
-	state.pop_state()
+	_state.pop_state()
 
 func shape_1():
-	leaves.append(state.position + Vector2(0,2.0))
+	leaves.append(_state.position + Vector2(0,2.0))
 	
 func shape_2():
-	fruits.append(state.position + Vector2(0,2.0))
+	fruits.append(_state.position + Vector2(0,2.0))
 
 func reset():
-	state.reset()
+	_state.reset()
 	lines.clear()
 	leaves.clear()
 	fruits.clear()

@@ -31,7 +31,6 @@ signal update_line_segments(amount)
 
 func _ready():
 	_get_starting_position()
-#	_initialize_turtle()
 	_initialize_rng_state()
 	_initialize_production_picker()
 	_initialize_cosmetics()
@@ -73,9 +72,6 @@ func _get_starting_position():
 	var start_pos_node = get_node_or_null("GrowthStartPosition")
 	if start_pos_node:
 		start = start_pos_node.position
-
-#func _initialize_turtle():
-#	turtle.start_position = start
 
 func _initialize_rng_state():
 	Globals.rng_state.rng = RandomNumberGenerator.new()
@@ -155,12 +151,8 @@ func generate_geometry():
 	var num_lines_before = turtle.lines.size()
 	var num_leaves_before = turtle.leaves.size()
 	var num_fruits_before = turtle.fruits.size()
-	var initial_width
-	if dynamic_line_width:
-		initial_width = (current_iteration+1)# * 0.66
-	else:
-		initial_width = 1.0
-	turtle.generate_geometry(word, initial_width)
+	var initial_line_width = determine_line_width()
+	turtle.generate_geometry(word, initial_line_width)
 	var num_lines_after = turtle.lines.size()
 	var num_leaves_after = turtle.leaves.size()
 	var num_fruits_after = turtle.fruits.size()
@@ -172,6 +164,12 @@ func generate_geometry():
 	if num_fruits_before != num_fruits_after:
 		emit_signal("update_fruits", num_fruits_after)
 	update()
+
+func determine_line_width():
+	if dynamic_line_width:
+		return (current_iteration+1)
+	else:
+		return 1.0
 
 func _on_FruitColorPickerButton_color_changed(color):
 	color_fruit = color
@@ -204,7 +202,6 @@ func _on_preset_selected(preset: Preset):
 #	print("preset selected")
 	grammar = preset.grammar
 	grammar.production_picker = production_picker
-#	turtle.set_config(preset.config)
 	preset.turtle_settings.start_position = start
 	turtle.set_settings(preset.turtle_settings)
 	turtle.set_abilities(preset.turtle_abilities)
@@ -216,7 +213,6 @@ func _on_EditButton_button_up():
 	var c = turtle.get_abilities()
 	Globals.turtle_abilities = turtle.get_abilities()
 	Globals.turtle_settings = turtle.get_settings()
-#	Globals.turtle_config = turtle.get_config()
 	var error = get_tree().change_scene("res://source/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)
