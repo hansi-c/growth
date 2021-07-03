@@ -11,14 +11,14 @@ var _settings = TurtleSettings.new()
 func set_settings(settings: TurtleSettings):
 	_settings = settings
 
-func get_settings():
+func get_settings() -> TurtleSettings:
 	return _settings
 
 func set_abilities(abilities: TurtleAbilities):
 	for pair in abilities.enumerate_abilities():
 		add_ability(pair[0], pair[1])
 
-func get_abilities():
+func get_abilities() -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	for key in _abilities:
 		result.add_ability(key, _abilities[key].get_function())

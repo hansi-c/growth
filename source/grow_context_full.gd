@@ -210,7 +210,6 @@ func _on_preset_selected(preset: Preset):
 
 func _on_EditButton_button_up():
 	Globals.grammar = grammar
-	var c = turtle.get_abilities()
 	Globals.turtle_abilities = turtle.get_abilities()
 	Globals.turtle_settings = turtle.get_settings()
 	var error = get_tree().change_scene("res://source/editor/grammar_editor.tscn")
