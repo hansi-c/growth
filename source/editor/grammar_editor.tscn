@@ -16,85 +16,74 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="GUI"]
 margin_right = 640.0
-margin_bottom = 360.0
+margin_bottom = 356.0
 tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Grammar" type="GridContainer" parent="GUI/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
-margin_bottom = -4.0
-columns = 3
+margin_bottom = -40.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Grammar"]
-margin_right = 500.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 500, 300 )
-size_flags_horizontal = 3
-
-[node name="GrammarContainer" type="GridContainer" parent="GUI/TabContainer/Grammar/ScrollContainer"]
-margin_right = 371.0
-margin_bottom = 78.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PropertiesContainer" type="GridContainer" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer"]
-margin_right = 371.0
+[node name="PropertiesContainer" type="GridContainer" parent="GUI/TabContainer/Grammar"]
+margin_right = 632.0
 margin_bottom = 52.0
 columns = 2
 
-[node name="AlphabetLabel" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer"]
+[node name="AlphabetLabel" type="Label" parent="GUI/TabContainer/Grammar/PropertiesContainer"]
 margin_top = 1.0
 margin_right = 73.0
 margin_bottom = 23.0
 custom_styles/normal = ExtResource( 2 )
 text = "Alphabet:"
 
-[node name="AlphabetTextBox" type="LineEdit" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer"]
+[node name="AlphabetTextBox" type="LineEdit" parent="GUI/TabContainer/Grammar/PropertiesContainer"]
 margin_left = 77.0
-margin_right = 371.0
+margin_right = 437.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 100, 22 )
-size_flags_horizontal = 3
 custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
 editable = false
 expand_to_text_length = true
 script = ExtResource( 3 )
 
-[node name="AxiomLabel" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer"]
+[node name="AxiomLabel" type="Label" parent="GUI/TabContainer/Grammar/PropertiesContainer"]
 margin_top = 29.0
 margin_right = 73.0
 margin_bottom = 51.0
 custom_styles/normal = ExtResource( 2 )
 text = "Axiom:"
 
-[node name="AxiomLineEdit" type="LineEdit" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer"]
+[node name="AxiomLineEdit" type="LineEdit" parent="GUI/TabContainer/Grammar/PropertiesContainer"]
 margin_left = 77.0
 margin_top = 28.0
-margin_right = 371.0
+margin_right = 437.0
 margin_bottom = 52.0
-rect_min_size = Vector2( 100, 22 )
-size_flags_horizontal = 3
 expand_to_text_length = true
 script = ExtResource( 4 )
 
-[node name="ProductionContainer" type="GridContainer" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Grammar"]
 margin_top = 56.0
+margin_right = 632.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 500, 264 )
+size_flags_horizontal = 3
+
+[node name="ProductionContainer" type="GridContainer" parent="GUI/TabContainer/Grammar/ScrollContainer"]
 margin_right = 371.0
-margin_bottom = 78.0
+margin_bottom = 22.0
 columns = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="left_context_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer"]
+[node name="left_context_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
 margin_right = 88.0
 margin_bottom = 22.0
 custom_styles/normal = ExtResource( 2 )
@@ -103,7 +92,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="predecessor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer"]
+[node name="predecessor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
 margin_left = 92.0
 margin_right = 183.0
 margin_bottom = 22.0
@@ -113,7 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="successor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer"]
+[node name="successor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
 margin_left = 187.0
 margin_right = 263.0
 margin_bottom = 22.0
@@ -123,7 +112,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="probability_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer"]
+[node name="probability_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
 margin_left = 267.0
 margin_right = 347.0
 margin_bottom = 22.0
@@ -133,14 +122,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_production_button" type="Button" parent="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer"]
+[node name="add_production_button" type="Button" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
 margin_left = 351.0
 margin_right = 371.0
 margin_bottom = 22.0
 text = "+"
 
 [node name="Turtle" type="GridContainer" parent="GUI/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -171,10 +159,13 @@ columns = 2
 script = ExtResource( 6 )
 
 [node name="ButtonsContainer" type="GridContainer" parent="GUI"]
+anchor_left = 1.0
+anchor_right = 1.0
 margin_left = 508.0
 margin_top = 32.0
-margin_right = 617.0
-margin_bottom = 332.0
+margin_right = 554.0
+margin_bottom = 62.0
+grow_horizontal = 0
 custom_constants/hseparation = 10
 columns = 2
 __meta__ = {
@@ -193,7 +184,7 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="GUI/ButtonsContainer"]
-margin_right = 49.0
+margin_right = 46.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
@@ -202,14 +193,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="text_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_Axiom_text_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_alphabet_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
-[connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
-[connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_add_production_button_button_up"]
+[connection signal="text_changed" from="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_Axiom_text_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
+[connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
+[connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_add_production_button_button_up"]
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
-[connection signal="button_up" from="GUI/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_RevertButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/GrammarContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_RevertButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/AbilitiesContainer" method="_on_BackButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
