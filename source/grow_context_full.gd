@@ -85,16 +85,16 @@ func _emit_iteration_update():
 	emit_signal("update_current_symbol", current_symbol, word.length())
 
 func _update_stats():
-	emit_signal("update_fruits", turtle.fruits.size())
-	emit_signal("update_leaves", turtle.leaves.size())
 	emit_signal("update_line_segments", turtle.lines.size())
+	emit_signal("update_leaves", turtle.shapes_1.size())
+	emit_signal("update_fruits", turtle.shapes_2.size())
 
 func _draw():
 	for line in turtle.lines:
 		_draw_stem(line)
-	for position in turtle.leaves:
+	for position in turtle.shapes_1:
 		_draw_leave(position)
-	for position in turtle.fruits:
+	for position in turtle.shapes_2:
 		_draw_fruit(position)
 		
 func _draw_stem(line_segment):
@@ -149,13 +149,13 @@ func next_rule():
 
 func generate_geometry():
 	var num_lines_before = turtle.lines.size()
-	var num_leaves_before = turtle.leaves.size()
-	var num_fruits_before = turtle.fruits.size()
+	var num_leaves_before = turtle.shapes_1.size()
+	var num_fruits_before = turtle.shapes_2.size()
 	var initial_line_width = determine_line_width()
 	turtle.generate_geometry(word, initial_line_width)
 	var num_lines_after = turtle.lines.size()
-	var num_leaves_after = turtle.leaves.size()
-	var num_fruits_after = turtle.fruits.size()
+	var num_leaves_after = turtle.shapes_1.size()
+	var num_fruits_after = turtle.shapes_2.size()
 	
 	if num_lines_before != num_lines_after:
 		emit_signal("update_line_segments", num_lines_after)

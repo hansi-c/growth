@@ -1,8 +1,8 @@
 class_name Turtle
 
 var lines = []
-var leaves = []
-var fruits = []
+var shapes_1 = []
+var shapes_2 = []
 var _state = TurtleState.new()
 # maps from grammar symbol (a String) to Funcref
 var _abilities = {}
@@ -35,7 +35,7 @@ func generate_geometry(word: String, initial_line_width=1.0):
 	_initialize_state(initial_line_width)
 	_process_word(word)
 
-func _initialize_state(initial_line_width):
+func _initialize_state(initial_line_width: float):
 	_state.set_width(initial_line_width)
 	_state.set_position(_settings.start_position)
 	_state.set_angle(_settings.start_angle)
@@ -53,7 +53,7 @@ func draw_line():
 	lines.append(line_segment)
 	_state.position = line_segment.end
 	
-func _line_segment(_start, direction, width):
+func _line_segment(_start: Vector2, direction: Vector2, width: float) -> LineSegment:
 	var result = LineSegment.new()
 	result.start = _start
 	result.end = _start + (direction * _settings.line_length)
@@ -74,13 +74,13 @@ func close_branch():
 	_state.pop_state()
 
 func shape_1():
-	leaves.append(_state.position + Vector2(0,2.0))
+	shapes_1.append(_state.position + Vector2(0,2.0))
 	
 func shape_2():
-	fruits.append(_state.position + Vector2(0,2.0))
+	shapes_2.append(_state.position + Vector2(0,2.0))
 
 func reset():
 	_state.reset()
 	lines.clear()
-	leaves.clear()
-	fruits.clear()
+	shapes_1.clear()
+	shapes_2.clear()
