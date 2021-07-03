@@ -1,10 +1,18 @@
 extends GridContainer
 
 const _ability_group_prefix = "_ability_"
-onready var turtle_abilities = Globals.turtle_abilities
-onready var turtle_settings = Globals.turtle_settings
+var turtle_abilities: TurtleAbilities
+var turtle_settings: TurtleSettings
 
 signal ability_removed(symbol)
+
+func _ready():
+	if Globals.turtle_abilities == null:
+		Globals.turtle_abilities = Turtles.default_abilities()
+	turtle_abilities = Turtles.duplicate_abilities(Globals.turtle_abilities)
+#	if Globals.turtle_settings == null:
+#		Globals.turtle_settings = TurtleSettings.new()
+	
 
 func _on_add_ability(symbol: String):
 	var ability_group = _concat_ability_group(symbol)
@@ -57,4 +65,4 @@ func _on_alphabet_changed(grammar: ILGrammar):
 
 func _on_BackButton_button_up():
 	Globals.turtle_abilities = turtle_abilities
-	Globals.turtle_settings = turtle_settings
+#	Globals.turtle_settings = turtle_settings

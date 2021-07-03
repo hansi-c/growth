@@ -43,51 +43,18 @@ func sierpinski_60_settings() -> TurtleSettings:
 	result.line_length = 40.0
 	result.width_falloff = 1.0
 	return result
-	
-#func wheat():
-#	var config = TurtleConfig.new()
-#	config.start_angle = Vector2.UP.angle() + deg2rad(25.0)
-#	config.turn_angle = deg2rad(25.0)
-#	config.line_length = 4.0
-#	config.width_falloff = 0.66
-#	config.abilities["F"] = "draw_line"
-#	config.abilities["-"] = "turn_cw"
-#	config.abilities["+"] = "turn_ccw"
-#	config.abilities["["] = "open_branch"
-#	config.abilities["]"] = "close_branch"
-#	config.abilities["A"] = "shape_1"
-#	config.abilities["B"] = "shape_2"
-#	return config
-	
-#func sierpinski_120():
-#	var config = TurtleConfig.new()
-#	config.start_angle = -deg2rad(120.0)#Vector2.UP.angle()
-#	config.turn_angle = -deg2rad(120.0)
-#	config.line_length = 40.0
-#	config.width_falloff = 1.0
-#	config.abilities["F"] = "draw_line"
-#	config.abilities["G"] = "draw_line"
-#	config.abilities["-"] = "turn_cw"
-#	config.abilities["+"] = "turn_ccw"
-#	return config
-#
-#func sierpinski_60():
-#	var config = TurtleConfig.new()
-#	config.start_angle = Vector2.UP.angle()
-#	config.turn_angle = -deg2rad(60.0)
-#	config.line_length = 40.0
-#	config.width_falloff = 1.0
-#	config.abilities["F"] = "draw_line"
-#	config.abilities["G"] = "draw_line"
-#	config.abilities["-"] = "turn_cw"
-#	config.abilities["+"] = "turn_ccw"
-#	return config
-#
-#func default_config():
-#	var config = TurtleConfig.new()
-#	config.abilities["F"] = "draw_line"
-#	config.abilities["-"] = "turn_cw"
-#	config.abilities["+"] = "turn_ccw"
-#	config.abilities["["] = "open_branch"
-#	config.abilities["]"] = "close_branch"
-#	return config
+
+func duplicate_abilities(abilities: TurtleAbilities) -> TurtleAbilities:
+	var result = TurtleAbilities.new()
+	for pair in abilities.enumerate_abilities():
+		result.add_ability(pair[0], pair[1])
+	return result
+
+func duplicate_settings(settings: TurtleSettings) -> TurtleSettings:
+	var result = TurtleSettings.new()
+	result.start_position = settings.start_position
+	result.start_angle = settings.start_angle
+	result.turn_angle = settings.turn_angle
+	result.line_length = settings.line_length
+	result.width_falloff = settings.width_falloff
+	return result
