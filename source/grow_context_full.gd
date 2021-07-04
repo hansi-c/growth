@@ -199,13 +199,11 @@ func _on_ResetButton_button_up():
 	reset()
 
 func _on_preset_selected(preset: Preset):
-#	print("preset selected")
 	grammar = preset.grammar
 	grammar.production_picker = production_picker
 	preset.turtle_settings.start_position = start
 	turtle.set_settings(preset.turtle_settings)
 	turtle.set_abilities(preset.turtle_abilities)
-	
 	reset()
 
 func _on_EditButton_button_up():

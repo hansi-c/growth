@@ -28,3 +28,6 @@ func enumerate_abilities():
 
 func clear():
 	_abilities.clear()
+
+func _to_string():
+	return str(_abilities)

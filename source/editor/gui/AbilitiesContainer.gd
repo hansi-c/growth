@@ -45,6 +45,7 @@ func add_ability_options(symbol: String, ability_group: String):
 		if a == active_ability:
 			ability_option.select(i)
 	add_child(ability_option)
+	turtle_abilities.set_ability(symbol, Globals.turtle_potential_abilities[ability_option.selected])
 	ability_option.connect("item_selected", self, "_on_ability_selected", [ability_group])
 
 func _on_ability_selected(index: int, ability_group: String):
@@ -62,6 +63,8 @@ func _remove_ability(ability_group: String):
 	var nodes = get_tree().get_nodes_in_group(ability_group)
 	for node in nodes:
 		node.queue_free()
+	var symbol = _extract_ability_from_group(ability_group)
+	turtle_abilities.remove_symbol(symbol)
 
 func _extract_ability_from_group(ability_group: String) -> String:
 	if ability_group.begins_with(_ability_group_prefix):
