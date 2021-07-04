@@ -5,7 +5,7 @@ var shapes_1 = []
 var shapes_2 = []
 var _state = TurtleState.new()
 # maps from grammar symbol (a String) to Funcref
-var _abilities = {}
+var _active_abilities = {}
 var _settings = TurtleSettings.new()
 
 func set_settings(settings: TurtleSettings):
@@ -20,15 +20,15 @@ func set_abilities(abilities: TurtleAbilities):
 
 func get_abilities() -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	for key in _abilities:
-		result.add_ability(key, _abilities[key].get_function())
+	for key in _active_abilities:
+		result.set_ability(key, _active_abilities[key].get_function())
 	return result
 
 func add_ability(symbol: String, ability: String):
 	var call = FuncRef.new()
 	call.set_instance(self)
 	call.set_function(ability)
-	_abilities[symbol] = call
+	_active_abilities[symbol] = call
 
 func generate_geometry(word: String, initial_line_width=1.0):
 	reset()
@@ -43,8 +43,8 @@ func _initialize_state(initial_line_width: float):
 func _process_word(word: String):
 	for i in range(word.length()):
 		var s = word[i]
-		if _abilities.has(s):
-			var ability = _abilities[s]
+		if _active_abilities.has(s):
+			var ability = _active_abilities[s]
 			ability.call_func()
 
 func draw_line():
@@ -84,3 +84,14 @@ func reset():
 	lines.clear()
 	shapes_1.clear()
 	shapes_2.clear()
+
+func enumerate_potential_abilities() -> Array:
+	return [
+		"draw_line",
+		"turn_ccw",
+		"turn_cw",
+		"open_branch",
+		"close_branch",
+		"shape_1",
+		"shape_2"
+	]

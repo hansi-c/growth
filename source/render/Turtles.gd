@@ -2,22 +2,22 @@ extends Node
 
 func default_abilities() -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	result.add_ability("F", "draw_line")
-	result.add_ability("-", "turn_cw")
-	result.add_ability("+", "turn_ccw")
-	result.add_ability("[", "open_branch")
-	result.add_ability("]", "close_branch")
+	result.set_ability("F", "draw_line")
+	result.set_ability("-", "turn_cw")
+	result.set_ability("+", "turn_ccw")
+	result.set_ability("[", "open_branch")
+	result.set_ability("]", "close_branch")
 	return result
 
 func wheat_abilities() -> TurtleAbilities:
 	var result = default_abilities()
-	result.add_ability("A", "shape_1")
-	result.add_ability("B", "shape_2")
+	result.set_ability("A", "shape_1")
+	result.set_ability("B", "shape_2")
 	return result
 
 func sierpinski_abilities() -> TurtleAbilities:
 	var result = default_abilities()
-	result.add_ability("G", "draw_line")
+	result.set_ability("G", "draw_line")
 	return result
 
 func wheat_settings() -> TurtleSettings:
@@ -47,7 +47,7 @@ func sierpinski_60_settings() -> TurtleSettings:
 func duplicate_abilities(abilities: TurtleAbilities) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	for pair in abilities.enumerate_abilities():
-		result.add_ability(pair[0], pair[1])
+		result.set_ability(pair[0], pair[1])
 	return result
 
 func duplicate_settings(settings: TurtleSettings) -> TurtleSettings:

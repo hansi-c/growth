@@ -2,7 +2,7 @@ class_name TurtleAbilities
 
 var _abilities = {}
 
-func add_ability(symbol: String, ability: String):
+func set_ability(symbol: String, ability: String):
 	_abilities[symbol] = ability
 	
 func remove_symbol(symbol: String):
@@ -10,6 +10,12 @@ func remove_symbol(symbol: String):
 
 func has_symbol(symbol: String):
 	return _abilities.has(symbol)
+
+func get_ability(symbol: String):
+	if _abilities.has(symbol):
+		return _abilities[symbol]
+	else:
+		return ""
 
 # returns an array of arrays.
 # the inner arrays have 2 entries: [symbol, ability]

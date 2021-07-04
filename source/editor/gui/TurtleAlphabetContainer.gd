@@ -31,11 +31,15 @@ func add_symbol_button(symbol: String):
 	button.connect("button_up", self, "_on_symbol_button_up", [button])
 
 func _on_symbol_button_up(button: Button):
-	button.set_disabled(true)
 	var symbol = button.get_text()
 	emit_signal("add_ability", symbol)
 
-func _on_ability_removed(symbol):
+func _on_ability_added(symbol: String):
+	for child in get_children():
+		if child is Button and child.get_text() == symbol:
+			child.set_disabled(true)
+
+func _on_ability_removed(symbol: String):
 	for child in get_children():
 		if child is Button and child.get_text() == symbol:
 			child.set_disabled(false)
