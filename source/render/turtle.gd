@@ -15,6 +15,7 @@ func get_settings() -> TurtleSettings:
 	return _settings
 
 func set_abilities(abilities: TurtleAbilities):
+	_active_abilities.clear()
 	for pair in abilities.enumerate_abilities():
 		add_ability(pair[0], pair[1])
 

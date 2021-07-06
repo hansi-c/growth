@@ -24,9 +24,13 @@ func add_presets():
 			preset.turtle_abilities = Turtles.default_abilities()
 		add_preset("Custom", preset)
 	
+	var identity = Preset.new()
+	identity.grammar = Grammars.identity_grammar()
+	identity.turtle_settings = TurtleSettings.new()
+	identity.turtle_abilities = Turtles.default_abilities()
+	
 	var wheat = Preset.new()
 	wheat.grammar = Grammars.wheat_1l()
-#	wheat.config = Turtles.wheat()
 	wheat.turtle_settings = Turtles.wheat_settings()
 	wheat.turtle_abilities = Turtles.wheat_abilities()
 
@@ -41,9 +45,10 @@ func add_presets():
 	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities()
 
 	add_preset("Wheat", wheat)
+	add_preset("Identity", identity)
 	add_preset("Sierpinski 60", sierpinski_60)
 	add_preset("Sierpinski 120", sierpinski_120)
-
+	
 func add_preset(name: String, preset: Preset):
 	presets.append(preset)
 	add_item(name)
