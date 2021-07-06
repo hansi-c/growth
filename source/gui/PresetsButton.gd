@@ -1,7 +1,5 @@
 extends OptionButton
 
-#onready var global_grammar = Globals.grammar
-#onready var global_turtle_config = Globals.turtle_config
 var presets = []
 
 signal preset_selected(preset)
