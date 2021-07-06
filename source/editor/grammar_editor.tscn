@@ -200,7 +200,7 @@ margin_right = 262.0
 margin_bottom = 24.0
 columns = 5
 
-[node name="SpinBox" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer/StartAngleContainer"]
+[node name="StartAngleValue" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer/StartAngleContainer"]
 margin_right = 74.0
 margin_bottom = 24.0
 align = 2
@@ -246,7 +246,7 @@ margin_right = 262.0
 margin_bottom = 52.0
 columns = 5
 
-[node name="SpinBox" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer/TurnAngleContainer"]
+[node name="TurnAngleValue" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer/TurnAngleContainer"]
 margin_right = 74.0
 margin_bottom = 24.0
 align = 2
@@ -285,7 +285,7 @@ margin_right = 77.0
 margin_bottom = 75.0
 text = "Line length"
 
-[node name="LineLengthSpinBox" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer"]
+[node name="LineLengthValue" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer"]
 margin_left = 81.0
 margin_top = 56.0
 margin_right = 262.0
@@ -298,7 +298,7 @@ margin_right = 77.0
 margin_bottom = 103.0
 text = "Width falloff"
 
-[node name="WidthFalloffSpinBox" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer"]
+[node name="WidthFalloffValue" type="SpinBox" parent="GUI/TabContainer/Turtle/GridContainer/SettingsContainer"]
 margin_left = 81.0
 margin_top = 84.0
 margin_right = 262.0
