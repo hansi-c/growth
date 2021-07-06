@@ -34,5 +34,6 @@ func _on_line_angle_changed(value: float):
 	
 func _on_width_falloff_changed(value: float):
 	viewmodel.width_falloff = value
+	
 func _on_BackButton_button_up():
 	Globals.turtle_settings = viewmodel.to_turtle_settings()

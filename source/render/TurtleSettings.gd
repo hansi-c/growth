@@ -7,3 +7,5 @@ var line_length = 10.0
 #var initial_width = 1.0
 var width_falloff = 1.0
 
+func _to_string() -> String:
+	return "start angle: %s, turn angle: %s, line length: %s, width falloff %s" % [start_angle, turn_angle, line_length, width_falloff]
