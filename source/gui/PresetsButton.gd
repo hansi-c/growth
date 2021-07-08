@@ -42,7 +42,7 @@ func add_presets():
 	sierpinski_120.turtle_settings = Turtles.sierpinski_120_settings()
 	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities()
 
-	add_preset("Wheat", wheat)
+	add_preset("Plant", wheat)
 	add_preset("Identity", identity)
 	add_preset("Sierpinski 60", sierpinski_60)
 	add_preset("Sierpinski 120", sierpinski_120)
