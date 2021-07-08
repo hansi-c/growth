@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	test_apply_rule()
 	test_match_left_context()
-	test_apply_next_production()
+	test_context_symbols()
 
 func test_apply_rule():
 	var grammar = ILGrammar.new()
@@ -27,11 +27,10 @@ func test_apply_rule():
 	print(result)
 	assert(result == "01Two")
 
-	# expect an error to be thrown here
 	word = "+"
 	result = grammar.apply_production(word, 0)
 	print(result)
-	assert(result == "")
+	assert(result == word)
 
 func test_match_left_context():
 	var production = Production.new("","", "ABC", "")
@@ -89,19 +88,23 @@ func test_match_left_context():
 	matches = p6.matches_left_context(word, index)
 	assert(matches == true)
 
-func test_apply_next_production():
-	var grammar = ILGrammar.new()
-	grammar.add_production(Production.new("A", "ABC"))
-	var word = "A"
-	var result = ILGrammar.AppliedProduction.new()
+func test_context_symbols():
+	var context_symbols = {"a": true}
+	var word = "a+ab"
+	var p1 = Production.new("", "", "a", "")
+	var matches = p1.matches_left_context(word, 1, context_symbols)
+	assert(matches)
+	matches = p1.matches_left_context(word, 2, context_symbols)
+	assert(matches)
+	matches = p1.matches_left_context(word, 3, context_symbols)
+	assert(matches)
+	matches = p1.matches_left_context(word, 0, context_symbols)
+	assert(not matches)
 	
-	var applied = grammar.apply_next_production(word, 0, result)
-	assert(applied == true)
-	assert(result.word == "ABC")
-	assert(result.next_index == 3)
-	
-	applied = grammar.apply_next_production(word, 1, result)
-	assert(applied == false)
-
-	applied = grammar.apply_next_production(word, 3, result)
-	assert(applied == false)
+	var p2 = Production.new("", "", "aa", "")
+	matches = p2.matches_left_context(word, 4, context_symbols)
+	assert(matches)
+	matches = p2.matches_left_context(word, 3, context_symbols)
+	assert(matches)
+	matches = p2.matches_left_context(word, 2, context_symbols)
+	assert(not matches)

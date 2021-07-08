@@ -5,7 +5,7 @@ class_name ILGrammar
 
 var axiom
 var productions = {}
-#var context_symbols = {}
+var context_symbols = {}
 var production_picker: ProductionPicker = ProductionPicker.new()
 
 func set_production_picker(_production_picker:ProductionPicker):
@@ -30,7 +30,7 @@ func update_predecessor(production: Production):
 	delete_production(production)
 	add_production(production)
 	
-func apply_productions(word):
+func apply_productions(word: String):
 	var result = ""
 	for i in range(word.length()):
 		var ps = applicable_productions(word, i)
@@ -44,7 +44,7 @@ func apply_productions(word):
 # Returns the index of the next predecessor of a production,
 # starting at offset.
 # Returns an index > word.length() if no production is found until the end of the word.
-func find_next_rule(word, offset) -> int:
+func find_next_rule(word: String, offset: int) -> int:
 	var i = offset
 	while i < word.length():
 		var symbol = word[i]
@@ -53,11 +53,11 @@ func find_next_rule(word, offset) -> int:
 		i += 1
 	return i
 
-func apply_production(word, index, applied_production=[]) -> String:
+func apply_production(word: String, index: int, applied_production=[]) -> String:
 	var result = ""
 	var ps = applicable_productions(word, index)
 	if ps.empty():
-		push_error("unknown rule at index %s in word '%s'" % [index, word])
+		return word
 	else:
 		var random_index = production_picker.pick(ps)
 		var p = ps[random_index]
@@ -68,7 +68,7 @@ func apply_production(word, index, applied_production=[]) -> String:
 			result += word.substr(index+1)
 	return result
 
-func applicable_productions(word, index):
+func applicable_productions(word: String, index: int) -> Array:
 	var s = word[index]
 	var result = []
 	if productions.has(s):
@@ -90,7 +90,7 @@ func _to_string() -> String:
 			result += "\n" + p._to_string()
 	return result
 
-func production_count():
+func production_count() -> int:
 	var count = 0
 	for s in productions:
 		for p in productions[s]:

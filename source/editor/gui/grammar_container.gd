@@ -100,23 +100,23 @@ func delete_row(row_group: String):
 	rows.erase(row_group)
 
 func _on_left_context_changed(text: String, row_group: String):
-	var production = rows[row_group]
+	var production: Production = rows[row_group]
 	production.left_context = text
 	emit_signal("alphabet_changed", grammar)
 
 func _on_predecessor_changed(text: String, row_group: String):
-	var production = rows[row_group]
+	var production: Production = rows[row_group]
 	production.predecessor = text
 	grammar.update_predecessor(production)
 	emit_signal("alphabet_changed", grammar)
 
 func _on_successor_changed(text: String, row_group: String):
-	var production = rows[row_group]
+	var production: Production = rows[row_group]
 	production.successor = text
 	emit_signal("alphabet_changed", grammar)
 
 func _on_probability_changed(value: float, row_group: String):
-	var production = rows[row_group]
+	var production: Production = rows[row_group]
 	production.probability_factor = value
 
 func _on_Axiom_text_changed(new_text):
