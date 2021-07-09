@@ -1,22 +1,35 @@
 extends Node
 
-func default_abilities() -> TurtleAbilities:
+func default_abilities(alphabet: Dictionary) -> TurtleAbilities:
+	var result = TurtleAbilities.new()
+	if alphabet.has("F"):
+		result.set_ability("F", "draw_line")
+	if alphabet.has("-"):
+		result.set_ability("-", "turn_cw")
+	if alphabet.has("+"):
+		result.set_ability("+", "turn_ccw")
+	if alphabet.has("["):
+		result.set_ability("[", "open_branch")
+	if alphabet.has("]"):
+		result.set_ability("]", "close_branch")
+	return result
+
+func wheat_abilities() -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	result.set_ability("F", "draw_line")
 	result.set_ability("-", "turn_cw")
 	result.set_ability("+", "turn_ccw")
 	result.set_ability("[", "open_branch")
 	result.set_ability("]", "close_branch")
-	return result
-
-func wheat_abilities() -> TurtleAbilities:
-	var result = default_abilities()
 	result.set_ability("A", "shape_1")
 	result.set_ability("B", "shape_2")
 	return result
 
 func sierpinski_abilities() -> TurtleAbilities:
-	var result = default_abilities()
+	var result = TurtleAbilities.new()
+	result.set_ability("F", "draw_line")
+	result.set_ability("-", "turn_cw")
+	result.set_ability("+", "turn_ccw")
 	result.set_ability("G", "draw_line")
 	return result
 

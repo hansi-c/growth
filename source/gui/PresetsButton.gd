@@ -19,13 +19,13 @@ func add_presets():
 		if Globals.turtle_abilities:
 			preset.turtle_abilities = Globals.turtle_abilities
 		else:
-			preset.turtle_abilities = Turtles.default_abilities()
+			preset.turtle_abilities = Turtles.default_abilities(Globals.grammar.alphabet())
 		add_preset("Custom", preset)
 	
 	var identity = Preset.new()
 	identity.grammar = Grammars.identity_grammar()
 	identity.turtle_settings = TurtleSettings.new()
-	identity.turtle_abilities = Turtles.default_abilities()
+	identity.turtle_abilities = Turtles.default_abilities(identity.grammar.alphabet())
 	
 	var wheat = Preset.new()
 	wheat.grammar = Grammars.wheat_1l()
