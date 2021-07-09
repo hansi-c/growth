@@ -97,7 +97,7 @@ func production_count() -> int:
 			count += 1
 	return count
 	
-func alphabet() -> Array:
+func alphabet() -> Dictionary:
 	var result = {}
 	if axiom and not axiom.empty():
 		_add_unique_chars(result, axiom)
@@ -106,7 +106,15 @@ func alphabet() -> Array:
 			_add_unique_chars(result, p.left_context)
 			_add_unique_chars(result, p.predecessor)
 			_add_unique_chars(result, p.successor)
-	return result.keys()
+	return result
+
+func alphabet_list() -> Array:
+	return alphabet().keys()
+
+func alphabet_sorted() -> Array:
+	var keys = alphabet_list()
+	keys.sort()
+	return keys
 
 func _add_unique_chars(target: Dictionary, source: String):
 	if source and not source.empty():

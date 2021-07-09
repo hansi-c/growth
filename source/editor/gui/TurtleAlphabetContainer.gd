@@ -3,11 +3,11 @@ extends HBoxContainer
 signal add_ability(symbol)
 
 func _on_alphabet_changed(grammar: ILGrammar):
-	var alphabet = grammar.alphabet()
+	var alphabet: Dictionary = grammar.alphabet()
 	delete_symbol_buttons(alphabet)
-	add_symbol_buttons(alphabet)
+	add_symbol_buttons(alphabet.keys())
 
-func delete_symbol_buttons(alphabet: Array):
+func delete_symbol_buttons(alphabet: Dictionary):
 	for child in get_children():
 		if child is Button:
 			var symbol = child.get_text()
