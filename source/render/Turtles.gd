@@ -2,15 +2,15 @@ extends Node
 
 func default_abilities(alphabet: Dictionary) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	if alphabet.has("F"):
+	if alphabet and alphabet.has("F"):
 		result.set_ability("F", "draw_line")
-	if alphabet.has("-"):
+	if alphabet and alphabet.has("-"):
 		result.set_ability("-", "turn_cw")
-	if alphabet.has("+"):
+	if alphabet and alphabet.has("+"):
 		result.set_ability("+", "turn_ccw")
-	if alphabet.has("["):
+	if alphabet and alphabet.has("["):
 		result.set_ability("[", "open_branch")
-	if alphabet.has("]"):
+	if alphabet and alphabet.has("]"):
 		result.set_ability("]", "close_branch")
 	return result
 
