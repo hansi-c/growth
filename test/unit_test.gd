@@ -91,6 +91,7 @@ func test_match_left_context():
 func test_context_symbols():
 	var context_symbols = {"a": true}
 	var word = "a+ab"
+	
 	var p1 = Production.new("", "", "a", "")
 	var matches = p1.matches_left_context(word, 1, context_symbols)
 	assert(matches)
@@ -108,3 +109,28 @@ func test_context_symbols():
 	assert(matches)
 	matches = p2.matches_left_context(word, 2, context_symbols)
 	assert(not matches)
+	matches = p2.matches_left_context(word, 1, context_symbols)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 0, context_symbols)
+	assert(not matches)
+	
+	context_symbols = {}
+	matches = p2.matches_left_context(word, 4, context_symbols)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 3, context_symbols)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 2, context_symbols)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 1, context_symbols)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 0, context_symbols)
+
+	matches = p2.matches_left_context(word, 4)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 3)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 2)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 1)
+	assert(not matches)
+	matches = p2.matches_left_context(word, 0)
