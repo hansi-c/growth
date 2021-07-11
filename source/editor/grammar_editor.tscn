@@ -313,26 +313,14 @@ step = 0.001
 align = 2
 
 [node name="ButtonsContainer" type="GridContainer" parent="GUI"]
-anchor_left = 1.0
 anchor_right = 1.0
-margin_left = 508.0
-margin_top = 32.0
-margin_right = 554.0
-margin_bottom = 62.0
+margin_left = 576.0
+margin_top = 42.0
+margin_right = 622.0
+margin_bottom = 72.0
 grow_horizontal = 0
+rect_pivot_offset = Vector2( 1, 0 )
 custom_constants/hseparation = 10
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RevertButton" type="Button" parent="GUI/ButtonsContainer"]
-visible = false
-margin_right = 53.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-text = "Revert"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -356,7 +344,6 @@ __meta__ = {
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_added" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_added"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
-[connection signal="button_up" from="GUI/ButtonsContainer/RevertButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_RevertButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
