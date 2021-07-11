@@ -15,7 +15,6 @@ func test_apply_rule():
 	var result = grammar.apply_production(word, 0)
 	print(result)
 	assert(result == "Zero")
-
 	word = "012"
 	result = grammar.apply_production(word, 0)
 	print(result)
@@ -34,6 +33,8 @@ func test_apply_rule():
 
 func test_match_left_context():
 	var production = Production.new("","", "ABC", "")
+	production.open_branch = "["
+	production.close_branch = "]"
 	var word = "ABC[DE][FG[HI[JK]L]MNO]P"
 	var index = 8 # F
 	var matches = production.matches_left_context(word, index)
@@ -56,11 +57,15 @@ func test_match_left_context():
 	assert(matches == false)
 
 	var p2 = Production.new("","", "D", "")
+	p2.open_branch = "["
+	p2.close_branch = "]"
 	index = 5 # E
 	matches = p2.matches_left_context(word, index)
 	assert(matches == true)
 
 	var p3 = Production.new("","", "C", "")
+	p3.open_branch = "["
+	p3.close_branch = "]"
 	index = 8 # F
 	matches = p3.matches_left_context(word, index)
 	assert(matches == true)
@@ -70,6 +75,8 @@ func test_match_left_context():
 	assert(matches == false)
 
 	var p4 = Production.new("","", "", "")
+	p4.open_branch = "["
+	p4.close_branch = "]"
 	index = 0
 	matches = p4.matches_left_context(word, index)
 	assert(matches == true)
@@ -79,11 +86,15 @@ func test_match_left_context():
 	assert(matches == true)
 
 	var p5 = Production.new("","", "MN", "")
+	p5.open_branch = "["
+	p5.close_branch = "]"
 	index = 21 # O
 	matches = p5.matches_left_context(word, index)
 	assert(matches == true)
 
 	var p6 = Production.new("","", "FG", "")
+	p6.open_branch = "["
+	p6.close_branch = "]"
 	index = 19 # M
 	matches = p6.matches_left_context(word, index)
 	assert(matches == true)

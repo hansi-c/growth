@@ -1,5 +1,7 @@
 class_name Production
 
+var open_branch
+var close_branch
 var predecessor: String
 var successor: String
 var left_context: String
@@ -23,9 +25,9 @@ func matches_context(word: String, index: int, context_symbols=null) -> bool:
 # PARAMETRIC L-SYSTEMS AND THEIR APPLICATION TO THE MODELLING AND VISUALIZATION OF PLANTS
 # by James Scott Hanan, 1992, page 24
 func matches_left_context(word: String, index: int, context_symbols=null) -> bool:
-	if left_context == null:
+	if left_context == null or left_context.empty():
 		return true
-	elif not left_context.empty() and index == 0:
+	elif index == 0:
 		return false
 
 	var i = index - 1
@@ -34,11 +36,11 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 
 	while matches and i >= 0 and j >= 0:
 		# skip substrings representing branches
-		if word[i] == "]":
+		if word[i] == close_branch:
 			# move the index i to point at the first character to the left of the
 			# matching left bracket
 			i = skip_matching_left_bracket(word, i)
-		elif word[i] == "[":
+		elif word[i] == open_branch:
 			# skip left brackets
 			i -= 1
 		else:
@@ -47,16 +49,13 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 			var context_symbol = left_context[j]
 			if not context_symbols or context_symbols.has(word_symbol):
 				if word_symbol == context_symbol:
-#			if matches_symbol(word[i], left_context[j], context_symbols):
 					i -= 1
 					j -= 1
 				else:
+					# mismatch
 					matches = false
 			else:
 				i -= 1
-#			else:
-				# mismatch
-#				matches = false
 		if i < 0 and j >= 0:
 			# the string index is past the left end and there is still context to match
 			matches = false
@@ -67,24 +66,13 @@ func skip_matching_left_bracket(word: String, index: int) -> int:
 	var count = 1
 	while index > 0 and count > 0:
 		index -= 1
-		if word[index] == "[":
+		if word[index] == open_branch:
 			count -= 1
-		elif word[index] == "]":
+		elif word[index] == close_branch:
 			count += 1
 	return index
 
-#func matches_symbol(word_symbol: String, context_symbol: String, context_symbols=null):
-#	if not context_symbols or not context_symbols.has(a):
-#		return a == b
-#	elif :
-#		return true
-##		if a != b and not :
-#		return a == b and 
-
 func matches_right_context(_word: String, _index: int, _context_symbols=null) -> bool:
-#	if right_context == null or right_context.empty():
-#		return true
-#	return false
 	return true
 
 # w : ABC
