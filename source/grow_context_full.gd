@@ -67,7 +67,7 @@ func reset():
 	_update_stats()
 	_emit_iteration_update()
 	emit_signal("iterations_reset")
-
+	
 func _get_starting_position():
 	var start_pos_node = get_node_or_null("GrowthStartPosition")
 	if start_pos_node:
