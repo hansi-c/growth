@@ -1,7 +1,7 @@
 class_name Production
 
-var open_branch
-var close_branch
+var open_branch = "["
+var close_branch = "]"
 var predecessor: String
 var successor: String
 var left_context: String
