@@ -49,10 +49,13 @@ func _process_word(word: String):
 			ability.call_func()
 
 func draw_line():
-	var direction = Vector2(cos(_state.angle), sin(_state.angle))
-	var line_segment = _line_segment(_state.position, direction, _state.width)
-	lines.append(line_segment)
-	_state.position = line_segment.end
+	if _state.angle:
+		var direction = Vector2(cos(_state.angle), sin(_state.angle))
+		var line_segment = _line_segment(_state.position, direction, _state.width)
+		lines.append(line_segment)
+		_state.position = line_segment.end
+	else:
+		push_error("invalid state")
 	
 func _line_segment(_start: Vector2, direction: Vector2, width: float) -> LineSegment:
 	var result = LineSegment.new()

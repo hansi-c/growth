@@ -4,8 +4,8 @@ var positions = []
 var angles = []
 var widths = []
 var position = Vector2.ZERO
-var angle = 0
-var width = 0
+var angle = 0.0
+var width = 0.0
 
 func set_position(_position: Vector2):
 	position = _position
@@ -32,6 +32,8 @@ func push_state():
 
 func pop_state():
 	position = positions.pop_back()
+	if not position:
+		push_error("cannot pop empty stack")
 	angle = angles.pop_back()
 	width = widths.pop_back()
 
@@ -42,3 +44,8 @@ func reset():
 	position = Vector2.ZERO
 	angle = 0
 	width = 0
+
+func _to_string():
+	return "position: %s\nangle: %s\nwidth: %s\npositions: %s\nangles: %s\nwidths: %s" % [
+		position, angle, width, positions, angles, widths
+	]

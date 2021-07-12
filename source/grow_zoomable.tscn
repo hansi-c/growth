@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://source/gui/StemValue.gd" type="Script" id=10]
 [ext_resource path="res://source/gui/CurrentSymbolValue.gd" type="Script" id=11]
 [ext_resource path="res://source/gui/PresetsButton.gd" type="Script" id=12]
+[ext_resource path="res://source/gui/CameraZoom.gd" type="Script" id=13]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -39,6 +40,9 @@ __meta__ = {
 
 [node name="CameraPan" type="Node2D" parent="."]
 script = ExtResource( 1 )
+
+[node name="CameraZoom" type="Node2D" parent="."]
+script = ExtResource( 13 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 mouse_filter = 2
@@ -354,6 +358,7 @@ __meta__ = {
 }
 
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
+[connection signal="camera_zooming" from="CameraZoom" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_zooming"]
 [connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_iterations_reset"]
 [connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_iterations_reset"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_max_iteration_reached"]
@@ -374,6 +379,7 @@ __meta__ = {
 [connection signal="toggled" from="GUI/Indented/ProgressContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
+[connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_reset"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
 [connection signal="item_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="GUI/Indented/PresetsContainer/PresetsButton" method="_on_item_selected"]
 [connection signal="preset_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
