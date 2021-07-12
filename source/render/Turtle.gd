@@ -32,7 +32,6 @@ func add_ability(symbol: String, ability: String):
 	_active_abilities[symbol] = call
 
 func generate_geometry(word: String, initial_line_width=1.0):
-	print(word)
 	reset()
 	_initialize_state(initial_line_width)
 	_process_word(word)
@@ -50,7 +49,6 @@ func _process_word(word: String):
 			ability.call_func()
 
 func draw_line():
-	print("state: %s" % [_state])
 	if _state.angle:
 		var direction = Vector2(cos(_state.angle), sin(_state.angle))
 		var line_segment = _line_segment(_state.position, direction, _state.width)
