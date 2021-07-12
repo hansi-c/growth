@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Turtle",
 "language": "GDScript",
-"path": "res://source/render/turtle.gd"
+"path": "res://source/render/Turtle.gd"
 }, {
 "base": "Reference",
 "class": "TurtleAbilities",
