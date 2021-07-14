@@ -314,9 +314,9 @@ text = "Reset"
 
 [node name="FocusOriginButton" type="Button" parent="GUI/Indented/ProgressContainer"]
 margin_left = 159.0
-margin_right = 259.0
+margin_right = 248.0
 margin_bottom = 20.0
-text = "Camera Reset"
+text = "Focus origin"
 
 [node name="PresetsContainer" type="GridContainer" parent="GUI/Indented"]
 margin_left = 450.0
@@ -362,6 +362,7 @@ __meta__ = {
 
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
 [connection signal="camera_zooming" from="CameraZoom" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_zooming"]
+[connection signal="focus_camera" from="ViewportContainer/Viewport/PlantCanvas" to="ViewportContainer/Viewport/Camera2D" method="_on_focus_camera"]
 [connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_iterations_reset"]
 [connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/FinishIterationButton" method="_on_iterations_reset"]
 [connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_max_iteration_reached"]
@@ -383,7 +384,7 @@ __meta__ = {
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/FinishIterationButton" to="GUI/Indented/ProgressContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
 [connection signal="button_up" from="GUI/Indented/ProgressContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
-[connection signal="button_up" from="GUI/Indented/ProgressContainer/FocusOriginButton" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_reset"]
+[connection signal="button_up" from="GUI/Indented/ProgressContainer/FocusOriginButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FocusOriginButton_button_up"]
 [connection signal="item_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="GUI/Indented/PresetsContainer/PresetsButton" method="_on_item_selected"]
 [connection signal="preset_selected" from="GUI/Indented/PresetsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
 [connection signal="button_up" from="GUI/Indented/PresetsContainer/EditButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_EditButton_button_up"]
