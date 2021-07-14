@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://source/gui/CameraPan.gd" type="Script" id=1]
 [ext_resource path="res://source/gui/GrowSimulationTimer.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://source/gui/CurrentSymbolValue.gd" type="Script" id=11]
 [ext_resource path="res://source/gui/PresetsButton.gd" type="Script" id=12]
 [ext_resource path="res://source/gui/CameraZoom.gd" type="Script" id=13]
+[ext_resource path="res://source/gui/godot_theme.tres" type="Theme" id=14]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -86,6 +87,7 @@ script = ExtResource( 4 )
 margin_right = 640.0
 margin_bottom = 360.0
 mouse_filter = 2
+theme = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,75 +112,75 @@ __meta__ = {
 }
 
 [node name="CurrentIterationLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_right = 98.0
-margin_bottom = 14.0
+margin_right = 106.0
+margin_bottom = 22.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Iteration:"
 
 [node name="CurrentIterationValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 102.0
-margin_right = 102.0
-margin_bottom = 14.0
+margin_left = 110.0
+margin_right = 118.0
+margin_bottom = 22.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 6 )
 
 [node name="CurrentSymbolLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 18.0
-margin_right = 98.0
-margin_bottom = 32.0
+margin_top = 26.0
+margin_right = 106.0
+margin_bottom = 48.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Symbol:"
 
 [node name="CurrentSymbolValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 102.0
-margin_top = 18.0
-margin_right = 102.0
-margin_bottom = 32.0
+margin_left = 110.0
+margin_top = 26.0
+margin_right = 118.0
+margin_bottom = 48.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 11 )
 
 [node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 36.0
-margin_right = 98.0
-margin_bottom = 50.0
+margin_top = 52.0
+margin_right = 106.0
+margin_bottom = 74.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Fruits:"
 
 [node name="FruitsValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 102.0
-margin_top = 36.0
-margin_right = 102.0
-margin_bottom = 50.0
+margin_left = 110.0
+margin_top = 52.0
+margin_right = 118.0
+margin_bottom = 74.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 9 )
 
 [node name="LeavesLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 54.0
-margin_right = 98.0
-margin_bottom = 68.0
+margin_top = 78.0
+margin_right = 106.0
+margin_bottom = 100.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Leaves:"
 
 [node name="LeavesValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 102.0
-margin_top = 54.0
-margin_right = 102.0
-margin_bottom = 68.0
+margin_left = 110.0
+margin_top = 78.0
+margin_right = 118.0
+margin_bottom = 100.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 8 )
 
 [node name="StemLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 72.0
-margin_right = 98.0
-margin_bottom = 86.0
+margin_top = 104.0
+margin_right = 106.0
+margin_bottom = 126.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Line segments:"
 
 [node name="StemValue" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_left = 102.0
-margin_top = 72.0
-margin_right = 102.0
-margin_bottom = 86.0
+margin_left = 110.0
+margin_top = 104.0
+margin_right = 118.0
+margin_bottom = 126.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 10 )
 
@@ -293,7 +295,7 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="GUI/Indented/ProgressContainer"]
 margin_right = 57.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 toggle_mode = true
 pressed = true
 text = "Playing"
@@ -302,20 +304,20 @@ script = ExtResource( 5 )
 [node name="FinishIterationButton" type="Button" parent="GUI/Indented/ProgressContainer"]
 margin_left = 61.0
 margin_right = 103.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Next"
 script = ExtResource( 7 )
 
 [node name="ResetButton" type="Button" parent="GUI/Indented/ProgressContainer"]
 margin_left = 107.0
 margin_right = 155.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Reset"
 
 [node name="FocusOriginButton" type="Button" parent="GUI/Indented/ProgressContainer"]
 margin_left = 159.0
 margin_right = 248.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Focus origin"
 
 [node name="PresetsContainer" type="GridContainer" parent="GUI/Indented"]
@@ -329,8 +331,9 @@ __meta__ = {
 }
 
 [node name="PresetsButton" type="OptionButton" parent="GUI/Indented/PresetsContainer"]
+margin_left = 1.0
 margin_right = 88.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 text = "L-System"
@@ -342,7 +345,7 @@ __meta__ = {
 [node name="EditButton" type="Button" parent="GUI/Indented/PresetsContainer"]
 margin_left = 92.0
 margin_right = 128.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 text = "Edit"
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="GUI"]
