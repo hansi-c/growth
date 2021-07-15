@@ -49,7 +49,7 @@ func _process_word(word: String):
 			ability.call_func()
 
 func draw_line():
-	if _state.angle:
+	if _state.angle != null:
 		var direction = Vector2(cos(_state.angle), sin(_state.angle))
 		var line_segment = _line_segment(_state.position, direction, _state.width)
 		lines.append(line_segment)
