@@ -22,6 +22,7 @@ var stem_thickness = 1.0
 # button signals
 signal max_iteration_reached()
 signal iterations_reset()
+signal focus_camera(point)
 # stats signals
 signal update_current_iteration(current, maximum)
 signal update_current_symbol(current, maximum)
@@ -214,3 +215,7 @@ func _on_EditButton_button_up():
 	var error = get_tree().change_scene("res://source/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)
+
+
+func _on_FocusOriginButton_button_up():
+	emit_signal("focus_camera", start)
