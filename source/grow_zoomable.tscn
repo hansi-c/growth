@@ -103,9 +103,10 @@ __meta__ = {
 }
 
 [node name="StatsContainer" type="GridContainer" parent="GUI/Indented"]
-margin_right = 113.0
+margin_right = 118.0
 margin_bottom = 86.0
 mouse_filter = 2
+custom_constants/vseparation = -6
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -125,62 +126,62 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 6 )
 
 [node name="CurrentSymbolLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 26.0
+margin_top = 16.0
 margin_right = 106.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Symbol:"
 
 [node name="CurrentSymbolValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 110.0
-margin_top = 26.0
+margin_top = 16.0
 margin_right = 118.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 11 )
 
 [node name="FruitsLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 52.0
+margin_top = 32.0
 margin_right = 106.0
-margin_bottom = 74.0
+margin_bottom = 54.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Fruits:"
 
 [node name="FruitsValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 110.0
-margin_top = 52.0
+margin_top = 32.0
 margin_right = 118.0
-margin_bottom = 74.0
+margin_bottom = 54.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 9 )
 
 [node name="LeavesLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 78.0
+margin_top = 48.0
 margin_right = 106.0
-margin_bottom = 100.0
+margin_bottom = 70.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Leaves:"
 
 [node name="LeavesValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 110.0
-margin_top = 78.0
+margin_top = 48.0
 margin_right = 118.0
-margin_bottom = 100.0
+margin_bottom = 70.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 8 )
 
 [node name="StemLabel" type="Label" parent="GUI/Indented/StatsContainer"]
-margin_top = 104.0
+margin_top = 64.0
 margin_right = 106.0
-margin_bottom = 126.0
+margin_bottom = 86.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Line segments:"
 
 [node name="StemValue" type="Label" parent="GUI/Indented/StatsContainer"]
 margin_left = 110.0
-margin_top = 104.0
+margin_top = 64.0
 margin_right = 118.0
-margin_bottom = 126.0
+margin_bottom = 86.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 10 )
 
@@ -288,6 +289,7 @@ margin_top = -30.0
 margin_right = 579.0
 grow_vertical = 0
 mouse_filter = 2
+custom_constants/hseparation = 0
 columns = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -302,21 +304,21 @@ text = "Playing"
 script = ExtResource( 5 )
 
 [node name="FinishIterationButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 61.0
-margin_right = 103.0
+margin_left = 57.0
+margin_right = 99.0
 margin_bottom = 22.0
 text = "Next"
 script = ExtResource( 7 )
 
 [node name="ResetButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 107.0
-margin_right = 155.0
+margin_left = 99.0
+margin_right = 147.0
 margin_bottom = 22.0
 text = "Reset"
 
 [node name="FocusOriginButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 159.0
-margin_right = 248.0
+margin_left = 147.0
+margin_right = 236.0
 margin_bottom = 22.0
 text = "Focus origin"
 
