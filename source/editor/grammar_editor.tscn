@@ -335,14 +335,14 @@ __meta__ = {
 }
 
 [connection signal="text_changed" from="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_Axiom_text_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_add_production_button_button_up"]
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_added" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_added"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
