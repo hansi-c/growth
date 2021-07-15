@@ -289,7 +289,7 @@ margin_top = -30.0
 margin_right = 579.0
 grow_vertical = 0
 mouse_filter = 2
-custom_constants/hseparation = 0
+custom_constants/hseparation = 1
 columns = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -304,21 +304,21 @@ text = "Playing"
 script = ExtResource( 5 )
 
 [node name="FinishIterationButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 57.0
-margin_right = 99.0
+margin_left = 58.0
+margin_right = 100.0
 margin_bottom = 22.0
 text = "Next"
 script = ExtResource( 7 )
 
 [node name="ResetButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 99.0
-margin_right = 147.0
+margin_left = 101.0
+margin_right = 149.0
 margin_bottom = 22.0
 text = "Reset"
 
 [node name="FocusOriginButton" type="Button" parent="GUI/Indented/ProgressContainer"]
-margin_left = 147.0
-margin_right = 236.0
+margin_left = 150.0
+margin_right = 239.0
 margin_bottom = 22.0
 text = "Focus origin"
 
@@ -327,14 +327,15 @@ margin_left = 450.0
 margin_right = 578.0
 margin_bottom = 20.0
 grow_horizontal = 0
+custom_constants/hseparation = 1
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PresetsButton" type="OptionButton" parent="GUI/Indented/PresetsContainer"]
-margin_left = 1.0
-margin_right = 88.0
+margin_left = 4.0
+margin_right = 91.0
 margin_bottom = 22.0
 grow_horizontal = 0
 size_flags_horizontal = 10
