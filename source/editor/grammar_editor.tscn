@@ -7,7 +7,7 @@
 [ext_resource path="res://source/editor/gui/TurtleAlphabetContainer.gd" type="Script" id=5]
 [ext_resource path="res://source/editor/gui/AbilitiesContainer.gd" type="Script" id=6]
 [ext_resource path="res://source/editor/gui/SettingsContainer.gd" type="Script" id=7]
-[ext_resource path="res://source/gui/godot_theme.tres" type="Theme" id=8]
+[ext_resource path="res://source/simulation/gui/godot_theme.tres" type="Theme" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
 resource_name = "StartAngleRadio"
