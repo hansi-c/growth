@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
-"path": "res://source/grow_context_full.gd"
+"path": "res://source/simulation/grow_context_full.gd"
 }, {
 "base": "Reference",
 "class": "ILGrammar",
@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "LineSegment",
 "language": "GDScript",
-"path": "res://source/render/LineSegment.gd"
+"path": "res://source/simulation/render/LineSegment.gd"
 }, {
 "base": "Reference",
 "class": "Preset",
 "language": "GDScript",
-"path": "res://source/gui/Preset.gd"
+"path": "res://source/simulation/gui/Preset.gd"
 }, {
 "base": "Reference",
 "class": "Production",
@@ -52,17 +52,17 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Turtle",
 "language": "GDScript",
-"path": "res://source/render/Turtle.gd"
+"path": "res://source/simulation/render/Turtle.gd"
 }, {
 "base": "Reference",
 "class": "TurtleAbilities",
 "language": "GDScript",
-"path": "res://source/render/TurtleAbilities.gd"
+"path": "res://source/simulation/render/TurtleAbilities.gd"
 }, {
 "base": "Reference",
 "class": "TurtleSettings",
 "language": "GDScript",
-"path": "res://source/render/TurtleSettings.gd"
+"path": "res://source/simulation/render/TurtleSettings.gd"
 }, {
 "base": "Reference",
 "class": "TurtleSettingsModel",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "TurtleState",
 "language": "GDScript",
-"path": "res://source/render/TurtleState.gd"
+"path": "res://source/simulation/render/TurtleState.gd"
 } ]
 _global_script_class_icons={
 "GrowContextFull": "",
@@ -93,13 +93,13 @@ _global_script_class_icons={
 [application]
 
 config/name="grow"
-run/main_scene="res://source/grow_zoomable.tscn"
+run/main_scene="res://source/simulation/grow_zoomable.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Grammars="*res://source/grammar/Grammars.gd"
-Turtles="*res://source/render/Turtles.gd"
+Turtles="*res://source/simulation/render/Turtles.gd"
 Globals="*res://source/global/Globals.gd"
 
 [display]
