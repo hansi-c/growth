@@ -15,9 +15,6 @@ func _init(_predecessor, _successor, _left_context="", _right_context="", _proba
 	right_context = _right_context
 	probability_factor = _probability
 
-#func matches(word: String, index: int, context_symbols=null):
-#	if left_context and not left_context.empty())
-
 func matches_context(word: String, index: int, context_symbols=null) -> bool:
 	return matches_left_context(word, index, context_symbols) and matches_right_context(word, index, context_symbols)
 
@@ -59,7 +56,6 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 		if i < 0 and j >= 0:
 			# the string index is past the left end and there is still context to match
 			matches = false
-
 	return matches
 
 func skip_matching_left_bracket(word: String, index: int) -> int:
