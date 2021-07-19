@@ -14,21 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/grow_context_full.gd"
 }, {
-"base": "Node2D",
-"class": "GrowFullIteration",
-"language": "GDScript",
-"path": "res://source/grow_full_iteration.gd"
-}, {
-"base": "Node2D",
-"class": "GrowLineByLine",
-"language": "GDScript",
-"path": "res://source/grow_line_by_line.gd"
-}, {
-"base": "CanvasItem",
-"class": "GrowSmoothTransitions",
-"language": "GDScript",
-"path": "res://source/grow_smooth_iterations.gd"
-}, {
 "base": "Reference",
 "class": "ILGrammar",
 "language": "GDScript",
@@ -91,9 +76,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GrowContextFull": "",
-"GrowFullIteration": "",
-"GrowLineByLine": "",
-"GrowSmoothTransitions": "",
 "ILGrammar": "",
 "LineSegment": "",
 "Preset": "",
