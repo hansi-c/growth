@@ -47,7 +47,6 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 			var context_symbol = left_context[j]
 			if not context_symbols or context_symbols.has(word_symbol):
 				if word_symbol == context_symbol:
-#			if matches_symbol(word[i], left_context[j], context_symbols):
 					i -= 1
 					j -= 1
 				else:
