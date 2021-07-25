@@ -72,18 +72,7 @@ func skip_matching_left_bracket(word: String, index: int) -> int:
 			count += 1
 	return index
 
-#func matches_symbol(word_symbol: String, context_symbol: String, context_symbols=null):
-#	if not context_symbols or not context_symbols.has(a):
-#		return a == b
-#	elif :
-#		return true
-##		if a != b and not :
-#		return a == b and 
-
 func matches_right_context(_word: String, _index: int, _context_symbols=null) -> bool:
-#	if right_context == null or right_context.empty():
-#		return true
-#	return false
 	return true
 
 # w : ABC
