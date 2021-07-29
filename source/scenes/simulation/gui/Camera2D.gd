@@ -8,7 +8,6 @@ func _on_camera_panning(relative):
 
 func _on_focus_camera(point: Vector2):
 	position = point
-	zoom = Vector2(1,1)
 
 func _on_camera_zooming(zoom_change, mouse_position):
 	zoom = zoom * zoom_change
