@@ -18,10 +18,11 @@ You can try out the latest version here: https://yongu.itch.io/l-systems?secret=
 
 ### Existing features
 
-+ Accepts context-sensitive grammars (only left context so far. right context will follow)
++ Accepts context-sensitive grammars. (Only left context so far. Right context will follow.)
 + Accepts stochastic grammars. The same symbol may be assigned multiple successors. One of them is chosen according to their probability factors. 
 + A grammar editor at runtime. Users are able to write their own grammars.
 
 ### Planned features
 
 + Parametric L Systems. Allows passing parameters to productions.
++ Export and import function. Write L Systems to files and create them from files. Share your favorite L System with others!
