@@ -22,7 +22,7 @@ func matches_context(word: String, index: int, context_symbols=null) -> bool:
 # implemented pseudo code from http://algorithmicbotany.org/papers/hanan.dis1992.pdf
 # PARAMETRIC L-SYSTEMS AND THEIR APPLICATION TO THE MODELLING AND VISUALIZATION OF PLANTS
 # by James Scott Hanan, 1992, page 24
-func matches_left_context(word: String, index: int, context_symbols=null) -> bool:
+func matches_left_context(word: String, index: int, context_symbols=null, branching_symbols=BranchingSymbols.new()) -> bool:
 	if left_context == null:
 		return true
 	elif not left_context.empty() and index == 0:
@@ -34,11 +34,11 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 
 	while matches and i >= 0 and j >= 0:
 		# skip substrings representing branches
-		if word[i] == "]":
+		if word[i] == branching_symbols.close_branch:
 			# move the index i to point at the first character to the left of the
 			# matching left bracket
-			i = skip_matching_left_bracket(word, i)
-		elif word[i] == "[":
+			i = skip_matching_left_bracket(word, i, branching_symbols)
+		elif word[i] == branching_symbols.open_branch:
 			# skip left brackets
 			i -= 1
 		else:
@@ -62,13 +62,13 @@ func matches_left_context(word: String, index: int, context_symbols=null) -> boo
 
 	return matches
 
-func skip_matching_left_bracket(word: String, index: int) -> int:
+func skip_matching_left_bracket(word: String, index: int, branching_symbols: BranchingSymbols) -> int:
 	var count = 1
 	while index > 0 and count > 0:
 		index -= 1
-		if word[index] == "[":
+		if word[index] == branching_symbols.open_branch:
 			count -= 1
-		elif word[index] == "]":
+		elif word[index] == branching_symbols.close_branch:
 			count += 1
 	return index
 

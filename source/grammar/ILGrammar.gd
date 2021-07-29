@@ -3,9 +3,10 @@
 # or non-deterministic according to its production picker.
 class_name ILGrammar
 
-var axiom
+var axiom: String
 var productions = {}
 var context_symbols = {}
+var branching_symbols: BranchingSymbols = BranchingSymbols.new()
 var production_picker: ProductionPicker = ProductionPicker.new()
 
 func set_production_picker(_production_picker:ProductionPicker):
@@ -30,17 +31,6 @@ func update_predecessor(production: Production):
 	delete_production(production)
 	add_production(production)
 	
-func apply_productions(word: String):
-	var result = ""
-	for i in range(word.length()):
-		var ps = applicable_productions(word, i)
-		if not ps.empty():
-			var random_index = production_picker.pick(ps)
-			result += ps[random_index].successor
-		else:
-			result += word[i]
-	return result
-
 # Returns the index of the next predecessor of a production,
 # starting at offset.
 # Returns an index > word.length() if no production is found until the end of the word.

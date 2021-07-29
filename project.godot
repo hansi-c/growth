@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "BranchingSymbols",
+"language": "GDScript",
+"path": "res://source/grammar/BranchingSymbols.gd"
+}, {
 "base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_classes=[ {
 "path": "res://source/simulation/render/TurtleState.gd"
 } ]
 _global_script_class_icons={
+"BranchingSymbols": "",
 "GrowContextFull": "",
 "ILGrammar": "",
 "LineSegment": "",
