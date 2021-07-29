@@ -125,7 +125,7 @@ func _on_Axiom_text_changed(new_text):
 
 func _on_SaveButton_button_up():
 	Globals.grammar = grammar
-	var error = get_tree().change_scene("res://source/simulation/grow_zoomable.tscn")
+	var error = get_tree().change_scene("res://source/scenes/simulation/grow_zoomable.tscn")
 	if error:
 		print("could not change scene: %s" % error)
 
