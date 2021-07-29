@@ -26,3 +26,4 @@ You can try out the latest version here: https://yongu.itch.io/l-systems?secret=
 
 + Parametric L Systems. Allows passing parameters to productions.
 + Export and import function. Write L Systems to files and create them from files. Share your favorite L System with others!
++ Random grammar generator. Generate random grammars in mass production, write them to file and view them. Requires export/import function.
