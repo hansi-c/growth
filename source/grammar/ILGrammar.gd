@@ -6,7 +6,7 @@ class_name ILGrammar
 var axiom: String
 var productions = {}
 var context_symbols = {}
-var branching_symbols: BranchingSymbols = BranchingSymbols.new()
+var control_symbols: ControlSymbols = ControlSymbols.new()
 var production_picker: ProductionPicker = ProductionPicker.new()
 
 func set_production_picker(_production_picker:ProductionPicker):
@@ -64,7 +64,8 @@ func applicable_productions(word: String, index: int) -> Array:
 	if productions.has(s):
 		var successors = productions[s]
 		for p in successors:
-			if p.matches_context(word, index):
+			var branching_symbols = control_symbols.get_branching_symbols()
+			if p.matches_context(word, index, branching_symbols):
 				result.append(p)
 	return result
 
@@ -96,6 +97,8 @@ func alphabet() -> Dictionary:
 			_add_unique_chars(result, p.left_context)
 			_add_unique_chars(result, p.predecessor)
 			_add_unique_chars(result, p.successor)
+	for s in control_symbols.enumerate():
+		_add_unique_chars(result, s)
 	return result
 
 func alphabet_list() -> Array:

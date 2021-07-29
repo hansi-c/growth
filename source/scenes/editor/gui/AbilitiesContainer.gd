@@ -8,7 +8,7 @@ signal ability_removed(symbol)
 
 func _ready():
 	if Globals.turtle_abilities == null:
-		Globals.turtle_abilities = Turtles.default_abilities(Globals.grammar.alphabet())
+		Globals.turtle_abilities = Turtles.default_abilities(Globals.grammar)
 	turtle_abilities = Turtles.duplicate_abilities(Globals.turtle_abilities)
 	if not Globals.turtle_potential_abilities or Globals.turtle_potential_abilities.empty():
 		Globals.turtle_potential_abilities = Turtle.new().enumerate_potential_abilities()

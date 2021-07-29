@@ -1,36 +1,30 @@
 extends Node
 
-func default_abilities(alphabet: Dictionary) -> TurtleAbilities:
-	var result = TurtleAbilities.new()
-	if alphabet and alphabet.has("F"):
-		result.set_ability("F", "draw_line")
-	if alphabet and alphabet.has("-"):
-		result.set_ability("-", "turn_cw")
-	if alphabet and alphabet.has("+"):
-		result.set_ability("+", "turn_ccw")
-	if alphabet and alphabet.has("["):
-		result.set_ability("[", "open_branch")
-	if alphabet and alphabet.has("]"):
-		result.set_ability("]", "close_branch")
-	return result
-
-func wheat_abilities() -> TurtleAbilities:
+func default_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	result.set_ability("F", "draw_line")
-	result.set_ability("-", "turn_cw")
-	result.set_ability("+", "turn_ccw")
-	result.set_ability("[", "open_branch")
-	result.set_ability("]", "close_branch")
+	_add_control_abilities(result, grammar.control_symbols)
+	return result
+
+func _add_control_abilities(result: TurtleAbilities, control_symbols: ControlSymbols):
+	result.set_ability(control_symbols.get_rotate_cw(), "turn_cw")
+	result.set_ability(control_symbols.get_rotate_ccw(), "turn_ccw")
+	result.set_ability(control_symbols.get_open_branch(), "open_branch")
+	result.set_ability(control_symbols.get_close_branch(), "close_branch")
+
+func wheat_abilities(grammar: ILGrammar) -> TurtleAbilities:
+	var result = TurtleAbilities.new()
+	result.set_ability("F", "draw_line")
 	result.set_ability("A", "shape_1")
 	result.set_ability("B", "shape_2")
+	_add_control_abilities(result, grammar.control_symbols)
 	return result
 
-func sierpinski_abilities() -> TurtleAbilities:
+func sierpinski_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	result.set_ability("F", "draw_line")
-	result.set_ability("-", "turn_cw")
-	result.set_ability("+", "turn_ccw")
 	result.set_ability("G", "draw_line")
+	_add_control_abilities(result, grammar.control_symbols)
 	return result
 
 func wheat_settings() -> TurtleSettings:

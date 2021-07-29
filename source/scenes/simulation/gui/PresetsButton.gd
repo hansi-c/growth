@@ -19,28 +19,28 @@ func add_presets():
 		if Globals.turtle_abilities:
 			preset.turtle_abilities = Globals.turtle_abilities
 		else:
-			preset.turtle_abilities = Turtles.default_abilities(Globals.grammar.alphabet())
+			preset.turtle_abilities = Turtles.default_abilities(Globals.grammar)
 		add_preset("Custom", preset)
 	
 	var identity = Preset.new()
 	identity.grammar = Grammars.identity_grammar()
 	identity.turtle_settings = TurtleSettings.new()
-	identity.turtle_abilities = Turtles.default_abilities(identity.grammar.alphabet())
+	identity.turtle_abilities = Turtles.default_abilities(identity.grammar)
 	
 	var wheat = Preset.new()
 	wheat.grammar = Grammars.wheat_1l()
 	wheat.turtle_settings = Turtles.wheat_settings()
-	wheat.turtle_abilities = Turtles.wheat_abilities()
+	wheat.turtle_abilities = Turtles.wheat_abilities(wheat.grammar)
 
 	var sierpinski_60 = Preset.new()
 	sierpinski_60.grammar = Grammars.sierpinski_60()
 	sierpinski_60.turtle_settings = Turtles.sierpinski_60_settings()
-	sierpinski_60.turtle_abilities = Turtles.sierpinski_abilities()
+	sierpinski_60.turtle_abilities = Turtles.sierpinski_abilities(sierpinski_60.grammar)
 
 	var sierpinski_120 = Preset.new()
 	sierpinski_120.grammar = Grammars.sierpinski_120()
 	sierpinski_120.turtle_settings = Turtles.sierpinski_120_settings()
-	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities()
+	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities(sierpinski_120.grammar)
 
 	add_preset("Plant", wheat)
 	add_preset("Identity", identity)

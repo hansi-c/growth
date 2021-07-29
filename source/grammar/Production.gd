@@ -13,16 +13,13 @@ func _init(_predecessor, _successor, _left_context="", _right_context="", _proba
 	right_context = _right_context
 	probability_factor = _probability
 
-#func matches(word: String, index: int, context_symbols=null):
-#	if left_context and not left_context.empty())
-
-func matches_context(word: String, index: int, context_symbols=null) -> bool:
-	return matches_left_context(word, index, context_symbols) and matches_right_context(word, index, context_symbols)
+func matches_context(word: String, index: int, context_symbols=null, branching_symbols: BranchingSymbols=BranchingSymbols.new()) -> bool:
+	return matches_left_context(word, index, context_symbols, branching_symbols) and matches_right_context(word, index, context_symbols, branching_symbols)
 
 # implemented pseudo code from http://algorithmicbotany.org/papers/hanan.dis1992.pdf
 # PARAMETRIC L-SYSTEMS AND THEIR APPLICATION TO THE MODELLING AND VISUALIZATION OF PLANTS
 # by James Scott Hanan, 1992, page 24
-func matches_left_context(word: String, index: int, context_symbols=null, branching_symbols=BranchingSymbols.new()) -> bool:
+func matches_left_context(word: String, index: int, context_symbols=null, branching_symbols: BranchingSymbols=BranchingSymbols.new()) -> bool:
 	if left_context == null:
 		return true
 	elif not left_context.empty() and index == 0:
@@ -53,9 +50,6 @@ func matches_left_context(word: String, index: int, context_symbols=null, branch
 					matches = false
 			else:
 				i -= 1
-#			else:
-				# mismatch
-#				matches = false
 		if i < 0 and j >= 0:
 			# the string index is past the left end and there is still context to match
 			matches = false
@@ -72,7 +66,7 @@ func skip_matching_left_bracket(word: String, index: int, branching_symbols: Bra
 			count += 1
 	return index
 
-func matches_right_context(_word: String, _index: int, _context_symbols=null) -> bool:
+func matches_right_context(_word: String, _index: int, _context_symbols=null, _branching_symbols: BranchingSymbols=BranchingSymbols.new()) -> bool:
 	return true
 
 # w : ABC
