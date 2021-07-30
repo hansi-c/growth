@@ -1,10 +1,10 @@
 # L Systems
 
-Lindenmayer Systems implemented in the Godot game engine.
+Lindenmayer Systems implemented in the [Godot game engine](https://godotengine.org).
 
 ## growth
 
-The project began as a contribution to Godot Game Jam 2021. https://gogodotjam.com/
+The project began as a contribution to [Godot Game Jam 2021](https://gogodotjam.com/).
 
 The theme for the jam was growth. We used an L System to grow a plant.
 
