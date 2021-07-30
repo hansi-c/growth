@@ -90,12 +90,19 @@ func reset():
 	shapes_2.clear()
 
 func enumerate_potential_abilities() -> Array:
-	return [
-		"draw_line",
-		"turn_ccw",
-		"turn_cw",
-		"open_branch",
-		"close_branch",
-		"shape_1",
-		"shape_2"
-	]
+	return draw_abilities().keys() + control_abilities().keys()
+
+func control_abilities() -> Dictionary:
+	return {
+		"turn_ccw"     : true,
+		"turn_cw"      : true,
+		"open_branch"  : true,
+		"close_branch" : true,
+	}
+
+func draw_abilities() -> Dictionary:
+	return {
+		"draw_line" : true,
+		"shape_1"   : true,
+		"shape_2"   : true
+	}

@@ -35,9 +35,12 @@ func set_close_branch(symbol: String):
 	_branching_symbols.close_branch = symbol
 
 func enumerate() -> Array:
-	return [
-		_rotate_cw,
-		_rotate_ccw,
-		_branching_symbols.open_branch,
-		_branching_symbols.close_branch
-	]
+	return enumerate_dictionary().keys()
+	
+func enumerate_dictionary() -> Dictionary:
+	return {
+		_rotate_cw: true,
+		_rotate_ccw: true,
+		_branching_symbols.open_branch: true,
+		_branching_symbols.close_branch: true
+	}

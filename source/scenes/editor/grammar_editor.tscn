@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/scenes/editor/gui/grammar_container.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/editor/gui/grammar_editor_label_style.tres" type="StyleBox" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://source/scenes/editor/gui/AbilitiesContainer.gd" type="Script" id=6]
 [ext_resource path="res://source/scenes/editor/gui/SettingsContainer.gd" type="Script" id=7]
 [ext_resource path="res://source/scenes/simulation/gui/godot_theme.tres" type="Theme" id=8]
+[ext_resource path="res://source/scenes/editor/EditorContainer.gd" type="Script" id=9]
 
 [sub_resource type="ButtonGroup" id=1]
 resource_name = "StartAngleRadio"
@@ -27,6 +28,7 @@ __meta__ = {
 margin_right = 640.0
 margin_bottom = 356.0
 tab_align = 0
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -346,3 +348,4 @@ __meta__ = {
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
