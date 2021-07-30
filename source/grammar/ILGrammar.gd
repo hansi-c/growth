@@ -33,7 +33,7 @@ func update_predecessor(production: Production):
 	
 # Returns the index of the next predecessor of a production,
 # starting at offset.
-# Returns an index > word.length() if no production is found until the end of the word.
+# Returns an index >= word.length() if no production is found until the end of the word.
 func find_next_rule(word: String, offset: int) -> int:
 	var i = offset
 	while i < word.length():
@@ -65,7 +65,7 @@ func applicable_productions(word: String, index: int) -> Array:
 		var successors = productions[s]
 		for p in successors:
 			var branching_symbols = control_symbols.get_branching_symbols()
-			if p.matches_context(word, index, branching_symbols):
+			if p.matches_context(word, index, context_symbols, branching_symbols):
 				result.append(p)
 	return result
 
