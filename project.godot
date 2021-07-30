@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "TurtleSettingsModel",
 "language": "GDScript",
-"path": "res://source/scenes/editor/gui/TurtleSettingsModel.gd"
+"path": "res://source/scenes/editor/gui/turtle/TurtleSettingsModel.gd"
 }, {
 "base": "Reference",
 "class": "TurtleState",

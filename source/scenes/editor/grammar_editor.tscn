@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://source/scenes/editor/gui/grammar_container.gd" type="Script" id=1]
+[ext_resource path="res://source/scenes/editor/gui/grammar/AlphabetTextBox.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/editor/gui/grammar_editor_label_style.tres" type="StyleBox" id=2]
-[ext_resource path="res://source/scenes/editor/gui/AlphabetTextBox.gd" type="Script" id=3]
-[ext_resource path="res://source/scenes/editor/gui/AxiomLineEdit.gd" type="Script" id=4]
-[ext_resource path="res://source/scenes/editor/gui/TurtleAlphabetContainer.gd" type="Script" id=5]
-[ext_resource path="res://source/scenes/editor/gui/AbilitiesContainer.gd" type="Script" id=6]
-[ext_resource path="res://source/scenes/editor/gui/SettingsContainer.gd" type="Script" id=7]
+[ext_resource path="res://source/scenes/editor/gui/grammar/grammar_container.gd" type="Script" id=3]
+[ext_resource path="res://source/scenes/editor/gui/grammar/AxiomLineEdit.gd" type="Script" id=4]
+[ext_resource path="res://source/scenes/editor/gui/turtle/TurtleAlphabetContainer.gd" type="Script" id=5]
+[ext_resource path="res://source/scenes/editor/gui/turtle/AbilitiesContainer.gd" type="Script" id=6]
+[ext_resource path="res://source/scenes/editor/gui/turtle/SettingsContainer.gd" type="Script" id=7]
 [ext_resource path="res://source/scenes/simulation/gui/godot_theme.tres" type="Theme" id=8]
 [ext_resource path="res://source/scenes/editor/gui/EditorContainer.gd" type="Script" id=9]
 
@@ -58,7 +58,7 @@ margin_bottom = 22.0
 custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
 editable = false
 expand_to_text_length = true
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 
 [node name="AxiomLabel" type="Label" parent="GUI/TabContainer/Grammar/PropertiesContainer"]
 margin_top = 26.0
@@ -85,7 +85,7 @@ size_flags_horizontal = 3
 margin_right = 371.0
 margin_bottom = 22.0
 columns = 5
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -345,7 +345,7 @@ __meta__ = {
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_added" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_added"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
