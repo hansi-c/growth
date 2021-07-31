@@ -5,7 +5,6 @@ extends Node
 func duplicate_grammar(grammar: ILGrammar):
 	var result = ILGrammar.new()
 	result.axiom = grammar.axiom
-	result.production_picker = grammar.production_picker
 	for s in grammar.productions:
 		for p in grammar.productions[s]:
 			result.add_production(duplicate_production(p))

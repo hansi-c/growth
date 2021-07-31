@@ -1,22 +1,17 @@
 # Can be a 0L, 1L or 2L grammar. 0L has no context, 1L has either
-# left or right context, 2L has both. The grammar will be deterministic
-# or non-deterministic according to its production picker.
+# left or right context, 2L has both.
 class_name ILGrammar
 
 var axiom: String
+# maps from predecessor to an array of applicable productions
 var productions = {}
 var context_symbols = {}
 var control_symbols: ControlSymbols = ControlSymbols.new()
-var production_picker: ProductionPicker = ProductionPicker.new()
-
-func set_production_picker(_production_picker:ProductionPicker):
-	production_picker = _production_picker
 
 func add_production(p: Production):
-	var symbol = p.predecessor
-	if not productions.has(symbol):
-		productions[symbol] = []
-	var successors = productions[symbol]
+	if not productions.has(p.predecessor):
+		productions[p.predecessor] = []
+	var successors = productions[p.predecessor]
 	successors.append(p)
 
 func delete_production(production: Production):
@@ -34,31 +29,26 @@ func update_predecessor(production: Production):
 # Returns the index of the next predecessor of a production,
 # starting at offset.
 # Returns an index >= word.length() if no production is found until the end of the word.
-func find_next_rule(word: String, offset: int) -> int:
-	var i = offset
-	while i < word.length():
-		var symbol = word[i]
-		# FIXME make this more efficient. Use a return parameter probably.
-		# Or store here, but that introduces more state which we try to avoid.
-		if productions.has(symbol) and not applicable_productions(word, i).empty():
-			break
-		i += 1
-	return i
+#func find_next_rule(word: String, offset: int) -> int:
+#	var i = offset
+#	while i < word.length():
+#		var symbol = word[i]
+#		# FIXME make this more efficient. Use a return parameter probably.
+#		# Or store here, but that introduces more state which we try to avoid.
+#		if productions.has(symbol) and not applicable_productions(word, i).empty():
+#			return i
+#		i += 1
+#	return i
 
-func apply_production(word: String, index: int, applied_production=[]) -> String:
-	var result = ""
-	var ps = applicable_productions(word, index)
-	if ps.empty():
-		return word
-	else:
-		var random_index = production_picker.pick(ps)
-		var p = ps[random_index]
-		if applied_production.size() > 0:
-			applied_production[0] = p
-		result = word.substr(0, index) + p.successor
-		if word.length() > index:
-			result += word.substr(index+1)
-	return result
+func find_next_rule(word: String, offset: int) -> int:
+	for i in range(offset, word.length()):
+		var symbol = word[i]
+		if productions.has(symbol):
+			var _applicable_productions = applicable_productions(word, i)
+			if not _applicable_productions.empty():
+				return i
+		i += 1
+	return word.length()
 
 func applicable_productions(word: String, index: int) -> Array:
 	var s = word[index]

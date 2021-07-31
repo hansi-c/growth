@@ -9,8 +9,9 @@ var current_iteration = 0
 var current_symbol = 0
 var word = ""
 var grammar: ILGrammar
-var turtle: Turtle = Turtle.new()
+var word_builder: WordBuilder = WordBuilder.new()
 var production_picker: ProductionPicker
+var turtle: Turtle = Turtle.new()
 # cosmetics
 var color_fruit = Color.red
 var color_leaves = Color.green
@@ -146,9 +147,14 @@ func has_next_rule():
 	return current_symbol < word.length()
 
 func next_rule():
-	var last_production = [null]
-	word = grammar.apply_production(word, current_symbol, last_production)
-	current_symbol += last_production[0].successor.length()
+	var applicable_productions: Array = grammar.applicable_productions(word, current_symbol)
+	if applicable_productions.empty():
+		return
+	var random_index: int = production_picker.pick(applicable_productions)
+	var production: Production = applicable_productions[random_index]
+	var successor: String = production.successor
+	word = word_builder.apply_production(word, current_symbol, successor)
+	current_symbol += successor.length()
 	_emit_current_symbol_update()
 
 func generate_geometry():
@@ -203,7 +209,6 @@ func _on_ResetButton_button_up():
 
 func _on_preset_selected(preset: Preset):
 	grammar = preset.grammar
-	grammar.production_picker = production_picker
 	preset.turtle_settings.start_position = start
 	turtle.set_settings(preset.turtle_settings)
 	turtle.set_abilities(preset.turtle_abilities)
