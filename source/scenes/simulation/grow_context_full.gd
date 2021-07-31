@@ -83,6 +83,9 @@ func _initialize_production_picker():
 
 func _emit_iteration_update():
 	emit_signal("update_current_iteration", current_iteration, iterations)
+#	_emit_current_symbol_update()
+
+func _emit_current_symbol_update():
 	emit_signal("update_current_symbol", current_symbol, word.length())
 
 func _update_stats():
@@ -139,13 +142,14 @@ func next_iteration():
 
 func has_next_rule():
 	current_symbol = grammar.find_next_rule(word, current_symbol)
+	_emit_current_symbol_update()
 	return current_symbol < word.length()
 
 func next_rule():
 	var last_production = [null]
 	word = grammar.apply_production(word, current_symbol, last_production)
 	current_symbol += last_production[0].successor.length()
-	emit_signal("update_current_symbol", current_symbol, word.length())
+	_emit_current_symbol_update()
 
 func generate_geometry():
 	var num_lines_before = turtle.lines.size()
@@ -213,7 +217,6 @@ func _on_EditButton_button_up():
 	var error = get_tree().change_scene("res://source/scenes/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)
-
 
 func _on_FocusOriginButton_button_up():
 	emit_signal("focus_camera", start)
