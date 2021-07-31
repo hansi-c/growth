@@ -123,7 +123,6 @@ func _on_FinishIteration():
 		generate_geometry()
 		if has_next_iteration():
 			next_iteration()
-#	print(word)
 
 func has_next_iteration():
 	return current_iteration < iterations
@@ -157,7 +156,6 @@ func generate_geometry():
 	var num_lines_after = turtle.lines.size()
 	var num_leaves_after = turtle.shapes_1.size()
 	var num_fruits_after = turtle.shapes_2.size()
-	
 	if num_lines_before != num_lines_after:
 		emit_signal("update_line_segments", num_lines_after)
 	if num_leaves_before != num_leaves_after:

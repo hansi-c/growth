@@ -38,7 +38,9 @@ func find_next_rule(word: String, offset: int) -> int:
 	var i = offset
 	while i < word.length():
 		var symbol = word[i]
-		if productions.has(symbol):
+		# FIXME make this more efficient. Use a return parameter probably.
+		# Or store here, but that introduces more state which we try to avoid.
+		if productions.has(symbol) and not applicable_productions(word, i).empty():
 			break
 		i += 1
 	return i
