@@ -29,37 +29,28 @@ func update_predecessor(production: Production):
 # Returns the index of the next predecessor of a production,
 # starting at offset.
 # Returns an index >= word.length() if no production is found until the end of the word.
-#func find_next_rule(word: String, offset: int) -> int:
-#	var i = offset
-#	while i < word.length():
-#		var symbol = word[i]
-#		# FIXME make this more efficient. Use a return parameter probably.
-#		# Or store here, but that introduces more state which we try to avoid.
-#		if productions.has(symbol) and not applicable_productions(word, i).empty():
-#			return i
-#		i += 1
-#	return i
-
-func find_next_rule(word: String, offset: int) -> int:
+# The argument _applicable_productions will hold all productions that are possible
+# at the returned index.
+func find_next_rule(word: String, offset: int, _applicable_productions: Array) -> int:
 	for i in range(offset, word.length()):
 		var symbol = word[i]
 		if productions.has(symbol):
-			var _applicable_productions = applicable_productions(word, i)
+			applicable_productions(word, i, _applicable_productions)
 			if not _applicable_productions.empty():
 				return i
 		i += 1
 	return word.length()
 
-func applicable_productions(word: String, index: int) -> Array:
+func applicable_productions(word: String, index: int, _applicable_productions: Array):
 	var s = word[index]
-	var result = []
+#	var result = []
 	if productions.has(s):
 		var successors = productions[s]
 		for p in successors:
 			var branching_symbols = control_symbols.get_branching_symbols()
 			if p.matches_context(word, index, context_symbols, branching_symbols):
-				result.append(p)
-	return result
+				_applicable_productions.append(p)
+#	return result
 
 # w : ABC
 # p1 : A < B -> A  : 1

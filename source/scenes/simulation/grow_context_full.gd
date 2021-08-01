@@ -116,14 +116,17 @@ func _on_Timer_timeout():
 	if has_next_iteration():
 		if is_iteration_finished():
 			next_iteration()
-		if has_next_iteration() and has_next_rule():
-			next_rule()
+		var applicable_productions = []
+		if has_next_iteration() and has_next_rule(applicable_productions):
+			next_rule(applicable_productions)
 			generate_geometry()
 
 func _on_FinishIteration():
 	if has_next_iteration():
-		while not is_iteration_finished() and has_next_rule():
-			next_rule()
+		while not is_iteration_finished():
+			var applicable_productions = []
+			if has_next_rule(applicable_productions):
+				next_rule(applicable_productions)
 		generate_geometry()
 		if has_next_iteration():
 			next_iteration()
@@ -141,13 +144,12 @@ func next_iteration():
 	if not has_next_iteration():
 		emit_signal("max_iteration_reached")
 
-func has_next_rule():
-	current_symbol = grammar.find_next_rule(word, current_symbol)
+func has_next_rule(applicable_productions: Array):
+	current_symbol = grammar.find_next_rule(word, current_symbol, applicable_productions)
 	_emit_current_symbol_update()
 	return current_symbol < word.length()
 
-func next_rule():
-	var applicable_productions: Array = grammar.applicable_productions(word, current_symbol)
+func next_rule(applicable_productions: Array):
 	if applicable_productions.empty():
 		return
 	var random_index: int = production_picker.pick(applicable_productions)
