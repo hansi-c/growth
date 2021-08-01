@@ -193,8 +193,11 @@ script = ExtResource( 13 )
 [node name="CosmeticsContainer" type="GridContainer" parent="GUI/Indented"]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_top = -85.0
 margin_right = 210.0
+margin_bottom = 25.0
 grow_vertical = 0
+rect_scale = Vector2( 0.75, 0.75 )
 mouse_filter = 2
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
