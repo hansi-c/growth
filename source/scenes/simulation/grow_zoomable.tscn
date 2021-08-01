@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/scenes/simulation/grow_context_full.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/simulation/gui/LeavesValue.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/icons/godot_engine/PlayStart.svg" type="Texture" id=17]
 [ext_resource path="res://assets/icons/godot_engine/Reload.svg" type="Texture" id=18]
 [ext_resource path="res://assets/icons/godot_engine/CenterView.svg" type="Texture" id=19]
+[ext_resource path="res://source/scenes/simulation/gui/BackgroundRect.gd" type="Script" id=20]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -40,6 +41,7 @@ margin_right = 640.0
 margin_bottom = 360.0
 mouse_filter = 2
 color = Color( 0.392157, 0.678431, 0.772549, 1 )
+script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -289,6 +291,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
+margin_top = 120.0
+margin_right = 40.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 40, 30 )
+
 [node name="ControlButtonPanel" type="Panel" parent="GUI/Indented"]
 margin_left = 290.0
 margin_right = 568.0
@@ -404,6 +412,7 @@ __meta__ = {
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/StemColorPicker" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
+[connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/BGColorPicker" to="BackgroundRect" method="_on_background_color_changed"]
 [connection signal="item_selected" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" to="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" method="_on_item_selected"]
 [connection signal="preset_selected" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
 [connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/EditButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_EditButton_button_up"]
