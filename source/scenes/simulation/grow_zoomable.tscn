@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://source/scenes/simulation/grow_context_full.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/simulation/gui/LeavesValue.gd" type="Script" id=2]
@@ -14,6 +14,11 @@
 [ext_resource path="res://source/scenes/simulation/gui/FruitsValue.gd" type="Script" id=12]
 [ext_resource path="res://source/scenes/simulation/gui/StemValue.gd" type="Script" id=13]
 [ext_resource path="res://source/scenes/simulation/gui/godot_theme.tres" type="Theme" id=14]
+[ext_resource path="res://assets/icons/godot_engine/Play.svg" type="Texture" id=15]
+[ext_resource path="res://assets/icons/godot_engine/Pause.svg" type="Texture" id=16]
+[ext_resource path="res://assets/icons/godot_engine/PlayStart.svg" type="Texture" id=17]
+[ext_resource path="res://assets/icons/godot_engine/Reload.svg" type="Texture" id=18]
+[ext_resource path="res://assets/icons/godot_engine/CenterView.svg" type="Texture" id=19]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -281,60 +286,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsContainer" type="HBoxContainer" parent="GUI/Indented"]
-margin_left = 240.0
-margin_right = 580.0
-margin_bottom = 22.0
+[node name="ControlButtonPanel" type="Panel" parent="GUI/Indented"]
+margin_left = 290.0
+margin_right = 568.0
+margin_bottom = 24.0
 grow_horizontal = 0
-custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PresetsButton" type="OptionButton" parent="GUI/Indented/ControlsContainer"]
-margin_right = 86.0
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Indented/ControlButtonPanel"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 277.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PresetsContainer" type="HBoxContainer" parent="GUI/Indented/ControlButtonPanel/HBoxContainer"]
+margin_right = 172.0
 margin_bottom = 22.0
-grow_horizontal = 0
-size_flags_horizontal = 10
+
+[node name="PresetsButton" type="OptionButton" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer"]
+margin_right = 120.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 3
 text = "L System"
+flat = true
+clip_text = true
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EditButton" type="Button" parent="GUI/Indented/ControlsContainer"]
-margin_left = 87.0
-margin_right = 135.0
+[node name="EditButton" type="Button" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer"]
+margin_left = 124.0
+margin_right = 172.0
 margin_bottom = 22.0
 text = "Edit..."
+flat = true
 
-[node name="PlayButton" type="Button" parent="GUI/Indented/ControlsContainer"]
-margin_left = 136.0
-margin_right = 193.0
+[node name="ControlsContainer" type="HBoxContainer" parent="GUI/Indented/ControlButtonPanel/HBoxContainer"]
+margin_left = 192.0
+margin_top = 2.0
+margin_right = 268.0
+margin_bottom = 24.0
+
+[node name="PlayButton" type="TextureButton" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer"]
+margin_right = 16.0
 margin_bottom = 22.0
 toggle_mode = true
 pressed = true
-text = "Playing"
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
 script = ExtResource( 10 )
 
-[node name="FinishIterationButton" type="Button" parent="GUI/Indented/ControlsContainer"]
-margin_left = 194.0
-margin_right = 236.0
+[node name="FinishIterationButton" type="TextureButton" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer"]
+margin_left = 20.0
+margin_right = 36.0
 margin_bottom = 22.0
-text = "Next"
+texture_normal = ExtResource( 17 )
 script = ExtResource( 11 )
 
-[node name="ResetButton" type="Button" parent="GUI/Indented/ControlsContainer"]
-margin_left = 237.0
-margin_right = 285.0
+[node name="ResetButton" type="TextureButton" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer"]
+margin_left = 40.0
+margin_right = 56.0
 margin_bottom = 22.0
-text = "Reset"
+texture_normal = ExtResource( 18 )
 
-[node name="FocusOriginButton" type="Button" parent="GUI/Indented/ControlsContainer"]
-margin_left = 286.0
-margin_right = 340.0
+[node name="FocusOriginButton" type="TextureButton" parent="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer"]
+margin_left = 60.0
+margin_right = 76.0
 margin_bottom = 22.0
-text = "Center"
+texture_normal = ExtResource( 19 )
 
 [node name="ZoomVScrollBar" type="VScrollBar" parent="GUI"]
 anchor_left = 1.0
@@ -354,10 +382,10 @@ __meta__ = {
 [connection signal="camera_panning" from="CameraPan" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_panning"]
 [connection signal="camera_zooming" from="CameraZoom" to="ViewportContainer/Viewport/Camera2D" method="_on_camera_zooming"]
 [connection signal="focus_camera" from="ViewportContainer/Viewport/PlantCanvas" to="ViewportContainer/Viewport/Camera2D" method="_on_focus_camera"]
-[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlsContainer/PlayButton" method="_on_iterations_reset"]
-[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlsContainer/FinishIterationButton" method="_on_iterations_reset"]
-[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlsContainer/PlayButton" method="_on_max_iteration_reached"]
-[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlsContainer/FinishIterationButton" method="_on_max_iteration_reached"]
+[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/FinishIterationButton" method="_on_iterations_reset"]
+[connection signal="iterations_reset" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/PlayButton" method="_on_iterations_reset"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/FinishIterationButton" method="_on_max_iteration_reached"]
+[connection signal="max_iteration_reached" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/PlayButton" method="_on_max_iteration_reached"]
 [connection signal="update_current_iteration" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentIterationValue" method="_on_update_current_iteration"]
 [connection signal="update_current_symbol" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/CurrentSymbolValue" method="_on_update_current_symbol"]
 [connection signal="update_fruits" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/FruitsValue" method="_on_update_fruits"]
@@ -370,13 +398,12 @@ __meta__ = {
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/LeafRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeafRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/StemColorPicker" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/StemThicknessSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_StemThicknessSlider_value_changed"]
-[connection signal="item_selected" from="GUI/Indented/ControlsContainer/PresetsButton" to="GUI/Indented/ControlsContainer/PresetsButton" method="_on_item_selected"]
-[connection signal="preset_selected" from="GUI/Indented/ControlsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
-[connection signal="button_up" from="GUI/Indented/ControlsContainer/EditButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_EditButton_button_up"]
-[connection signal="toggled" from="GUI/Indented/ControlsContainer/PlayButton" to="GUI/Indented/ControlsContainer/PlayButton" method="_on_PlayButton_toggled"]
-[connection signal="toggled" from="GUI/Indented/ControlsContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
-[connection signal="button_up" from="GUI/Indented/ControlsContainer/FinishIterationButton" to="GUI/Indented/ControlsContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
-[connection signal="button_up" from="GUI/Indented/ControlsContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
-[connection signal="button_up" from="GUI/Indented/ControlsContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
-[connection signal="button_up" from="GUI/Indented/ControlsContainer/FocusOriginButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FocusOriginButton_button_up"]
+[connection signal="item_selected" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" to="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" method="_on_item_selected"]
+[connection signal="preset_selected" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/PresetsButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_preset_selected"]
+[connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/PresetsContainer/EditButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_EditButton_button_up"]
+[connection signal="toggled" from="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/PlayButton" to="ViewportContainer/Viewport/PlantCanvas/Timer" method="_on_PlayButton_toggled"]
+[connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/FinishIterationButton" to="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/PlayButton" method="_on_FinishIterationButton_button_up"]
+[connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/FinishIterationButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FinishIteration"]
+[connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/ResetButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_ResetButton_button_up"]
+[connection signal="button_up" from="GUI/Indented/ControlButtonPanel/HBoxContainer/ControlsContainer/FocusOriginButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FocusOriginButton_button_up"]
 [connection signal="value_changed" from="GUI/ZoomVScrollBar" to="ViewportContainer/Viewport/Camera2D" method="_on_ZoomScrollBar_value_changed"]

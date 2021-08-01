@@ -1,11 +1,10 @@
-extends Button
+extends TextureButton
 
-func _on_PlayButton_toggled(button_pressed):
-	if button_pressed:
-		text = "Playing"
-	else:
-		text = "Paused"
-
+#func _on_PlayButton_toggled(button_pressed):
+#	if button_pressed:
+#		text = "Playing"
+#	else:
+#		text = "Paused"
 
 func _on_FinishIterationButton_button_up():
 	if pressed:
