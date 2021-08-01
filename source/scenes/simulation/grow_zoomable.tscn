@@ -20,8 +20,8 @@
 [ext_resource path="res://assets/icons/godot_engine/Reload.svg" type="Texture" id=18]
 [ext_resource path="res://assets/icons/godot_engine/CenterView.svg" type="Texture" id=19]
 [ext_resource path="res://source/scenes/simulation/gui/BackgroundRect.gd" type="Script" id=20]
-[ext_resource path="res://source/scenes/simulation/gui/RandomizeButton.gd" type="Script" id=21]
-[ext_resource path="res://source/scenes/simulation/gui/RandomizableColorPicker.gd" type="Script" id=22]
+[ext_resource path="res://source/scenes/simulation/gui/RandomizeColorsButton.gd" type="Script" id=21]
+[ext_resource path="res://source/scenes/simulation/gui/RandomizeSizesButton.gd" type="Script" id=22]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -208,34 +208,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RandomizeButton" type="Button" parent="GUI/Indented/CosmeticsContainer"]
-margin_right = 83.0
+[node name="RandomizeColorsButton" type="Button" parent="GUI/Indented/CosmeticsContainer"]
+margin_right = 64.0
 margin_bottom = 22.0
-text = "Randomize"
+text = "Random"
 script = ExtResource( 21 )
 
-[node name="Control" type="Control" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 93.0
-margin_right = 253.0
+[node name="RandomizeSizesButton" type="Button" parent="GUI/Indented/CosmeticsContainer"]
+margin_left = 74.0
+margin_right = 234.0
 margin_bottom = 22.0
+text = "Random"
+script = ExtResource( 22 )
 
 [node name="FruitColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
 margin_top = 32.0
-margin_right = 83.0
+margin_right = 64.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
 color = Color( 0.972549, 0.956863, 0.52549, 1 )
-script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FruitRadiusSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 93.0
+margin_left = 74.0
 margin_top = 39.0
-margin_right = 253.0
+margin_right = 234.0
 margin_bottom = 55.0
 rect_min_size = Vector2( 160, 0 )
 size_flags_vertical = 4
@@ -249,21 +250,20 @@ __meta__ = {
 
 [node name="LeavesColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
 margin_top = 72.0
-margin_right = 83.0
+margin_right = 64.0
 margin_bottom = 102.0
 rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
 color = Color( 0.992157, 0.427451, 0.729412, 1 )
-script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LeafRadiusSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 93.0
+margin_left = 74.0
 margin_top = 79.0
-margin_right = 253.0
+margin_right = 234.0
 margin_bottom = 95.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
@@ -278,21 +278,20 @@ __meta__ = {
 
 [node name="StemColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
 margin_top = 112.0
-margin_right = 83.0
+margin_right = 64.0
 margin_bottom = 142.0
 rect_min_size = Vector2( 40, 30 )
 mouse_filter = 1
 toggle_mode = false
 color = Color( 0.933333, 0.803922, 0.596078, 1 )
-script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StemThicknessSlider" type="HSlider" parent="GUI/Indented/CosmeticsContainer"]
-margin_left = 93.0
+margin_left = 74.0
 margin_top = 119.0
-margin_right = 253.0
+margin_right = 234.0
 margin_bottom = 135.0
 rect_min_size = Vector2( 160, 0 )
 mouse_filter = 1
@@ -308,7 +307,7 @@ __meta__ = {
 
 [node name="BGColorPicker" type="ColorPickerButton" parent="GUI/Indented/CosmeticsContainer"]
 margin_top = 152.0
-margin_right = 83.0
+margin_right = 64.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 40, 30 )
 
@@ -421,10 +420,8 @@ __meta__ = {
 [connection signal="update_leaves" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/LeavesValue" method="_on_update_leaves"]
 [connection signal="update_line_segments" from="ViewportContainer/Viewport/PlantCanvas" to="GUI/Indented/StatsContainer/StemValue" method="_on_update_line_segments"]
 [connection signal="timeout" from="ViewportContainer/Viewport/PlantCanvas/Timer" to="ViewportContainer/Viewport/PlantCanvas" method="_on_Timer_timeout"]
-[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeButton" to="ViewportContainer/Viewport/PlantCanvas" method="_on_randomize_cosmetics"]
-[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeButton" to="GUI/Indented/CosmeticsContainer/FruitColorPicker" method="_on_random_color"]
-[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeButton" to="GUI/Indented/CosmeticsContainer/LeavesColorPicker" method="_on_random_color"]
-[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeButton" to="GUI/Indented/CosmeticsContainer/StemColorPicker" method="_on_random_color"]
+[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeColorsButton" to="GUI/Indented/CosmeticsContainer/RandomizeColorsButton" method="_on_button_up"]
+[connection signal="button_up" from="GUI/Indented/CosmeticsContainer/RandomizeSizesButton" to="GUI/Indented/CosmeticsContainer/RandomizeSizesButton" method="_on_button_up"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/FruitColorPicker" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitColorPickerButton_color_changed"]
 [connection signal="value_changed" from="GUI/Indented/CosmeticsContainer/FruitRadiusSlider" to="ViewportContainer/Viewport/PlantCanvas" method="_on_FruitRadiusSlider_value_changed"]
 [connection signal="color_changed" from="GUI/Indented/CosmeticsContainer/LeavesColorPicker" to="ViewportContainer/Viewport/PlantCanvas" method="_on_LeavesColorPickerButton_color_changed"]

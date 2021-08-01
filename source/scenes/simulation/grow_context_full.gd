@@ -182,20 +182,20 @@ func determine_line_width():
 	else:
 		return 1.0
 
-func _on_randomize_cosmetics():
-	stem_thickness = randf()*9.9
-	fruit_radius = randf()*8
-	leaves_radius = randf()*8
+#func _on_randomize_cosmetics():
+#	stem_thickness = randf()*9.9
+#	fruit_radius = randf()*8
+#	leaves_radius = randf()*8
 #	color_stem = generateRandomRGB()
 #	color_leaves = generateRandomRGB()
 #	color_fruit = generateRandomRGB()
 
-func generateRandomRGB():
-	var result = Color()
-	result.r = randf()
-	result.g = randf()
-	result.b = randf()
-	return result
+#func generateRandomRGB():
+#	var result = Color()
+#	result.r = randf()
+#	result.g = randf()
+#	result.b = randf()
+#	return result
 
 func _on_FruitColorPickerButton_color_changed(color):
 	color_fruit = color
