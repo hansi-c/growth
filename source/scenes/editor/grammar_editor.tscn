@@ -345,7 +345,7 @@ __meta__ = {
 [connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_add_ability"]
 [connection signal="ability_added" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_added"]
 [connection signal="ability_removed" from="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_ability_removed"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbilitiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
