@@ -19,11 +19,11 @@ You can try out the latest version here: https://yongu.itch.io/l-systems?secret=
 ### Existing features
 
 + A grammar editor at runtime. Users are able to write their own grammars and test them immediately.
-+ Accepts context-sensitive grammars. (Only left context so far. Right context will follow.)
++ Accepts context-sensitive grammars. Productions are applied only if their left context matches the symbols before the current position. Right context is not implemented yet.
 + Accepts stochastic grammars. The same symbol may be assigned multiple successors, each with their own probability. One of them is chosen according to the weighted probabilities.
 
 ### Planned features
 
 + Parametric L Systems. Allows passing parameters to productions.
-+ Export and import function. Write L Systems to files and create them from files. Share your creations with others!
++ Export and import function. Write L Systems to files and load them from files. Share your creations with others!
 + Random grammar generator. Generate random grammars in mass production, write them to file and view them. Requires export/import function.
