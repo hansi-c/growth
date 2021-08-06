@@ -3,6 +3,9 @@ extends GridContainer
 const _ability_group_prefix = "_ability_"
 var turtle_abilities: TurtleAbilities
 var control_symbols: Dictionary
+# maps from String to TurtleAbilityViewModel
+#var user_abilities: Dictionary = {}
+#var control_abilties: Dictionary = {}
 
 signal ability_added(symbol)
 signal ability_removed(symbol)
@@ -50,7 +53,7 @@ func add_ability_options(symbol: String, ability_group: String):
 		if a == active_ability:
 			ability_option.select(i)
 	add_child(ability_option)
-	turtle_abilities.set_ability(symbol, Globals.turtle_potential_abilities[ability_option.selected])
+	turtle_abilities.add_ability(symbol, Globals.turtle_potential_abilities[ability_option.selected])
 	if control_symbols.has(symbol):
 		ability_option.set_disabled(true)
 	else:
