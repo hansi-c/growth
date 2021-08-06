@@ -1,6 +1,17 @@
 class_name TurtleAbilities
 
-var _abilities = {}
+const potential_user_abilities: Dictionary = {
+	"draw_line" : true,
+	"shape_1"   : true,
+	"shape_2"   : true
+}
+const potential_control_abilities: Dictionary = {
+	"turn_ccw"     : true,
+	"turn_cw"      : true,
+	"open_branch"  : true,
+	"close_branch" : true,
+}
+var _abilities: Dictionary = {}
 
 func add_abilities(abilities: Dictionary):
 	for key in abilities.keys():
@@ -18,6 +29,12 @@ func has_symbol(symbol: String) -> bool:
 func get_ability(symbol: String) -> String:
 	return _abilities[symbol]
 
+func is_control_ability(ability: String) -> bool:
+	return potential_control_abilities.has(ability)
+
+func is_user_ability(ability: String) -> bool:
+	return potential_user_abilities.has(ability)
+
 # returns an array of arrays.
 # the inner arrays have 2 entries: [symbol, ability]
 func enumerate_abilities() -> Array:
@@ -30,23 +47,8 @@ func enumerate_abilities() -> Array:
 func clear():
 	_abilities.clear()
 
-func _to_string():
+func _to_string() -> String:
 	return str(enumerate_abilities())
 
 static func potential_abilities() -> Array:
-	return potential_draw_abilities().keys() + potential_control_abilities().keys()
-
-static func potential_control_abilities() -> Dictionary:
-	return {
-		"turn_ccw"     : true,
-		"turn_cw"      : true,
-		"open_branch"  : true,
-		"close_branch" : true,
-	}
-
-static func potential_draw_abilities() -> Dictionary:
-	return {
-		"draw_line" : true,
-		"shape_1"   : true,
-		"shape_2"   : true
-	}
+	return potential_user_abilities.keys() + potential_control_abilities.keys()

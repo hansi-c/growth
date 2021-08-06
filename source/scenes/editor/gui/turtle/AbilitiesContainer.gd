@@ -2,10 +2,6 @@ extends GridContainer
 
 const _ability_group_prefix = "_ability_"
 var turtle_abilities: TurtleAbilities
-var control_symbols: Dictionary
-# maps from String to TurtleAbilityViewModel
-#var user_abilities: Dictionary = {}
-#var control_abilties: Dictionary = {}
 
 signal ability_added(symbol)
 signal ability_removed(symbol)
@@ -14,9 +10,8 @@ func _ready():
 	if Globals.turtle_abilities == null:
 		Globals.turtle_abilities = Turtles.default_abilities(Globals.grammar)
 	turtle_abilities = Turtles.duplicate_abilities(Globals.turtle_abilities)
-	control_symbols = Globals.grammar.control_symbols.enumerate_dictionary()
 	if not Globals.turtle_potential_abilities or Globals.turtle_potential_abilities.empty():
-		Globals.turtle_potential_abilities = Turtle.new().enumerate_potential_abilities()
+		Globals.turtle_potential_abilities = TurtleAbilities.potential_abilities()
 	_initialize_active_abilities()
 
 func _initialize_active_abilities():
@@ -37,7 +32,8 @@ func add_ability_button(symbol: String, ability_group: String):
 	var ability_button = Button.new()
 	ability_button.add_to_group(ability_group)
 	ability_button.set_text(symbol)
-	if control_symbols.has(symbol):
+	var ability = turtle_abilities.get_ability(symbol)
+	if turtle_abilities.is_control_ability(ability):
 		ability_button.set_disabled(true)
 	else:
 		ability_button.connect("button_up", self, "_on_ability_button_up", [ability_group])
@@ -54,7 +50,7 @@ func add_ability_options(symbol: String, ability_group: String):
 			ability_option.select(i)
 	add_child(ability_option)
 	turtle_abilities.add_ability(symbol, Globals.turtle_potential_abilities[ability_option.selected])
-	if control_symbols.has(symbol):
+	if turtle_abilities.is_control_ability(active_ability):
 		ability_option.set_disabled(true)
 	else:
 		ability_option.connect("item_selected", self, "_on_ability_selected", [ability_group])
@@ -63,7 +59,6 @@ func _on_ability_selected(index: int, ability_group: String):
 	var ability_symbol = _extract_ability_from_group(ability_group)
 	var ability = Globals.turtle_potential_abilities[index]
 	turtle_abilities.set_ability(ability_symbol, ability)
-#	print("%s : %s" % [ability_symbol, ability])
 	
 func _on_ability_button_up(ability_group: String):
 	_remove_ability(ability_group)
