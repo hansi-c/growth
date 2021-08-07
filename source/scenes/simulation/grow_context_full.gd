@@ -229,6 +229,7 @@ func _on_preset_selected(preset: Preset):
 	grammar = preset.grammar
 	preset.turtle_settings.start_position = start
 	turtle.set_settings(preset.turtle_settings)
+	turtle.forget_abilities()
 	for ability in preset.turtle_abilities.enumerate_abilities():
 		turtle.learn_ability(ability[0], ability[1])
 	reset()

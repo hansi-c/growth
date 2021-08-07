@@ -89,8 +89,10 @@ func _extract_ability_from_group(ability_group: String) -> String:
 		return ""
 
 func _on_alphabet_changed(grammar: ILGrammar):
+	if _user_ability_container == null:
+		return
 	var alphabet = grammar.alphabet()
-	for child in get_children():
+	for child in _user_ability_container.get_children():
 		if child is Button:
 			var symbol = child.get_text()
 			if not alphabet.has(symbol):
