@@ -5,6 +5,7 @@ func _ready():
 	test_match_left_context()
 	test_context_symbols()
 
+# FIXME this test is broken
 func test_apply_rule():
 	var grammar = ILGrammar.new()
 	grammar.add_production(Production.new("0", "Zero"))
