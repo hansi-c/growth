@@ -75,11 +75,6 @@ _global_script_classes=[ {
 "path": "res://source/render/TurtleAbility.gd"
 }, {
 "base": "Reference",
-"class": "TurtleAbilityViewModel",
-"language": "GDScript",
-"path": "res://source/scenes/editor/gui/turtle/TurtleAbilitiesViewModel.gd"
-}, {
-"base": "Reference",
 "class": "TurtleSettings",
 "language": "GDScript",
 "path": "res://source/render/TurtleSettings.gd"
@@ -113,7 +108,6 @@ _global_script_class_icons={
 "Turtle": "",
 "TurtleAbilities": "",
 "TurtleAbility": "",
-"TurtleAbilityViewModel": "",
 "TurtleSettings": "",
 "TurtleSettingsModel": "",
 "TurtleState": "",

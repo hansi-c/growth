@@ -238,7 +238,6 @@ func _on_EditButton_button_up():
 	Globals.turtle_abilities = TurtleAbilities.new()
 	Globals.turtle_abilities.add_abilities(turtle.enumerate_abilities())
 	Globals.turtle_settings = turtle.get_settings()
-	Globals.turtle_potential_abilities = TurtleAbilities.potential_abilities()
 	var error = get_tree().change_scene("res://source/scenes/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)

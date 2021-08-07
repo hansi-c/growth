@@ -8,6 +8,9 @@ var productions = {}
 var context_symbols = {}
 var control_symbols: ControlSymbols = ControlSymbols.new()
 
+func is_control_symbol(symbol: String) -> bool:
+	return control_symbols.enumerate_dictionary().has(symbol)
+
 func add_production(p: Production):
 	if not productions.has(p.predecessor):
 		productions[p.predecessor] = []
