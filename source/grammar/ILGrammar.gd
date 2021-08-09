@@ -46,14 +46,12 @@ func find_next_rule(word: String, offset: int, _applicable_productions: Array) -
 
 func applicable_productions(word: String, index: int, _applicable_productions: Array):
 	var s = word[index]
-#	var result = []
 	if productions.has(s):
 		var successors = productions[s]
 		for p in successors:
 			var branching_symbols = control_symbols.get_branching_symbols()
 			if p.matches_context(word, index, context_symbols, branching_symbols):
 				_applicable_productions.append(p)
-#	return result
 
 # w : ABC
 # p1 : A < B -> A  : 1
@@ -87,6 +85,11 @@ func alphabet() -> Dictionary:
 		_add_unique_chars(result, s)
 	return result
 
+#func sort_user_symbols_to_array() -> Array:
+#	var result = []
+#	for s in alphabet():
+#		if not 
+
 func alphabet_list() -> Array:
 	return alphabet().keys()
 
@@ -99,3 +102,14 @@ func _add_unique_chars(target: Dictionary, source: String):
 	if source and not source.empty():
 		for c in source:
 			target[c] = true
+
+func alphabet_to_string():
+	var alphabet: Array = alphabet_sorted()
+	var result = ""
+	var first = true
+	for s in alphabet:
+		if not first:
+			result += " "
+		result += s
+		first = false
+	return result
