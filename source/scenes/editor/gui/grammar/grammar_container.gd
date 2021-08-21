@@ -12,8 +12,6 @@ signal axiom_changed(axiom)
 func _ready():
 	if Globals.grammar == null:
 		Globals.grammar = Grammars.identity_grammar()
-		var production_picker = StochasticProductionPicker.new(Globals.rng_state.rng)
-		Globals.grammar.set_production_picker(production_picker)
 	grammar = Grammars.duplicate_grammar(Globals.grammar)
 	_setup_grammar_table()
 	emit_signal("axiom_changed", grammar.axiom)

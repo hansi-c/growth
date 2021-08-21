@@ -1,46 +1,30 @@
 class_name ControlSymbols
 
-var _rotate_cw: String = "-"
-var _rotate_ccw: String = "+"
-var _branching_symbols: BranchingSymbols = BranchingSymbols.new()
+var _dictionary = {
+	TurtleAbilities.TURN_CW      : "-",
+	TurtleAbilities.TURN_CCW     : "+",
+	TurtleAbilities.OPEN_BRANCH  : "[",
+	TurtleAbilities.CLOSE_BRANCH : "]"
+}
 
-func get_rotate_cw() -> String:
-	return _rotate_cw
+func has_ability(ability: String) -> bool:
+	return _dictionary.has(ability)
 
-func set_rotate_cw(symbol: String):
-	_rotate_cw = symbol
+func get_symbol(ability: String):
+	return _dictionary[ability]
 
-func get_rotate_ccw() -> String:
-	return _rotate_ccw
-
-func set_rotate_ccw(symbol: String):
-	_rotate_ccw = symbol
+func set_symbol(ability: String, symbol: String):
+	_dictionary[ability] = symbol
 
 func get_branching_symbols() -> BranchingSymbols:
-	return _branching_symbols
-
-func set_branching_symbols(symbols: BranchingSymbols):
-	_branching_symbols = symbols
-
-func get_open_branch() -> String:
-	return _branching_symbols.open_branch
-
-func set_open_branch(symbol: String):
-	_branching_symbols.open_branch = symbol
-
-func get_close_branch() -> String:
-	return _branching_symbols.close_branch
-
-func set_close_branch(symbol: String):
-	_branching_symbols.close_branch = symbol
+	return BranchingSymbols.new(_dictionary[TurtleAbilities.OPEN_BRANCH],
+	 _dictionary[TurtleAbilities.CLOSE_BRANCH])
 
 func enumerate() -> Array:
-	return enumerate_dictionary().keys()
-	
+	return _dictionary.values()
+#
 func enumerate_dictionary() -> Dictionary:
-	return {
-		_rotate_cw: true,
-		_rotate_ccw: true,
-		_branching_symbols.open_branch: true,
-		_branching_symbols.close_branch: true
-	}
+	return _dictionary.duplicate()
+	
+func _to_string() -> String:
+	return ""

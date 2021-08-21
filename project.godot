@@ -70,6 +70,11 @@ _global_script_classes=[ {
 "path": "res://source/render/TurtleAbilities.gd"
 }, {
 "base": "Reference",
+"class": "TurtleAbility",
+"language": "GDScript",
+"path": "res://source/render/TurtleAbility.gd"
+}, {
+"base": "Reference",
 "class": "TurtleSettings",
 "language": "GDScript",
 "path": "res://source/render/TurtleSettings.gd"
@@ -102,6 +107,7 @@ _global_script_class_icons={
 "StochasticProductionPicker": "",
 "Turtle": "",
 "TurtleAbilities": "",
+"TurtleAbility": "",
 "TurtleSettings": "",
 "TurtleSettingsModel": "",
 "TurtleState": "",

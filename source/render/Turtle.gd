@@ -4,8 +4,8 @@ var lines = []
 var shapes_1 = []
 var shapes_2 = []
 var _state = TurtleState.new()
-# maps from grammar symbol (a String) to Funcref
-var _active_abilities = {}
+# maps from alphabet symbol to FuncRef
+var _abilities: Dictionary = {}
 var _settings = TurtleSettings.new()
 
 func set_settings(settings: TurtleSettings):
@@ -14,27 +14,29 @@ func set_settings(settings: TurtleSettings):
 func get_settings() -> TurtleSettings:
 	return _settings
 
-func set_abilities(abilities: TurtleAbilities):
-	_active_abilities.clear()
-	for pair in abilities.enumerate_abilities():
-		add_ability(pair[0], pair[1])
+func learn_ability(symbol: String, function: String):
+	var ability: FuncRef = _create_funcref(function)
+	_abilities[symbol] = ability
 
-func get_abilities() -> TurtleAbilities:
-	var result = TurtleAbilities.new()
-	for key in _active_abilities:
-		result.set_ability(key, _active_abilities[key].get_function())
-	return result
-
-func add_ability(symbol: String, ability: String):
+func _create_funcref(ability: String) -> FuncRef:
 	var call = FuncRef.new()
 	call.set_instance(self)
 	call.set_function(ability)
-	_active_abilities[symbol] = call
+	return call
 
 func generate_geometry(word: String, initial_line_width=1.0):
 	reset()
 	_initialize_state(initial_line_width)
 	_process_word(word)
+
+func forget_abilities():
+	_abilities.clear()
+
+func reset():
+	_state.reset()
+	lines.clear()
+	shapes_1.clear()
+	shapes_2.clear()
 
 func _initialize_state(initial_line_width: float):
 	_state.set_width(initial_line_width)
@@ -44,10 +46,12 @@ func _initialize_state(initial_line_width: float):
 func _process_word(word: String):
 	for i in range(word.length()):
 		var s = word[i]
-		if _active_abilities.has(s):
-			var ability = _active_abilities[s]
+		if _abilities.has(s):
+			var ability = _abilities[s]
 			ability.call_func()
 
+### Abilities ###
+# ability - rename with care!
 func draw_line():
 	if _state.angle != null:
 		var direction = Vector2(cos(_state.angle), sin(_state.angle))
@@ -63,46 +67,35 @@ func _line_segment(_start: Vector2, direction: Vector2, width: float) -> LineSeg
 	result.end = _start + (direction * _settings.line_length)
 	result.width = width
 	return result
-	
+
+# ability - rename with care!
 func turn_ccw():
 	_state.turn_counter_clockwise(_settings.turn_angle)
 
+# ability - rename with care!
 func turn_cw():
 	_state.turn_clockwise(_settings.turn_angle)
 
+# ability - rename with care!
 func open_branch():
 	_state.push_state()
 	_state.width *= _settings.width_falloff
 
+# ability - rename with care!
 func close_branch():
 	_state.pop_state()
 
+# ability - rename with care!
 func shape_1():
 	shapes_1.append(_state.position + Vector2(0,2.0))
 	
+# ability - rename with care!
 func shape_2():
 	shapes_2.append(_state.position + Vector2(0,2.0))
 
-func reset():
-	_state.reset()
-	lines.clear()
-	shapes_1.clear()
-	shapes_2.clear()
-
-func enumerate_potential_abilities() -> Array:
-	return draw_abilities().keys() + control_abilities().keys()
-
-func control_abilities() -> Dictionary:
-	return {
-		"turn_ccw"     : true,
-		"turn_cw"      : true,
-		"open_branch"  : true,
-		"close_branch" : true,
-	}
-
-func draw_abilities() -> Dictionary:
-	return {
-		"draw_line" : true,
-		"shape_1"   : true,
-		"shape_2"   : true
-	}
+func enumerate_abilities() -> Dictionary:
+	var result = {}
+	for key in _abilities:
+		var function: String = _abilities[key].function
+		result[key] = function
+	return result

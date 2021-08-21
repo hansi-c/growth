@@ -2,29 +2,34 @@ extends Node
 
 func default_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	result.set_ability("F", "draw_line")
-	_add_control_abilities(result, grammar.control_symbols)
+	result.add_ability("F", TurtleAbilities.DRAW_LINE)
+	add_control_abilities(result, grammar.control_symbols)
 	return result
 
-func _add_control_abilities(result: TurtleAbilities, control_symbols: ControlSymbols):
-	result.set_ability(control_symbols.get_rotate_cw(), "turn_cw")
-	result.set_ability(control_symbols.get_rotate_ccw(), "turn_ccw")
-	result.set_ability(control_symbols.get_open_branch(), "open_branch")
-	result.set_ability(control_symbols.get_close_branch(), "close_branch")
+func add_control_abilities(result: TurtleAbilities,
+	control_symbols: ControlSymbols):
+	result.add_ability(control_symbols.get_symbol(
+		TurtleAbilities.TURN_CW), TurtleAbilities.TURN_CW)
+	result.add_ability(control_symbols.get_symbol(
+		TurtleAbilities.TURN_CCW), TurtleAbilities.TURN_CCW)
+	result.add_ability(control_symbols.get_symbol(
+		TurtleAbilities.OPEN_BRANCH), TurtleAbilities.OPEN_BRANCH)
+	result.add_ability(control_symbols.get_symbol(
+		TurtleAbilities.CLOSE_BRANCH), TurtleAbilities.CLOSE_BRANCH)
 
 func wheat_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	result.set_ability("F", "draw_line")
-	result.set_ability("A", "shape_1")
-	result.set_ability("B", "shape_2")
-	_add_control_abilities(result, grammar.control_symbols)
+	result.add_ability("F", TurtleAbilities.DRAW_LINE)
+	result.add_ability("A", TurtleAbilities.SHAPE_1)
+	result.add_ability("B", TurtleAbilities.SHAPE_2)
+	add_control_abilities(result, grammar.control_symbols)
 	return result
 
 func sierpinski_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
-	result.set_ability("F", "draw_line")
-	result.set_ability("G", "draw_line")
-	_add_control_abilities(result, grammar.control_symbols)
+	result.add_ability("F", TurtleAbilities.DRAW_LINE)
+	result.add_ability("G", TurtleAbilities.DRAW_LINE)
+	add_control_abilities(result, grammar.control_symbols)
 	return result
 
 func wheat_settings() -> TurtleSettings:
@@ -54,7 +59,7 @@ func sierpinski_60_settings() -> TurtleSettings:
 func duplicate_abilities(abilities: TurtleAbilities) -> TurtleAbilities:
 	var result = TurtleAbilities.new()
 	for pair in abilities.enumerate_abilities():
-		result.set_ability(pair[0], pair[1])
+		result.add_ability(pair[0], pair[1])
 	return result
 
 func duplicate_settings(settings: TurtleSettings) -> TurtleSettings:

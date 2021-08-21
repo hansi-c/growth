@@ -33,9 +33,23 @@ signal update_line_segments(amount)
 
 func _ready():
 	_get_starting_position()
-	_initialize_rng_state()
 	_initialize_production_picker()
 	_initialize_cosmetics()
+
+func _get_starting_position():
+	var start_pos_node = get_node_or_null("GrowthStartPosition")
+	if start_pos_node:
+		start = start_pos_node.position
+
+func _initialize_production_picker():
+	_ensure_global_rng_state()
+	production_picker = StochasticProductionPicker.new(Globals.rng_state.rng)
+
+func _ensure_global_rng_state():
+	if Globals.rng_state == null:
+		Globals.rng_state = RngState.new()
+		Globals.rng_state.rng = RandomNumberGenerator.new()
+		Globals.rng_state.initialize(random_seed)
 
 func _initialize_cosmetics():
 	var cosmeticContainer = "../../../GUI/Indented/CosmeticsContainer/"
@@ -45,7 +59,6 @@ func _initialize_cosmetics():
 	var size_fruit_node = get_node_or_null(cosmeticContainer+"FruitRadiusSlider")
 	var size_leaf_node = get_node_or_null(cosmeticContainer+"LeafRadiusSlider")
 	var size_stem_node = get_node_or_null(cosmeticContainer+"StemThicknessSlider")
-
 	if color_fruit_node:
 		color_fruit = color_fruit_node.color
 	if color_leaf_node:
@@ -63,28 +76,16 @@ func reset():
 	current_iteration = 0
 	current_symbol = 0
 	word = grammar.axiom
-	Globals.rng_state.reset()
+	if Globals.rng_state != null:
+		Globals.rng_state.reset()
 	turtle.reset()
 	generate_geometry()
 	_update_stats()
 	_emit_iteration_update()
 	emit_signal("iterations_reset")
-	
-func _get_starting_position():
-	var start_pos_node = get_node_or_null("GrowthStartPosition")
-	if start_pos_node:
-		start = start_pos_node.position
-
-func _initialize_rng_state():
-	Globals.rng_state.rng = RandomNumberGenerator.new()
-	Globals.rng_state.initialize(random_seed)
-
-func _initialize_production_picker():
-	production_picker = StochasticProductionPicker.new(Globals.rng_state.rng)
 
 func _emit_iteration_update():
 	emit_signal("update_current_iteration", current_iteration, iterations)
-#	_emit_current_symbol_update()
 
 func _emit_current_symbol_update():
 	emit_signal("update_current_symbol", current_symbol, word.length())
@@ -228,14 +229,16 @@ func _on_preset_selected(preset: Preset):
 	grammar = preset.grammar
 	preset.turtle_settings.start_position = start
 	turtle.set_settings(preset.turtle_settings)
-	turtle.set_abilities(preset.turtle_abilities)
+	turtle.forget_abilities()
+	for ability in preset.turtle_abilities.enumerate_abilities():
+		turtle.learn_ability(ability[0], ability[1])
 	reset()
 
 func _on_EditButton_button_up():
 	Globals.grammar = grammar
-	Globals.turtle_abilities = turtle.get_abilities()
+	Globals.turtle_abilities = TurtleAbilities.new()
+	Globals.turtle_abilities.add_abilities(turtle.enumerate_abilities())
 	Globals.turtle_settings = turtle.get_settings()
-	Globals.turtle_potential_abilities = turtle.enumerate_potential_abilities()
 	var error = get_tree().change_scene("res://source/scenes/editor/grammar_editor.tscn")
 	if error:
 		print("could not change scene: %s" % error)
