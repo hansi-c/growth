@@ -18,7 +18,6 @@
 extends Container
 
 const _ability_group_prefix = "_ability_"
-var abilities: Dictionary = {}
 onready var _user_ability_container = get_node_or_null("UserAbilitiesContainer")
 onready var _control_ability_container = get_node_or_null("ControlAbilitiesContainer")
 # use this array to have potential abilities in a fixed order
