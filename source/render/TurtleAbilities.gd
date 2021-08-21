@@ -1,5 +1,13 @@
 class_name TurtleAbilities
 
+const DRAW_LINE    = "draw_line"
+const SHAPE_1      = "shape_1"
+const SHAPE_2      = "shape_2"
+const TURN_CW      = "turn_cw"
+const TURN_CCW     = "turn_ccw"
+const OPEN_BRANCH  = "open_branch"
+const CLOSE_BRANCH = "close_branch"
+
 # symbol -> ability
 var _abilities: Dictionary = {}
 
@@ -38,20 +46,25 @@ func _to_string() -> String:
 	return str(enumerate_abilities())
 
 const potential_user_abilities: Dictionary = {
-	"draw_line" : "draw line",
-	"shape_1"   : "shape 1",
-	"shape_2"   : "shape 2"
+	DRAW_LINE : "draw line",
+	SHAPE_1   : "shape 1",
+	SHAPE_2   : "shape 2"
 }
 
 const potential_control_abilities: Dictionary = {
-	"turn_ccw"     : "turn counterclockwise",
-	"turn_cw"      : "turn clockwise",
-	"open_branch"  : "open branch",
-	"close_branch" : "close branch",
+	OPEN_BRANCH  : "open branch",
+	CLOSE_BRANCH : "close branch",
+	TURN_CCW     : "turn counterclockwise",
+	TURN_CW      : "turn clockwise",
 }
 
-static func potential_abilities() -> Array:
-	return potential_user_abilities.keys() + potential_control_abilities.keys()
+static func potential_abilities() -> Dictionary:
+	var result = {}
+	for key in potential_user_abilities:
+		result[key] = potential_user_abilities[key]
+	for key in potential_control_abilities:
+		result[key] = potential_control_abilities[key]
+	return result
 
 static func is_control_ability(ability: String) -> bool:
 	return potential_control_abilities.has(ability)

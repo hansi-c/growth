@@ -29,7 +29,7 @@ func add_symbol_buttons(alphabet: Array, control_symbols: Dictionary):
 				if child is Button and child.get_text() == symbol:
 					has_button = true
 					break
-			if not has_button:
+			if not has_button and not control_symbols.values().has(symbol):
 				add_symbol_button(symbol)
 
 func add_symbol_button(symbol: String):
