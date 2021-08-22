@@ -143,22 +143,3 @@ func _on_SaveButton_button_up():
 	var error = get_tree().change_scene("res://source/scenes/simulation/grow_zoomable.tscn")
 	if error:
 		print("could not change scene: %s" % error)
-
-func _on_RevertButton_button_up():
-	var nodes_to_delete = _collect_nodes_to_delete()
-	rows.clear()
-	_row_index = 0
-	grammar = Grammars.duplicate_grammar(Globals.grammar)
-	_setup_grammar_table()
-	for node in nodes_to_delete:
-		node.queue_free()
-	emit_signal("axiom_changed", grammar.axiom)
-	emit_signal("alphabet_changed", grammar)
-
-func _collect_nodes_to_delete() -> Array:
-	var result = []
-	for node in get_children():
-		if node.is_in_group(table_cell_group):
-			result.append(node)
-	return result
-	

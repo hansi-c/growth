@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://source/scenes/editor/gui/grammar/AlphabetTextBox.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/editor/gui/grammar_editor_label_style.tres" type="StyleBox" id=2]
 [ext_resource path="res://source/scenes/editor/gui/grammar/grammar_container.gd" type="Script" id=3]
 [ext_resource path="res://source/scenes/editor/gui/grammar/AxiomLineEdit.gd" type="Script" id=4]
-[ext_resource path="res://source/scenes/editor/gui/turtle/TurtleAlphabetContainer.gd" type="Script" id=5]
 [ext_resource path="res://source/scenes/editor/gui/turtle/AbilitiesContainer.gd" type="Script" id=6]
 [ext_resource path="res://source/scenes/editor/gui/turtle/SettingsContainer.gd" type="Script" id=7]
 [ext_resource path="res://source/scenes/simulation/gui/godot_theme.tres" type="Theme" id=8]
@@ -34,6 +33,7 @@ __meta__ = {
 }
 
 [node name="Grammar" type="GridContainer" parent="GUI/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -136,7 +136,6 @@ margin_bottom = 22.0
 text = "+"
 
 [node name="Turtle" type="Control" parent="GUI/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -144,41 +143,31 @@ margin_top = 29.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/TabContainer/Turtle"]
-margin_right = 65.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AlphabetLabel" type="Label" parent="GUI/TabContainer/Turtle/HBoxContainer"]
-margin_right = 69.0
-margin_bottom = 22.0
-text = "Alphabet:"
-
-[node name="AlphabetContainer" type="HBoxContainer" parent="GUI/TabContainer/Turtle/HBoxContainer"]
-margin_left = 73.0
-margin_right = 73.0
-margin_bottom = 22.0
-script = ExtResource( 5 )
-
 [node name="GridContainer" type="GridContainer" parent="GUI/TabContainer/Turtle"]
 margin_top = 60.0
 margin_right = 620.0
-margin_bottom = 175.0
+margin_bottom = 321.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AbiltiesContainer" type="VBoxContainer" parent="GUI/TabContainer/Turtle/GridContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Turtle/GridContainer"]
 margin_right = 308.0
-margin_bottom = 104.0
+margin_bottom = 261.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="AbiltiesContainer" type="VBoxContainer" parent="GUI/TabContainer/Turtle/GridContainer/ScrollContainer"]
+margin_right = 308.0
+margin_bottom = 4.0
 size_flags_horizontal = 3
 script = ExtResource( 6 )
 
-[node name="UserAbilitiesContainer" type="GridContainer" parent="GUI/TabContainer/Turtle/GridContainer/AbiltiesContainer"]
+[node name="UserAbilitiesContainer" type="GridContainer" parent="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer"]
 margin_right = 308.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -187,7 +176,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlAbilitiesContainer" type="GridContainer" parent="GUI/TabContainer/Turtle/GridContainer/AbiltiesContainer"]
+[node name="ControlAbilitiesContainer" type="GridContainer" parent="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer"]
 margin_top = 4.0
 margin_right = 308.0
 margin_bottom = 4.0
@@ -196,7 +185,7 @@ columns = 2
 [node name="SettingsContainer" type="GridContainer" parent="GUI/TabContainer/Turtle/GridContainer"]
 margin_left = 312.0
 margin_right = 620.0
-margin_bottom = 104.0
+margin_bottom = 261.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 columns = 2
@@ -350,13 +339,11 @@ __meta__ = {
 }
 
 [connection signal="text_changed" from="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_Axiom_text_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" method="_on_alphabet_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/GridContainer/AbiltiesContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_add_production_button_button_up"]
-[connection signal="add_ability" from="GUI/TabContainer/Turtle/HBoxContainer/AlphabetContainer" to="GUI/TabContainer/Turtle/GridContainer/AbiltiesContainer" method="_on_add_ability"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
