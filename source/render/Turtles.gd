@@ -48,6 +48,12 @@ func sierpinski_abilities(grammar: ILGrammar) -> TurtleAbilities:
 	add_control_abilities(result, grammar.control_symbols)
 	return result
 
+func koch_curve_abilities(grammar: ILGrammar) -> TurtleAbilities:
+	var result = TurtleAbilities.new()
+	result.add_ability("F", TurtleAbilities.DRAW_LINE)
+	add_control_abilities(result, grammar.control_symbols)
+	return result
+
 func wheat_settings() -> TurtleSettings:
 	var result = TurtleSettings.new()
 	result.start_angle = Vector2.UP.angle() + deg2rad(25.0)
@@ -65,6 +71,14 @@ func sierpinski_120_settings() -> TurtleSettings:
 	return result
 
 func sierpinski_60_settings() -> TurtleSettings:
+	var result = TurtleSettings.new()
+	result.start_angle = Vector2.UP.angle()
+	result.turn_angle = -deg2rad(60.0)
+	result.line_length = 40.0
+	result.width_falloff = 1.0
+	return result
+
+func koch_curve_settings() -> TurtleSettings:
 	var result = TurtleSettings.new()
 	result.start_angle = Vector2.UP.angle()
 	result.turn_angle = -deg2rad(60.0)

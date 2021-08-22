@@ -27,7 +27,9 @@ func duplicate_grammar(grammar: ILGrammar):
 	return result
 
 func duplicate_production(production: Production):
-	return Production.new(production.predecessor, production.successor, production.left_context, production.right_context, production.probability_factor)
+	return Production.new(production.predecessor, production.successor,\
+			production.left_context, production.right_context, \
+			production.probability_factor)
 
 # taken from https://en.wikipedia.org/wiki/L-system#Example_7:_Fractal_plant
 func wheat_1l() -> ILGrammar:
@@ -94,4 +96,10 @@ func identity_grammar(symbol="F") -> ILGrammar:
 	var identity = Production.new(symbol, symbol)
 	result.add_production(identity)
 	result.axiom = symbol
+	return result
+
+func koch_snowflake() -> ILGrammar:
+	var result = ILGrammar.new()
+	result.axiom = "F--F--F"
+	result.add_production(Production.new("F", "F+F--F+F"))
 	return result

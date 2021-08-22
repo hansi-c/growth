@@ -43,10 +43,15 @@ func add_presets():
 	sierpinski_120.grammar = Grammars.sierpinski_120()
 	sierpinski_120.turtle_settings = Turtles.sierpinski_120_settings()
 	sierpinski_120.turtle_abilities = Turtles.sierpinski_abilities(sierpinski_120.grammar)
+	var koch_snowflake = Preset.new()
+	koch_snowflake.grammar = Grammars.koch_snowflake()
+	koch_snowflake.turtle_settings = Turtles.koch_curve_settings()
+	koch_snowflake.turtle_abilities = Turtles.koch_curve_abilities(koch_snowflake.grammar)
 	add_preset("Plant", wheat)
 	add_preset("Identity", identity)
 	add_preset("Sierpinski 60", sierpinski_60)
 	add_preset("Sierpinski 120", sierpinski_120)
+	add_preset("Koch snowflake", koch_snowflake)
 
 func add_custom_preset():
 	var preset = Preset.new()
