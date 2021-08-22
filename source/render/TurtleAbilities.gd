@@ -34,8 +34,8 @@ func add_abilities(abilities: Dictionary):
 func add_ability(symbol: String, ability: String):
 	_abilities[symbol] = ability
 
-func remove_symbol(symbol: String):
-	_abilities.erase(symbol)
+func remove_symbol(symbol: String) -> bool:
+	return _abilities.erase(symbol)
 
 func has_symbol(symbol: String) -> bool:
 	return _abilities.has(symbol)
@@ -61,29 +61,16 @@ func clear():
 func _to_string() -> String:
 	return str(enumerate_abilities())
 
-const potential_user_abilities: Dictionary = {
-	DRAW_LINE : "draw line",
-	SHAPE_1   : "shape 1",
-	SHAPE_2   : "shape 2"
-}
+#static func potential_abilities() -> Dictionary:
+#	var result = {}
+#	for key in potential_user_abilities:
+#		result[key] = potential_user_abilities[key]
+#	for key in potential_control_abilities:
+#		result[key] = potential_control_abilities[key]
+#	return result
 
-const potential_control_abilities: Dictionary = {
-	OPEN_BRANCH  : "open branch",
-	CLOSE_BRANCH : "close branch",
-	TURN_CCW     : "turn counterclockwise",
-	TURN_CW      : "turn clockwise",
-}
-
-static func potential_abilities() -> Dictionary:
-	var result = {}
-	for key in potential_user_abilities:
-		result[key] = potential_user_abilities[key]
-	for key in potential_control_abilities:
-		result[key] = potential_control_abilities[key]
-	return result
-
-static func is_control_ability(ability: String) -> bool:
-	return potential_control_abilities.has(ability)
-
-static func is_user_ability(ability: String) -> bool:
-	return potential_user_abilities.has(ability)
+#static func is_control_ability(ability: String) -> bool:
+#	return potential_control_abilities.has(ability)
+#
+#static func is_user_ability(ability: String) -> bool:
+#	return potential_user_abilities.has(ability)

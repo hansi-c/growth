@@ -26,6 +26,9 @@ var _dictionary = {
 func has_ability(ability: String) -> bool:
 	return _dictionary.has(ability)
 
+func has_symbol(symbol: String) -> bool:
+	return _dictionary.values().has(symbol)
+
 func get_symbol(ability: String):
 	return _dictionary[ability]
 
