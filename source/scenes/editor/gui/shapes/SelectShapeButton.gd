@@ -20,14 +20,19 @@ func concat_name():
 
 func _on_DeleteShapeButton_button_up():
 	var name = get_item_text(selected)
-	remove_item(selected)
+	var old = selected
+	if selected+1 < get_item_count():
+		select(selected+1)
+	remove_item(old)
+	update()
 	emit_signal("configuration_deleted", name)
 	if get_item_count() < 1:
 		clear()
 		emit_signal("disable_shape_dependent_buttons", true)
 	else:
-		select(0)
+#		select(0)
 		emit_signal("item_selected", 0)
+	update()
 
 func _on_SelectShapeButton_item_selected(index):
 	var name = get_item_text(index)
