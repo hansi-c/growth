@@ -1,4 +1,4 @@
 extends Button
 
-func _on_disable_shape_dependent_buttons(value):
-	disabled = value
+func _on_configuration_selected(_index):
+	disabled = false
