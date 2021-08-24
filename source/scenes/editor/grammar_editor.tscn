@@ -27,8 +27,8 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="GUI"]
-margin_right = 640.0
-margin_bottom = 356.0
+margin_right = 1280.0
+margin_bottom = 720.0
 tab_align = 0
 script = ExtResource( 9 )
 __meta__ = {
@@ -36,7 +36,6 @@ __meta__ = {
 }
 
 [node name="Grammar" type="GridContainer" parent="GUI/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -45,7 +44,7 @@ margin_right = -5.0
 margin_bottom = -5.0
 
 [node name="PropertiesContainer" type="GridContainer" parent="GUI/TabContainer/Grammar"]
-margin_right = 630.0
+margin_right = 1170.0
 margin_bottom = 48.0
 columns = 2
 
@@ -79,7 +78,7 @@ script = ExtResource( 4 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Grammar"]
 margin_top = 52.0
-margin_right = 630.0
+margin_right = 1270.0
 margin_bottom = 316.0
 rect_min_size = Vector2( 500, 264 )
 size_flags_horizontal = 3
@@ -320,6 +319,7 @@ step = 0.001
 align = 2
 
 [node name="Shapes" type="ColorRect" parent="GUI/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -382,10 +382,10 @@ position = Vector2( 315, 161 )
 
 [node name="ButtonsContainer" type="GridContainer" parent="GUI"]
 anchor_right = 1.0
-margin_left = 576.0
-margin_top = 42.0
-margin_right = 622.0
-margin_bottom = 72.0
+margin_left = 1200.0
+margin_top = 50.0
+margin_right = 1246.0
+margin_bottom = 80.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( 1, 0 )
 custom_constants/hseparation = 10
