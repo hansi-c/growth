@@ -47,10 +47,18 @@ signal update_leaves(amount)
 signal update_fruits(amount)
 signal update_line_segments(amount)
 
+#### THIS IS ONLY TEMPORARY! EVENTUALLY THE CONFIGURATIONS WILL BE
+#### CREATED DYNAMICALLY IN THE EDITOR!
+var _leaves_configuration: ShapeConfiguration = ImageConfiguration.new()
+var _fruits_configuration: ShapeConfiguration = ImageConfiguration.new()
+########################################################################
+
 func _ready():
 	_get_starting_position()
 	_initialize_production_picker()
 	_initialize_cosmetics()
+	_fruits_configuration.set_texture(load("res://assets/tomate.png"))
+	_leaves_configuration.set_texture(load("res://assets/tomaten_blatt.png"))
 
 func _get_starting_position():
 	var start_pos_node = get_node_or_null("GrowthStartPosition")
@@ -124,10 +132,12 @@ func _draw_stem(line_segment):
 		line_segment.width * stem_thickness)
 
 func _draw_leave(position):
-	draw_circle(position, leaves_radius, color_leaves)
+#	draw_circle(position, leaves_radius, color_leaves)
+	_leaves_configuration.draw(self, position)
 
 func _draw_fruit(position):
-	draw_circle(position, fruit_radius, color_fruit)
+#	draw_circle(position, fruit_radius, color_fruit)
+	_fruits_configuration.draw(self, position)
 
 func _on_Timer_timeout():
 	if has_next_iteration():
@@ -199,27 +209,14 @@ func determine_line_width():
 	else:
 		return 1.0
 
-#func _on_randomize_cosmetics():
-#	stem_thickness = randf()*9.9
-#	fruit_radius = randf()*8
-#	leaves_radius = randf()*8
-#	color_stem = generateRandomRGB()
-#	color_leaves = generateRandomRGB()
-#	color_fruit = generateRandomRGB()
-
-#func generateRandomRGB():
-#	var result = Color()
-#	result.r = randf()
-#	result.g = randf()
-#	result.b = randf()
-#	return result
-
 func _on_FruitColorPickerButton_color_changed(color):
 	color_fruit = color
+#	_fruits_configuration.set_color(color)
 	update()
 
 func _on_LeavesColorPickerButton_color_changed(color):
 	color_leaves = color
+	_leaves_configuration.set_color(color)
 	update()
 
 func _on_StemColorPickerButton_color_changed(color):
@@ -228,10 +225,12 @@ func _on_StemColorPickerButton_color_changed(color):
 
 func _on_LeafRadiusSlider_value_changed(value):
 	leaves_radius = value
+	_leaves_configuration.set_scale(value)
 	update()
 
 func _on_FruitRadiusSlider_value_changed(value):
 	fruit_radius = value
+	_fruits_configuration.set_scale(value)
 	update()
 
 func _on_StemThicknessSlider_value_changed(value):

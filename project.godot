@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/grammar/BranchingSymbols.gd"
 }, {
+"base": "ShapeConfiguration",
+"class": "CircleConfiguration",
+"language": "GDScript",
+"path": "res://source/render/shapes/CircleConfiguration.gd"
+}, {
 "base": "Reference",
 "class": "ControlSymbols",
 "language": "GDScript",
@@ -28,6 +33,11 @@ _global_script_classes=[ {
 "class": "ILGrammar",
 "language": "GDScript",
 "path": "res://source/grammar/ILGrammar.gd"
+}, {
+"base": "ShapeConfiguration",
+"class": "ImageConfiguration",
+"language": "GDScript",
+"path": "res://source/render/shapes/ImageConfiguration.gd"
 }, {
 "base": "Reference",
 "class": "LineSegment",
@@ -53,6 +63,11 @@ _global_script_classes=[ {
 "class": "RngState",
 "language": "GDScript",
 "path": "res://source/rng/RngState.gd"
+}, {
+"base": "Reference",
+"class": "ShapeConfiguration",
+"language": "GDScript",
+"path": "res://source/render/shapes/ShapeConfiguration.gd"
 }, {
 "base": "ProductionPicker",
 "class": "StochasticProductionPicker",
@@ -96,14 +111,17 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BranchingSymbols": "",
+"CircleConfiguration": "",
 "ControlSymbols": "",
 "GrowContextFull": "",
 "ILGrammar": "",
+"ImageConfiguration": "",
 "LineSegment": "",
 "Preset": "",
 "Production": "",
 "ProductionPicker": "",
 "RngState": "",
+"ShapeConfiguration": "",
 "StochasticProductionPicker": "",
 "Turtle": "",
 "TurtleAbilities": "",

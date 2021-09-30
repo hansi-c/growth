@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/scenes/editor/gui/grammar/AlphabetTextBox.gd" type="Script" id=1]
-[ext_resource path="res://source/scenes/editor/gui/grammar_editor_label_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://source/scenes/editor/gui/shapes/ShapeNode.gd" type="Script" id=2]
 [ext_resource path="res://source/scenes/editor/gui/grammar/grammar_container.gd" type="Script" id=3]
 [ext_resource path="res://source/scenes/editor/gui/grammar/AxiomLineEdit.gd" type="Script" id=4]
 [ext_resource path="res://source/scenes/editor/gui/shapes/ShapeSourceButton.gd" type="Script" id=5]
@@ -9,7 +9,7 @@
 [ext_resource path="res://source/scenes/editor/gui/turtle/SettingsContainer.gd" type="Script" id=7]
 [ext_resource path="res://source/scenes/simulation/gui/godot_theme.tres" type="Theme" id=8]
 [ext_resource path="res://source/scenes/editor/gui/EditorContainer.gd" type="Script" id=9]
-[ext_resource path="res://source/scenes/editor/gui/shapes/SelectShapeButton.gd" type="Script" id=10]
+[ext_resource path="res://source/scenes/editor/gui/shapes/CircleRect.gd" type="Script" id=10]
 [ext_resource path="res://source/scenes/editor/gui/shapes/DeleteShapeButton.gd" type="Script" id=11]
 [ext_resource path="res://source/scenes/editor/gui/shapes/ShapeConfigurationList.gd" type="Script" id=12]
 
@@ -46,7 +46,7 @@ margin_right = -5.0
 margin_bottom = -5.0
 
 [node name="PropertiesContainer" type="GridContainer" parent="GUI/TabContainer/Grammar"]
-margin_right = 1170.0
+margin_right = 1270.0
 margin_bottom = 48.0
 columns = 2
 
@@ -81,12 +81,13 @@ script = ExtResource( 4 )
 [node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Grammar"]
 margin_top = 52.0
 margin_right = 1270.0
-margin_bottom = 316.0
+margin_bottom = 686.0
 rect_min_size = Vector2( 500, 264 )
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="ProductionContainer" type="GridContainer" parent="GUI/TabContainer/Grammar/ScrollContainer"]
-margin_right = 371.0
+margin_right = 355.0
 margin_bottom = 22.0
 columns = 5
 script = ExtResource( 3 )
@@ -95,47 +96,43 @@ __meta__ = {
 }
 
 [node name="left_context_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
-margin_right = 88.0
+margin_right = 84.0
 margin_bottom = 22.0
-custom_styles/normal = ExtResource( 2 )
 text = "Left context"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="predecessor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
-margin_left = 92.0
-margin_right = 183.0
+margin_left = 88.0
+margin_right = 175.0
 margin_bottom = 22.0
-custom_styles/normal = ExtResource( 2 )
 text = "Predecessor"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="successor_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
-margin_left = 187.0
-margin_right = 263.0
+margin_left = 179.0
+margin_right = 251.0
 margin_bottom = 22.0
-custom_styles/normal = ExtResource( 2 )
 text = "Successor"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="probability_label" type="Label" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
-margin_left = 267.0
-margin_right = 347.0
+margin_left = 255.0
+margin_right = 331.0
 margin_bottom = 22.0
-custom_styles/normal = ExtResource( 2 )
 text = "Probability"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="add_production_button" type="Button" parent="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer"]
-margin_left = 351.0
-margin_right = 371.0
+margin_left = 335.0
+margin_right = 355.0
 margin_bottom = 22.0
 text = "+"
 
@@ -328,16 +325,21 @@ margin_top = 29.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/TabContainer/Shapes"]
+[node name="VSplitContainer" type="VSplitContainer" parent="GUI/TabContainer/Shapes"]
 margin_right = 99.0
 margin_bottom = 686.0
-rect_min_size = Vector2( 50, 0 )
+split_offset = 400
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/TabContainer/Shapes/VSplitContainer"]
+margin_right = 99.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 50, 60 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer"]
 margin_right = 99.0
 margin_bottom = 22.0
 
-[node name="NewConfiguationButton" type="Button" parent="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer"]
+[node name="NewConfiguationButton" type="Button" parent="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer"]
 margin_right = 40.0
 margin_bottom = 22.0
 text = "New"
@@ -345,7 +347,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteConfigurationButton" type="Button" parent="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer"]
+[node name="DeleteConfigurationButton" type="Button" parent="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer"]
 margin_left = 44.0
 margin_right = 99.0
 margin_bottom = 22.0
@@ -356,20 +358,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Shapes/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer"]
 margin_top = 26.0
 margin_right = 99.0
-margin_bottom = 686.0
-rect_min_size = Vector2( 0, 660 )
+margin_bottom = 460.0
+size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ShapeConfigurationList" type="ItemList" parent="GUI/TabContainer/Shapes/VBoxContainer/ScrollContainer"]
+[node name="ShapeConfigurationList" type="ItemList" parent="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer"]
 margin_right = 99.0
-margin_bottom = 660.0
+margin_bottom = 434.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 auto_height = true
 script = ExtResource( 12 )
+
+[node name="ShapeSourceContainer" type="VBoxContainer" parent="GUI/TabContainer/Shapes/VSplitContainer"]
+margin_top = 468.0
+margin_right = 99.0
+margin_bottom = 686.0
+
+[node name="ShapeSourceButton" type="OptionButton" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer"]
+margin_right = 99.0
+margin_bottom = 22.0
+script = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="GUI/TabContainer/Shapes"]
 margin_left = 107.0
@@ -377,31 +389,16 @@ margin_right = 1270.0
 margin_bottom = 686.0
 color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/ColorRect"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 82.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ShapeNode" type="Node2D" parent="GUI/TabContainer/Shapes/ColorRect"]
+position = Vector2( 581, 343 )
+z_index = 7
+script = ExtResource( 2 )
 
-[node name="SelectShapeButton" type="OptionButton" parent="GUI/TabContainer/Shapes/ColorRect/HBoxContainer"]
-visible = false
+[node name="CircleRect" type="ColorRect" parent="GUI/TabContainer/Shapes/ColorRect"]
 margin_right = 100.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 100, 0 )
+margin_bottom = 100.0
+color = Color( 1, 1, 1, 0 )
 script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShapeSourceButton" type="OptionButton" parent="GUI/TabContainer/Shapes/ColorRect/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 100, 0 )
-disabled = true
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -430,20 +427,20 @@ __meta__ = {
 }
 
 [connection signal="text_changed" from="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_Axiom_text_changed"]
-[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_alphabet_changed"]
+[connection signal="alphabet_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AlphabetTextBox" method="_on_alphabet_changed"]
 [connection signal="axiom_changed" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" to="GUI/TabContainer/Grammar/PropertiesContainer/AxiomLineEdit" method="_on_axiom_changed"]
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_add_production_button_button_up"]
-[connection signal="button_up" from="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer/NewConfiguationButton" to="GUI/TabContainer/Shapes/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_add_new_configuration"]
-[connection signal="button_up" from="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer/DeleteConfigurationButton" to="GUI/TabContainer/Shapes/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_delete_configuration"]
-[connection signal="item_selected" from="GUI/TabContainer/Shapes/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
-[connection signal="configuration_deleted" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" to="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/ShapeSourceButton" method="_on_SelectShapeButton_configuration_deleted"]
-[connection signal="configuration_selected" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" to="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/ShapeSourceButton" method="_on_SelectShapeButton_configuration_selected"]
-[connection signal="disable_shape_dependent_buttons" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" to="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/ShapeSourceButton" method="_on_disable_shape_dependent_buttons"]
-[connection signal="disable_shape_dependent_buttons" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" to="GUI/TabContainer/Shapes/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_disable_shape_dependent_buttons"]
-[connection signal="item_selected" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" to="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/SelectShapeButton" method="_on_SelectShapeButton_item_selected"]
-[connection signal="item_selected" from="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/HBoxContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
+[connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/NewConfiguationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_add_new_configuration"]
+[connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_delete_configuration"]
+[connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
+[connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
+[connection signal="circle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/ShapeNode" method="_on_ShapeSourceButton_circle_selected"]
+[connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
+[connection signal="rectangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/ShapeNode" method="_on_ShapeSourceButton_rectangle_selected"]
+[connection signal="triangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/ShapeNode" method="_on_ShapeSourceButton_triangle_selected"]
+[connection signal="gui_input" from="GUI/TabContainer/Shapes/ColorRect/CircleRect" to="GUI/TabContainer/Shapes/ColorRect/CircleRect" method="_on_self_gui_input"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
