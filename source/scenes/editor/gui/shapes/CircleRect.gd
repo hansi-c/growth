@@ -14,7 +14,6 @@ func _on_self_gui_input(event):
 		if _is_inside_circle(local_position):
 			dragging = true
 			drag_offset = local_position
-			print("yay")
 
 func _is_inside_circle(position:Vector2) -> bool:
 	var center = get_size()/2
@@ -25,5 +24,5 @@ func _input(event):
 		if event is InputEventMouseMotion:
 			var global_position = event.get_global_position()
 			set_global_position(global_position - drag_offset)
-		if event is InputEventMouseButton and not event.is_pressed():
+		elif event is InputEventMouseButton and not event.is_pressed():
 			dragging = false
