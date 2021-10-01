@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/render/shapes/ShapeConfiguration.gd"
 }, {
+"base": "ColorRect",
+"class": "ShapeRect",
+"language": "GDScript",
+"path": "res://source/scenes/editor/gui/shapes/ShapeRect.gd"
+}, {
 "base": "ProductionPicker",
 "class": "StochasticProductionPicker",
 "language": "GDScript",
@@ -122,6 +127,7 @@ _global_script_class_icons={
 "ProductionPicker": "",
 "RngState": "",
 "ShapeConfiguration": "",
+"ShapeRect": "",
 "StochasticProductionPicker": "",
 "Turtle": "",
 "TurtleAbilities": "",
