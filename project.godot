@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/grammar/ControlSymbols.gd"
 }, {
+"base": "Reference",
+"class": "DragHandler",
+"language": "GDScript",
+"path": "res://source/scenes/editor/gui/DragHandler.gd"
+}, {
 "base": "CanvasItem",
 "class": "GrowContextFull",
 "language": "GDScript",
@@ -118,6 +123,7 @@ _global_script_class_icons={
 "BranchingSymbols": "",
 "CircleConfiguration": "",
 "ControlSymbols": "",
+"DragHandler": "",
 "GrowContextFull": "",
 "ILGrammar": "",
 "ImageConfiguration": "",

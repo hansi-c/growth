@@ -1,6 +1,6 @@
 extends ShapeRect
 
-func _is_inside_shape(position:Vector2) -> bool:
+func is_inside_shape(position:Vector2) -> bool:
 	var center = get_size()/2
 	return center.distance_to(position) <= center.x
 
