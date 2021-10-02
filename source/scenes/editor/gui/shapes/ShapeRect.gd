@@ -12,7 +12,7 @@ func _on_self_gui_input(event):
 			dragging = true
 			drag_offset = local_position
 
-func _is_inside_shape(position:Vector2) -> bool:
+func _is_inside_shape(_position:Vector2) -> bool:
 	return true
 
 func _input(event):

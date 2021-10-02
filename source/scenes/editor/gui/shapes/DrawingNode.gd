@@ -5,7 +5,7 @@ onready var attachment_node = $AttachmentRect
 var attachment_pos: Vector2
 var stem_pos: Vector2
 
-func _process(delta):
+func _process(_delta):
 	attachment_pos = attachment_node.get_position() \
 		+ attachment_node.get_rect().size/2
 	stem_pos = stem_node.get_position()

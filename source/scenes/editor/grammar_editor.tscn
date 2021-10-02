@@ -385,23 +385,23 @@ margin_right = 99.0
 margin_bottom = 22.0
 script = ExtResource( 5 )
 
-[node name="ColorRect" type="ColorRect" parent="GUI/TabContainer/Shapes"]
+[node name="BackgroundRect" type="ColorRect" parent="GUI/TabContainer/Shapes"]
 margin_left = 107.0
 margin_right = 1270.0
 margin_bottom = 686.0
 rect_clip_content = true
 color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[node name="DrawingNode" type="Node2D" parent="GUI/TabContainer/Shapes/ColorRect"]
+[node name="DrawingNode" type="Node2D" parent="GUI/TabContainer/Shapes/BackgroundRect"]
 script = ExtResource( 14 )
 
-[node name="StemNode" type="Node2D" parent="GUI/TabContainer/Shapes/ColorRect/DrawingNode"]
+[node name="StemNode" type="Node2D" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode"]
 show_behind_parent = true
 position = Vector2( 581, 343 )
 z_index = 7
 script = ExtResource( 2 )
 
-[node name="AttachmentRect" type="ColorRect" parent="GUI/TabContainer/Shapes/ColorRect/DrawingNode"]
+[node name="AttachmentRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode"]
 show_behind_parent = true
 margin_left = 576.0
 margin_top = 338.0
@@ -414,7 +414,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CircleRect" type="ColorRect" parent="GUI/TabContainer/Shapes/ColorRect/DrawingNode/AttachmentRect"]
+[node name="ShapeRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
 show_behind_parent = true
 margin_left = -45.0
 margin_top = 5.0
@@ -427,7 +427,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StemRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/ColorRect"]
+[node name="StemRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect"]
 margin_left = 56.5685
 margin_top = 613.769
 margin_right = 216.569
@@ -472,13 +472,10 @@ __meta__ = {
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_delete_configuration"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
-[connection signal="circle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/StemNode" method="_on_ShapeSourceButton_circle_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
-[connection signal="rectangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/StemNode" method="_on_ShapeSourceButton_rectangle_selected"]
-[connection signal="triangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/StemNode" method="_on_ShapeSourceButton_triangle_selected"]
-[connection signal="gui_input" from="GUI/TabContainer/Shapes/ColorRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]
-[connection signal="gui_input" from="GUI/TabContainer/Shapes/ColorRect/DrawingNode/AttachmentRect/CircleRect" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/AttachmentRect/CircleRect" method="_on_self_gui_input"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/ColorRect/StemRotationSlider" to="GUI/TabContainer/Shapes/ColorRect/DrawingNode/StemNode" method="_on_StemRotationSlider_value_changed"]
+[connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]
+[connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/ShapeRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/ShapeRect" method="_on_self_gui_input"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/StemRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/StemNode" method="_on_StemRotationSlider_value_changed"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
