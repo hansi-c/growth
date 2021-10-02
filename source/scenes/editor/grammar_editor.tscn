@@ -430,20 +430,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
+[node name="RectangleRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 20, 20 )
+script = ExtResource( 13 )
+
+[node name="TextureRect" type="TextureRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
+margin_right = 16.0
+margin_bottom = 9.0
+rect_scale = Vector2( 10, 10 )
+mouse_filter = 0
 texture = ExtResource( 15 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="RectangleRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 13 )
 
 [node name="StemRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect"]
 margin_left = 260.215
@@ -493,8 +496,8 @@ __meta__ = {
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_self_gui_input"]
-[connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_self_gui_input"]
+[connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_self_gui_input"]
 [connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/StemRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/StemNode" method="_on_StemRotationSlider_value_changed"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]

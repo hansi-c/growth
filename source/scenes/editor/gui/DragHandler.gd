@@ -8,7 +8,7 @@ func handle_drag(event: InputEvent, control):
 		var local_position = event.get_position()
 		if control.is_inside_shape(local_position):
 			_dragging = true
-			_drag_offset = event.get_position()
+			_drag_offset = event.get_position() * control.get_scale()
 	elif _dragging:
 		if event is InputEventMouseMotion:
 			var global_position = event.get_global_position()
