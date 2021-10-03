@@ -382,6 +382,7 @@ script = ExtResource( 12 )
 margin_top = 468.0
 margin_right = 99.0
 margin_bottom = 686.0
+custom_constants/separation = 8
 
 [node name="ShapeSourceButton" type="OptionButton" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer"]
 margin_right = 99.0
@@ -389,6 +390,7 @@ margin_bottom = 22.0
 script = ExtResource( 5 )
 
 [node name="ImageSourceContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer"]
+visible = false
 margin_top = 26.0
 margin_right = 99.0
 margin_bottom = 40.0
@@ -426,7 +428,6 @@ script = ExtResource( 14 )
 [node name="StemNode" type="Node2D" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode"]
 show_behind_parent = true
 position = Vector2( 581, 343 )
-z_index = 7
 script = ExtResource( 2 )
 
 [node name="AttachmentRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode"]
@@ -443,7 +444,6 @@ __meta__ = {
 }
 
 [node name="CircleRect" type="ColorRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
-visible = false
 show_behind_parent = true
 margin_left = -45.0
 margin_top = 5.0
@@ -464,6 +464,7 @@ rect_pivot_offset = Vector2( 20, 20 )
 script = ExtResource( 13 )
 
 [node name="TextureRect" type="TextureRect" parent="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect"]
+visible = false
 margin_right = 16.0
 margin_bottom = 9.0
 rect_scale = Vector2( 10, 10 )
@@ -519,7 +520,10 @@ __meta__ = {
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_delete_configuration"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
+[connection signal="circle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_circle_selected"]
+[connection signal="image_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_image_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
+[connection signal="rectangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_rectangle_selected"]
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_self_button_up"]
 [connection signal="file_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton/FileDialog" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_FileDialog_file_selected"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]

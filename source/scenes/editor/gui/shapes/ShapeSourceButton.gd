@@ -4,6 +4,8 @@ const CIRCLE = "Circle"
 const RECTANGLE = "Rectangle"
 const IMAGE = "Image"
 
+onready var image_container = get_node("../ImageSourceContainer")
+
 signal circle_selected
 signal rectangle_selected
 signal image_selected
@@ -33,10 +35,13 @@ func _ready():
 func _on_ShapeSourceButton_item_selected(index):
 	var name = get_item_text(index)
 	if name == CIRCLE:
+		image_container.hide()
 		emit_signal("circle_selected")
 	elif name == RECTANGLE:
+		image_container.hide()
 		emit_signal("rectangle_selected")
 	elif name == IMAGE:
+		image_container.show()
 		emit_signal("image_selected")
 
 func _on_SelectShapeButton_configuration_deleted(name):
