@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://source/scenes/editor/gui/grammar/AlphabetTextBox.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/editor/gui/shapes/StemNode.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://source/scenes/editor/gui/shapes/DrawingNode.gd" type="Script" id=14]
 [ext_resource path="res://assets/tomaten_blatt.png" type="Texture" id=15]
 [ext_resource path="res://source/scenes/editor/gui/shapes/ImageRect.gd" type="Script" id=16]
+[ext_resource path="res://source/scenes/editor/gui/shapes/FileSelectLinkButton.gd" type="Script" id=17]
 
 [sub_resource type="ButtonGroup" id=1]
 resource_name = "StartAngleRadio"
@@ -387,6 +388,31 @@ margin_right = 99.0
 margin_bottom = 22.0
 script = ExtResource( 5 )
 
+[node name="ImageSourceContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer"]
+margin_top = 26.0
+margin_right = 99.0
+margin_bottom = 40.0
+
+[node name="FileSelectLinkButton" type="LinkButton" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer"]
+margin_right = 86.0
+margin_bottom = 14.0
+text = "Select a file..."
+script = ExtResource( 17 )
+
+[node name="FileDialog" type="FileDialog" parent="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton"]
+margin_right = 325.0
+margin_bottom = 140.0
+popup_exclusive = true
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png, *.jpg, *.jpeg, *.gif ; Images" )
+current_dir = "/Users/Czurda/Documents/godot/LSystem/growth"
+current_path = "/Users/Czurda/Documents/godot/LSystem/growth/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BackgroundRect" type="ColorRect" parent="GUI/TabContainer/Shapes"]
 margin_left = 107.0
 margin_right = 1270.0
@@ -494,6 +520,8 @@ __meta__ = {
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
+[connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_self_button_up"]
+[connection signal="file_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton/FileDialog" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_FileDialog_file_selected"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_self_gui_input"]

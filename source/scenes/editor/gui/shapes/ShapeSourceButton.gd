@@ -2,13 +2,10 @@ extends OptionButton
 
 const CIRCLE = "Circle"
 const RECTANGLE = "Rectangle"
-#const TRIANGLE = "Triangle"
-#const PRIMITIVE = "Primitive"
-const FILE = "Image"
+const IMAGE = "Image"
 
 signal circle_selected
 signal rectangle_selected
-#signal triangle_selected
 signal image_selected
 
 # maps from SelectShapeButton configuration name (String) to self index (int)
@@ -18,9 +15,7 @@ var _configured_shapes: Dictionary = {}
 func _ready():
 	add_item(CIRCLE)
 	add_item(RECTANGLE)
-#	add_item(TRIANGLE)
-#	add_item(PRIMITIVE)
-	add_item(FILE)
+	add_item(IMAGE)
 #	select(0)
 
 #func _on_disable_shape_dependent_buttons(value):
@@ -41,9 +36,7 @@ func _on_ShapeSourceButton_item_selected(index):
 		emit_signal("circle_selected")
 	elif name == RECTANGLE:
 		emit_signal("rectangle_selected")
-#	elif name == RECTANGLE:
-#		emit_signal("triangle_selected")
-	elif name == RECTANGLE:
+	elif name == IMAGE:
 		emit_signal("image_selected")
 
 func _on_SelectShapeButton_configuration_deleted(name):
