@@ -408,7 +408,7 @@ popup_exclusive = true
 window_title = "Open a File"
 mode = 0
 access = 2
-filters = PoolStringArray( "*.png, *.jpg, *.jpeg, *.gif ; Images" )
+filters = PoolStringArray( "*.png, *.jpg, *.jpeg, *.gif, *svg ; Images" )
 current_dir = "/Users/Czurda/Documents/godot/LSystem/growth"
 current_path = "/Users/Czurda/Documents/godot/LSystem/growth/"
 __meta__ = {
@@ -525,6 +525,7 @@ __meta__ = {
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
 [connection signal="rectangle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_rectangle_selected"]
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_self_button_up"]
+[connection signal="texture_loaded" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_FileSelect_texture_loaded"]
 [connection signal="file_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton/FileDialog" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ImageSourceContainer/FileSelectLinkButton" method="_on_FileDialog_file_selected"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_self_gui_input"]

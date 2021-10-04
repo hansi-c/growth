@@ -3,7 +3,7 @@ class_name ImageConfiguration
 
 var _texture: Texture = load("res://assets/tomate.png")
 
-func draw(target: CanvasItem, position: Vector2, angle: float=0.0):
+func draw(target: CanvasItem, position: Vector2, _angle: float=0.0):
 #	target.draw_set_transform(Vector2.ZERO, angle, Vector2(_scale, _scale))
 #	target.draw_texture(_texture, position)
 	var rect = Rect2(position, _texture.get_size() * _scale)

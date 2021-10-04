@@ -11,3 +11,7 @@ func is_inside_shape(position: Vector2) -> bool:
 	var color: Color = image.get_pixelv(position)
 	image.unlock()
 	return color.a > 0.0
+
+func _on_FileSelect_texture_loaded(texture):
+	set_texture(texture)
+	
