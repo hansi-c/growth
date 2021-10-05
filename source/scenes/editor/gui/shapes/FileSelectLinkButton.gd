@@ -17,12 +17,12 @@ func _update_text(path: String):
 	set_text(relative_name)
 
 func _extract_relative_filename(path: String) -> String:
-	var relative_name = file_path
-	var last_index = file_path.find_last("/")
+	var relative_name: String = path
+	var last_index = relative_name.find_last("/")
 	if last_index >= 0:
-		relative_name = file_path.substr(last_index)
-		if last_index + 1 < file_path.length():
-			relative_name = file_path.substr(last_index + 1)
+		relative_name = relative_name.substr(last_index)
+		if not relative_name.empty():
+			relative_name = relative_name.substr(1)
 	return relative_name
 
 func _on_self_button_up():

@@ -6,7 +6,7 @@ func _ready():
 	var parent = get_parent().get_parent()
 	if parent is Control:
 		var half_length = (parent.get_size()/2).length()
-		_left_edge = Vector2(-half_length, 0)
+		_left_edge = Vector2(0, half_length)
 
 func _draw():
 	draw_line(_left_edge, Vector2.ZERO, Color.black, 1.0)

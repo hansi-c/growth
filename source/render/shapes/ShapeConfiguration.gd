@@ -2,6 +2,8 @@ class_name ShapeConfiguration
 
 var _scale: float = 1.0
 var _color: Color = Color.black
+#var offset
+#var angle
 
 func draw(_target: CanvasItem, _position: Vector2, _angle: float=0.0):
 	pass

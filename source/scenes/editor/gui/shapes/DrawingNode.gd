@@ -10,12 +10,13 @@ var stem_pos: Vector2
 
 func _process(_delta):
 	attachment_pos = attachment_node.get_position() \
-		+ attachment_node.get_rect().size/2
+		+ attachment_node.get_pivot_offset()
 	stem_pos = stem_node.get_position()
 	update()
 
 func _draw():
-	draw_line(attachment_pos, stem_pos, attachment_node.get_frame_color())
+	var attachment_color: Color = attachment_node.get_frame_color()
+	draw_line(attachment_pos, stem_pos, attachment_color)
 
 func _on_ShapeSourceButton_circle_selected():
 	circle_rect.show()

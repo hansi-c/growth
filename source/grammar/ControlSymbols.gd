@@ -36,12 +36,13 @@ func set_symbol(ability: String, symbol: String):
 	_dictionary[ability] = symbol
 
 func get_branching_symbols() -> BranchingSymbols:
-	return BranchingSymbols.new(_dictionary[TurtleAbilities.OPEN_BRANCH],
-	 _dictionary[TurtleAbilities.CLOSE_BRANCH])
+	return BranchingSymbols.new(
+		_dictionary[TurtleAbilities.OPEN_BRANCH],
+		_dictionary[TurtleAbilities.CLOSE_BRANCH])
 
 func enumerate() -> Array:
 	return _dictionary.values()
-#
+
 func enumerate_dictionary() -> Dictionary:
 	return _dictionary.duplicate()
 	

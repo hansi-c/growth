@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "ShapeConfiguration",
 "class": "CircleConfiguration",
 "language": "GDScript",
-"path": "res://source/render/shapes/CircleConfiguration.gd"
+"path": "res://source/render/shapes/RectangeConfiguration.gd"
 }, {
 "base": "Reference",
 "class": "ControlSymbols",

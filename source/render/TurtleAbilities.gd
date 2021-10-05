@@ -60,17 +60,3 @@ func clear():
 
 func _to_string() -> String:
 	return str(enumerate_abilities())
-
-#static func potential_abilities() -> Dictionary:
-#	var result = {}
-#	for key in potential_user_abilities:
-#		result[key] = potential_user_abilities[key]
-#	for key in potential_control_abilities:
-#		result[key] = potential_control_abilities[key]
-#	return result
-
-#static func is_control_ability(ability: String) -> bool:
-#	return potential_control_abilities.has(ability)
-#
-#static func is_user_ability(ability: String) -> bool:
-#	return potential_user_abilities.has(ability)

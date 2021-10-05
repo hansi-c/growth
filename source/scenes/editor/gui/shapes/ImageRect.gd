@@ -12,6 +12,11 @@ func is_inside_shape(position: Vector2) -> bool:
 	image.unlock()
 	return color.a > 0.0
 
-func _on_FileSelect_texture_loaded(texture):
+func _on_FileSelect_texture_loaded(texture: Texture):
 	set_texture(texture)
+	var texture_size = texture.get_size()
+	_set_size(texture_size)
+	set_pivot_offset(texture_size/2)
 	
+func _on_RotationSlider_value_changed(value: float):
+	set_rotation_degrees(-value)
