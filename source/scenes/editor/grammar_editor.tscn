@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://source/scenes/editor/gui/grammar/AlphabetTextBox.gd" type="Script" id=1]
 [ext_resource path="res://source/scenes/editor/gui/shapes/StemNode.gd" type="Script" id=2]
@@ -25,6 +25,16 @@ resource_name = "StartAngleRadio"
 
 [sub_resource type="ButtonGroup" id=2]
 resource_name = "TurnAngleRadio"
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 15.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+
+[sub_resource type="ButtonGroup" id=3]
+resource_name = "shape_angle_group"
 
 [node name="GrammarEditor" type="Node2D"]
 
@@ -485,11 +495,29 @@ rect_pivot_offset = Vector2( 5, 5 )
 color = Color( 1, 0, 0, 1 )
 script = ExtResource( 13 )
 
-[node name="AttachmentRectRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect"]
-margin_left = 258.801
-margin_top = 582.715
-margin_right = 418.801
-margin_bottom = 598.715
+[node name="PanelContainer" type="PanelContainer" parent="GUI/TabContainer/Shapes/BackgroundRect"]
+margin_left = 36.4491
+margin_top = 513.934
+margin_right = 307.449
+margin_bottom = 599.934
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransformContainer" type="VBoxContainer" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 276.0
+margin_bottom = 91.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttachmentRectRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer"]
+margin_right = 261.0
+margin_bottom = 16.0
 min_value = -180.0
 max_value = 180.0
 step = 0.0
@@ -498,11 +526,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShapeRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect"]
-margin_left = 260.215
-margin_top = 616.597
-margin_right = 420.216
-margin_bottom = 632.597
+[node name="ShapeRotationSlider" type="HSlider" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer"]
+margin_top = 26.0
+margin_right = 261.0
+margin_bottom = 42.0
 min_value = -180.0
 max_value = 180.0
 step = 0.0
@@ -510,6 +537,37 @@ tick_count = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer"]
+margin_top = 52.0
+margin_right = 261.0
+margin_bottom = 76.0
+
+[node name="ConstShapeAngleCheckBox" type="CheckBox" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+pressed = true
+group = SubResource( 3 )
+
+[node name="Label" type="Label" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
+margin_left = 28.0
+margin_top = 1.0
+margin_right = 130.0
+margin_bottom = 23.0
+text = "Constant angle"
+
+[node name="RelativeShapeAngleCheckBox" type="CheckBox" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
+margin_left = 134.0
+margin_right = 158.0
+margin_bottom = 24.0
+group = SubResource( 3 )
+
+[node name="Label2" type="Label" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
+margin_left = 162.0
+margin_top = 1.0
+margin_right = 261.0
+margin_bottom = 23.0
+text = "Relative Angle"
 
 [node name="ButtonsContainer" type="GridContainer" parent="GUI"]
 anchor_right = 1.0
@@ -559,10 +617,10 @@ script = ExtResource( 18 )
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/AttachmentEndRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/AttachmentEndRect" method="_on_self_gui_input"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/AttachmentRectRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_RotationSlider_value_changed"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_RotationSlider_value_changed"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_RotationSlider_value_changed"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_RotationSlider_value_changed"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/AttachmentRectRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_RotationSlider_value_changed"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_RotationSlider_value_changed"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_RotationSlider_value_changed"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_RotationSlider_value_changed"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
