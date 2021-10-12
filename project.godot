@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "ShapeConfiguration",
 "class": "CircleConfiguration",
 "language": "GDScript",
-"path": "res://source/render/shapes/RectangeConfiguration.gd"
+"path": "res://source/render/shapes/CircleConfiguration.gd"
 }, {
 "base": "Reference",
 "class": "ControlSymbols",
@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "ProductionPicker",
 "language": "GDScript",
 "path": "res://source/grammar/ProductionPicker.gd"
+}, {
+"base": "ShapeConfiguration",
+"class": "RectangleConfiguration",
+"language": "GDScript",
+"path": "res://source/render/shapes/RectangeConfiguration.gd"
 }, {
 "base": "Reference",
 "class": "RngState",
@@ -131,6 +136,7 @@ _global_script_class_icons={
 "Preset": "",
 "Production": "",
 "ProductionPicker": "",
+"RectangleConfiguration": "",
 "RngState": "",
 "ShapeConfiguration": "",
 "ShapeRect": "",

@@ -26,15 +26,14 @@ resource_name = "StartAngleRadio"
 [sub_resource type="ButtonGroup" id=2]
 resource_name = "TurnAngleRadio"
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 15.0
 content_margin_right = 15.0
 content_margin_top = 15.0
 content_margin_bottom = 10.0
 bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
 
-[sub_resource type="ButtonGroup" id=3]
-resource_name = "shape_angle_group"
+[sub_resource type="ButtonGroup" id=4]
 
 [node name="GrammarEditor" type="Node2D"]
 
@@ -500,7 +499,7 @@ margin_left = 36.4491
 margin_top = 513.934
 margin_right = 307.449
 margin_bottom = 599.934
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -547,7 +546,7 @@ margin_bottom = 76.0
 margin_right = 24.0
 margin_bottom = 24.0
 pressed = true
-group = SubResource( 3 )
+group = SubResource( 4 )
 
 [node name="Label" type="Label" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
 margin_left = 28.0
@@ -560,7 +559,7 @@ text = "Constant angle"
 margin_left = 134.0
 margin_right = 158.0
 margin_bottom = 24.0
-group = SubResource( 3 )
+group = SubResource( 4 )
 
 [node name="Label2" type="Label" parent="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/HBoxContainer"]
 margin_left = 162.0
@@ -603,8 +602,8 @@ script = ExtResource( 18 )
 [connection signal="button_up" from="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer/add_production_button" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_add_production_button_button_up"]
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/NewConfiguationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_add_new_configuration"]
 [connection signal="button_up" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_delete_configuration"]
-[connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/HBoxContainer/DeleteConfigurationButton" method="_on_configuration_selected"]
+[connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" to="GUI/TabContainer/Shapes/VSplitContainer/VBoxContainer/ScrollContainer/ShapeConfigurationList" method="_on_ShapeConfigurationList_item_selected"]
 [connection signal="circle_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_circle_selected"]
 [connection signal="image_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode" method="_on_ShapeSourceButton_image_selected"]
 [connection signal="item_selected" from="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" to="GUI/TabContainer/Shapes/VSplitContainer/ShapeSourceContainer/ShapeSourceButton" method="_on_ShapeSourceButton_item_selected"]
@@ -618,10 +617,10 @@ script = ExtResource( 18 )
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_self_gui_input"]
 [connection signal="gui_input" from="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/AttachmentEndRect" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/AttachmentEndRect" method="_on_self_gui_input"]
 [connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/AttachmentRectRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect" method="_on_RotationSlider_value_changed"]
+[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_RotationSlider_value_changed"]
 [connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/CircleRect" method="_on_RotationSlider_value_changed"]
 [connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/TextureRect" method="_on_RotationSlider_value_changed"]
-[connection signal="value_changed" from="GUI/TabContainer/Shapes/BackgroundRect/PanelContainer/TransformContainer/ShapeRotationSlider" to="GUI/TabContainer/Shapes/BackgroundRect/DrawingNode/AttachmentRect/RectangleRect" method="_on_RotationSlider_value_changed"]
+[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/ScrollContainer/AbiltiesContainer" method="_on_BackButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Grammar/ScrollContainer/ProductionContainer" method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer/Turtle/GridContainer/SettingsContainer" method="_on_BackButton_button_up"]
-[connection signal="button_up" from="GUI/ButtonsContainer/BackButton" to="GUI/TabContainer" method="_on_BackButton_button_up"]
