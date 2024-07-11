@@ -1,6 +1,6 @@
 # L Systems
 
-[Lindenmayer Systems](https://en.wikipedia.org/wiki/L-system) implemented in the [Godot game engine](https://godotengine.org).
+[Lindenmayer Systems](https://en.wikipedia.org/wiki/L-system) implemented in the [Godot engine](https://godotengine.org).
 
 You can try out the latest version here: https://yongu.itch.io/l-systems \
 (Runs best on a computer with a mouse. Touchscreen support is bad.)
