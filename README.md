@@ -1,6 +1,6 @@
 # L Systems
 
-Lindenmayer Systems implemented in the [Godot game engine](https://godotengine.org).
+[Lindenmayer Systems](https://en.wikipedia.org/wiki/L-system) implemented in the [Godot game engine](https://godotengine.org).
 
 ## growth
 
